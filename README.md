@@ -5,7 +5,8 @@
 ## Loplat iOS SDK
 
 ### History
-* 2016.06.13 - 배터리 퍼포먼스 개선
+* 2016.06.13 
+	- 배터리 퍼포먼스 개선
 
 * 2016.06.7 - initial release
 
