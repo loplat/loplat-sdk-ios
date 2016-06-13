@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,LoplatDelegate {
         // Override point for customization after application launch.
         
         loplat = Loplat.getLoplat("test",client_secret: "test")
-        loplat.startLocationUpdate(180, batterySaveMode: 2);
+        loplat.startLocationUpdate(180);
         loplat.delegate=self
         
         return true

@@ -36,8 +36,7 @@
 @property (weak,nonatomic) id<LoplatDelegate> delegate;
 
 +(Loplat *)getLoplat:(NSString *)client_id client_secret:(NSString *)client_secret;
--(void)startLocationUpdate:(int)interval BatterySaveMode:(int)mode;
-//-(void)restartLocationUpdate;
+-(void)startLocationUpdate:(int)interval;
 -(void)restart;
 //-(void)startAudioLoop;
 //-(void)startFetchLoop;

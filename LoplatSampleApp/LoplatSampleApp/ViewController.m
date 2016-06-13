@@ -59,7 +59,7 @@
         
         app.loplat=[Loplat getLoplat:@"test" client_secret:@"test"];
         
-        [app.loplat startLocationUpdate:180 BatterySaveMode:2];
+        [app.loplat startLocationUpdate:180];
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"START"
                                                                        message:@"로플렛을 시작합니다."

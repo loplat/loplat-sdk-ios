@@ -21,7 +21,9 @@
 @property (nonatomic) CLLocationCoordinate2D myLocation;
 @property (nonatomic) CLLocationAccuracy myLocationAccuracy;
 
-+ (CLLocationManager *)sharedLocationManager;
+@property CLLocationManager *locationManager;
+
++ (LocationTracker *)sharedLocationManager;
 
 - (void)startLocationTracking;
 - (void)stopLocationTracking;

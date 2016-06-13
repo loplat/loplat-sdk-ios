@@ -73,7 +73,7 @@ class ViewController: UIViewController {
                 app.loplat=Loplat.getLoplat("test", client_secret:"test")
             }
             
-            app.loplat.startLocationUpdate(180, batterySaveMode: 2)
+            app.loplat.startLocationUpdate(180)
             
             
             let alert = UIAlertController(title: "START", message: "로플렛을 다시 시작합니다.", preferredStyle: UIAlertControllerStyle.Alert)

@@ -20,7 +20,7 @@
     // Override point for customization after application launch.
     
     loplat=[Loplat getLoplat:@"test" client_secret:@"test"];
-    [loplat startLocationUpdate:180 BatterySaveMode:2];// 업데이트 간격을 초단위로 설정가능
+    [loplat startLocationUpdate:180];// 업데이트 간격을 초단위로 설정가능
     loplat.delegate=self;
     
     
@@ -47,6 +47,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
 }
 
 
@@ -146,6 +147,7 @@
     
     return [NSString stringWithString:result];
 }
+
 
 
 
