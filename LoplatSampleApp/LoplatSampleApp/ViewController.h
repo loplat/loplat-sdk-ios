@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import <LoplatSDK/Loplat.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<RefreshDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *WebView;
 @property (weak, nonatomic) IBOutlet UIButton *startbtn;

@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7FB83D671D0A8F1300E971B0 /* LoplatSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB83D651D0A8F0900E971B0 /* LoplatSDK.framework */; };
-		7FB83D681D0A8F1300E971B0 /* LoplatSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB83D651D0A8F0900E971B0 /* LoplatSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7F4A5C591D0EB9F300ADAD0B /* LoplatSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4A5C571D0EB99400ADAD0B /* LoplatSDK.framework */; };
+		7F4A5C5A1D0EB9F300ADAD0B /* LoplatSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4A5C571D0EB99400ADAD0B /* LoplatSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7FD905271CFF02A300C7ECBC /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD905251CFF028500C7ECBC /* Realm.framework */; };
 		7FD905281CFF02A300C7ECBC /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD905251CFF028500C7ECBC /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DBF5D7551CF5BBFB003D5714 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF5D7541CF5BBFB003D5714 /* main.m */; };
@@ -46,7 +46,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				7FD905281CFF02A300C7ECBC /* Realm.framework in Embed Frameworks */,
-				7FB83D681D0A8F1300E971B0 /* LoplatSDK.framework in Embed Frameworks */,
+				7F4A5C5A1D0EB9F300ADAD0B /* LoplatSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,7 +54,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		7FB83D651D0A8F0900E971B0 /* LoplatSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LoplatSDK.framework; sourceTree = "<group>"; };
+		7F4A5C571D0EB99400ADAD0B /* LoplatSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LoplatSDK.framework; sourceTree = "<group>"; };
 		7FD905251CFF028500C7ECBC /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		DBF5D7501CF5BBFB003D5714 /* LoplatSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoplatSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF5D7541CF5BBFB003D5714 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FD905271CFF02A300C7ECBC /* Realm.framework in Frameworks */,
-				7FB83D671D0A8F1300E971B0 /* LoplatSDK.framework in Frameworks */,
+				7F4A5C591D0EB9F300ADAD0B /* LoplatSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,7 +104,7 @@
 		DBF5D7471CF5BBFB003D5714 = {
 			isa = PBXGroup;
 			children = (
-				7FB83D651D0A8F0900E971B0 /* LoplatSDK.framework */,
+				7F4A5C571D0EB99400ADAD0B /* LoplatSDK.framework */,
 				7FD905251CFF028500C7ECBC /* Realm.framework */,
 				DBF5D7521CF5BBFB003D5714 /* LoplatSampleApp */,
 				DBF5D76C1CF5BBFB003D5714 /* LoplatSampleAppTests */,

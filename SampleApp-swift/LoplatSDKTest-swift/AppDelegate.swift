@@ -10,9 +10,18 @@ import UIKit
 import SystemConfiguration.CaptiveNetwork
 import Foundation
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,LoplatDelegate {
 
+protocol Refreshdelegate {
+    func refreshwebview()
+}
+
+
+@UIApplicationMain
+
+class AppDelegate: UIResponder, UIApplicationDelegate,LoplatDelegate {
+    
+    var delegate: Refreshdelegate?
+    
     var window: UIWindow?
 
     var loplat:Loplat!
@@ -43,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,LoplatDelegate {
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+       [self.delegate?.refreshwebview()]
     }
 
     func applicationWillTerminate(application: UIApplication) {

@@ -21,6 +21,9 @@
     
     running=YES;
     
+    AppDelegate *app=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    app.delegate=self;
+    
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     NSString *urlString=[NSString stringWithFormat:@"http://i-handsome.com/tc/loplat/bssid_db_check.php?bundle=%@",bundleIdentifier];
     [self.WebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
@@ -117,7 +120,8 @@
     [self.WebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
 }
 
--(void)viewDidAppear:(BOOL)animated{
+
+-(void)refreshwebview{
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     NSString *urlString=[NSString stringWithFormat:@"http://i-handsome.com/tc/loplat/bssid_db_check.php?bundle=%@",bundleIdentifier];
     [self.WebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];

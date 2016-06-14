@@ -14,7 +14,7 @@
 
 @implementation AppDelegate
 
-@synthesize loplat;
+@synthesize loplat,bgtask,bgtask2,delegate;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -23,6 +23,7 @@
     [loplat startLocationUpdate:180];// 업데이트 간격을 초단위로 설정가능
     loplat.delegate=self;
     
+    //[self startBackground];
     
     return YES;
 }
@@ -42,7 +43,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [delegate refreshwebview];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -146,6 +147,90 @@
     }
     
     return [NSString stringWithString:result];
+}
+
+
+-(void)startBackground{
+    
+    
+    bgtask=[[UIApplication  sharedApplication] beginBackgroundTaskWithName:@"MyTask" expirationHandler:^{
+        
+    }];
+    
+    //time= [[UIApplication  sharedApplication] backgroundTimeRemaining];
+    NSLog(@"%d",1);
+    
+    
+    [NSTimer scheduledTimerWithTimeInterval:160 target:self selector:@selector(repeatBackground) userInfo:nil repeats:NO];
+    
+    
+    
+    
+    
+    
+    
+}
+
+-(void)repeatBackground{
+    
+    
+    
+    bgtask2=[[UIApplication  sharedApplication] beginBackgroundTaskWithName:@"MyTask2" expirationHandler:^{
+        
+    }];
+    [[UIApplication  sharedApplication] endBackgroundTask:bgtask];
+    bgtask=UIBackgroundTaskInvalid;
+    
+    //time= [[UIApplication  sharedApplication] backgroundTimeRemaining];
+    NSLog(@"%d",2);
+    
+    
+    
+    [NSTimer scheduledTimerWithTimeInterval:163 target:self selector:@selector(repeatBackground2) userInfo:nil repeats:NO];
+    
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://i-handsome.com/tc/loplat/bssid_report.php?bssid=%@&category=2&bundle=%@&placename=%@",@"00:00:00:00:00:00",@"test",@"test"]]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    
+    [request setHTTPMethod: @"GET"];
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
+}
+
+-(void)repeatBackground2{
+    
+    bgtask=[[UIApplication  sharedApplication] beginBackgroundTaskWithName:@"MyTask" expirationHandler:^{
+       
+    }];
+    
+    
+    [[UIApplication  sharedApplication] endBackgroundTask:bgtask2];
+    bgtask2=UIBackgroundTaskInvalid;
+    
+    //time2= [[UIApplication  sharedApplication] backgroundTimeRemaining];
+    NSLog(@"%d",3);
+    
+    
+    [NSTimer scheduledTimerWithTimeInterval:163 target:self selector:@selector(repeatBackground) userInfo:nil repeats:NO];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://i-handsome.com/tc/loplat/bssid_report.php?bssid=%@&category=3&bundle=%@&placename=%@",@"00:00:00:00:00:00",@"test",@"test"]]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:10];
+    
+    
+    [request setHTTPMethod: @"GET"];
+    NSError *requestError;
+    NSURLResponse *urlResponse = nil;
+    
+    
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
+    
 }
 
 

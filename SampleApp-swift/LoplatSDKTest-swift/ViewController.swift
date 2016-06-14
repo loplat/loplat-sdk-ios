@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,RefreshDelegate {
     
     @IBOutlet var webview : UIWebView!
     @IBOutlet var startbtn : UIButton!
@@ -21,6 +21,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let app = UIApplication.sharedApplication().delegate as! AppDelegate
+        app.delegate=self
+        
         let bundleID : String = NSBundle.mainBundle().bundleIdentifier!
         let url : String = "http://i-handsome.com/tc/loplat/bssid_db_check.php?bundle="+bundleID
         webview.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
@@ -39,8 +43,8 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    override func viewDidAppear(animated: Bool) {
+    
+    func refreshwebview(){
         let bundleID : String = NSBundle.mainBundle().bundleIdentifier!
         let url : String = "http://i-handsome.com/tc/loplat/bssid_db_check.php?bundle="+bundleID
         webview.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
@@ -137,6 +141,9 @@ class ViewController: UIViewController {
         
         
     }
+    
+    
+
     
 }
 
