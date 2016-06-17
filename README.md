@@ -97,7 +97,6 @@ BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/LoplatSDK.framework/includ
 }
 ~~~
 
-
 #### 7. Start parameter 설명
 ~~~objectivec
 loplat=[Loplat getLoplat:@"test" client_secret:@"test"];
