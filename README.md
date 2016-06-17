@@ -71,6 +71,7 @@ BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/LoplatSDK.framework/includ
 	}
 	// currentPlace와 previousPlace는 서버 return값의 위치를 찾은 경우의 json의 place tag와 같은 정보입니다. 
 ~~~
+
 ##### 서버 return 값
 * delegate json return value 
 ~~~json
@@ -93,7 +94,9 @@ BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/LoplatSDK.framework/includ
 		"client_code": null,
 		"accuracy": 0.5
 	},
-}~~~
+}
+~~~
+
 
 #### 7. Start parameter 설명
 ~~~objectivec
