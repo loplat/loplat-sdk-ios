@@ -2,30 +2,36 @@
 * If you want to see loplat REST API, please refer to https://github.com/loplat/loplat-rest-api for details
 * If you want to see Plengi Android SDK, please refer to https://github.com/loplat/loplat-sdk-android for details 
 
+### Loplat iOS SDK Settings
+AGENDA
+* If you want to see loplat REST API, please refer to https://github.com/loplat/loplat-rest-api for details
+* If you want to see Plengi Android SDK, please refer to https://github.com/loplat/loplat-sdk-android for details 
+
 ## Loplat iOS SDK
 
 ### History
 * 2016.06.13 
-	- ¹èÅÍ¸® ÆÛÆ÷¸Õ½º °³¼±
+	- ë°°í„°ë¦¬ í¼í¬ë¨¼ìŠ¤ ê°œì„ 
 
 * 2016.06.7 - initial release
 
 ### Loplat iOS SDK Settings
 AGENDA
-1. Background Mode ¼³Á¤ 
-2. info.plist¿¡ http: ¼­¹ö ¼³Á¤
-3. info.plist »ç¿ëÀÚ µ¿ÀÇ ¾È³»¹® ¼³Á¤ 
-4. Loplat iOS SDK Framework Ãß°¡, Realm Frmework Ãß°¡ 
-5. Header °æ·Î ¼³Á¤
-6. Callback delegate ±¸Çö (»ç¿ëÀÚ¿ë) ¹× ¼­¹ö °á°ú°ª ¿¹½Ã
-7. Start Parameter ¼³¸í
-8. Swift ÇÁ·ÎÁ§Æ®¿¡¼­ iOS SDK È£Ãâ¹ı
-9. Test Mode/ Production Mdoe »ç¿ë¹ı
-#### 1. Background Mode ¼³Á¤ (Project Setting ¡æ Capability)
-Location Update V Ã¼Å©
+1. Background Mode ì„¤ì • 
+2. info.plistì— http: ì„œë²„ ì„¤ì •
+3. info.plist ì‚¬ìš©ì ë™ì˜ ì•ˆë‚´ë¬¸ ì„¤ì • 
+4. Loplat iOS SDK Framework ì¶”ê°€, Realm Frmework ì¶”ê°€ 
+5. Header ê²½ë¡œ ì„¤ì •
+6. Callback delegate êµ¬í˜„ (ì‚¬ìš©ììš©) ë° ì„œë²„ ê²°ê³¼ê°’ ì˜ˆì‹œ
+7. Start Parameter ì„¤ëª…
+8. Swift í”„ë¡œì íŠ¸ì—ì„œ iOS SDK í˜¸ì¶œë²•
+9. Test Mode/ Production Mdoe ì‚¬ìš©ë²•
+
+#### 1. Background Mode ì„¤ì • (Project Setting â†’ Capability)
+Location Update V ì²´í¬
 <img src="http://i.imgur.com/MFeYHIT.png">
-#### 2. info.plist http ¼­¹ö ¼³Á¤
-#### 3. info.plist »ç¿ëÀÚ µ¿ÀÇ ¾È³» ¼³Á¤
+#### 2. info.plist http ì„œë²„ ì„¤ì •
+#### 3. info.plist ì‚¬ìš©ì ë™ì˜ ì•ˆë‚´ ì„¤ì •
 ~~~xml
     <key>NSAppTransportSecurity</key>
         <dict>
@@ -33,15 +39,15 @@ Location Update V Ã¼Å©
             <true/>
         </dict>
     <key>NSLocationAlwaysUsageDescription</key>
-        <string>»ç¿ëÀÚ µ¿ÀÇ ¾È³» ¹®ÀåÀ» ³Ö¾îÁÖ¼¼¿ä</string>
+        <string>ì‚¬ìš©ì ë™ì˜ ì•ˆë‚´ ë¬¸ì¥ì„ ë„£ì–´ì£¼ì„¸ìš”</string>
 ~~~
-#### 4. ´Ù¿î ¹ŞÀº LoplatSDK.framework Ãß°¡ (Project Setting ¡æ General ¡æ Embedded Binaries¿¡µµ ±×¸²°ú °°ÀÌ Ãß°¡)
-(Realm Frameworkµµ °°Àº ¹æ½ÄÀ¸·Î Ãß°¡ÇØ¾ß ÇÕ´Ï´Ù.)
+#### 4. ë‹¤ìš´ ë°›ì€ LoplatSDK.framework ì¶”ê°€ (Project Setting â†’ General â†’ Embedded Binariesì—ë„ ê·¸ë¦¼ê³¼ ê°™ì´ ì¶”ê°€)
+(Realm Frameworkë„ ê°™ì€ ë°©ì‹ìœ¼ë¡œ ì¶”ê°€í•´ì•¼ í•©ë‹ˆë‹¤.)
 <img src = "http://i.imgur.com/MOWhxfq.png">
-#### 5. Header °æ·Î ¼³Á¤ 
-BuildSetting ÀÇ Header Search Path¿¡ $(PROJECT_DIR)/LoplatSDK.framework/include/AppleLocationLib¸¦ Ãß°¡ÇÑ´Ù.
+#### 5. Header ê²½ë¡œ ì„¤ì • 
+BuildSetting ì˜ Header Search Pathì— $(PROJECT_DIR)/LoplatSDK.framework/include/AppleLocationLibë¥¼ ì¶”ê°€í•œë‹¤.
 <img src = "http://i.imgur.com/7ZPStaT.png">
-6. Loplat Service Start ±¸Çö
+6. Loplat Service Start êµ¬í˜„
 *   AppDelegate.h
 ~~~objectivec
      #import <UIKit/UIKit.h>
@@ -55,30 +61,30 @@ BuildSetting ÀÇ Header Search Path¿¡ $(PROJECT_DIR)/LoplatSDK.framework/include/
 ~~~objectivec
     @synthesize loplat;
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-        loplat=[Loplat getLoplat:@"test" client_secret:@"test"]; // client_id,client_secretÀ» ÀÔ·Â
-        [loplat startLocationUpdate:60];// ¾÷µ¥ÀÌÆ® °£°İÀ» ÃÊ´ÜÀ§·Î ¼³Á¤°¡´É
-        [loplat getCurrentPlace]; // ÇöÀç À§Ä¡ Á¤º¸ return
+        loplat=[Loplat getLoplat:@"test" client_secret:@"test"]; // client_id,client_secretì„ ì…ë ¥
+        [loplat startLocationUpdate:180];// ì—…ë°ì´íŠ¸ ê°„ê²©ì„ ì´ˆë‹¨ìœ„ë¡œ ì„¤ì •ê°€ëŠ¥
+        [loplat getCurrentPlace]; // í˜„ì¬ ìœ„ì¹˜ ì •ë³´ return
         loplat.delegate=self;
         return YES;
     }
 	-(void)DidEnterPlace:(NSDictionary *)currentPlace {
-			// callbackÀ» ±¸ÇöÇØ ÁÖ¼¼¿ä.     
+			// callbackì„ êµ¬í˜„í•´ ì£¼ì„¸ìš”.     
 	}
 	-(void)DidLeavePlace:(NSDictionary *)previousPlace {
-			// callbackÀ» ±¸ÇöÇØ ÁÖ¼¼¿ä. 
+			// callbackì„ êµ¬í˜„í•´ ì£¼ì„¸ìš”. 
     
 	}
-	// currentPlace¿Í previousPlace´Â ¼­¹ö return°ªÀÇ À§Ä¡¸¦ Ã£Àº °æ¿ìÀÇ jsonÀÇ place tag¿Í °°Àº Á¤º¸ÀÔ´Ï´Ù. 
+	// currentPlaceì™€ previousPlaceëŠ” ì„œë²„ returnê°’ì˜ ìœ„ì¹˜ë¥¼ ì°¾ì€ ê²½ìš°ì˜ jsonì˜ place tagì™€ ê°™ì€ ì •ë³´ì…ë‹ˆë‹¤. 
 ~~~
-##### ¼­¹ö return °ª
-* À§Ä¡¸¦ Ã£Àº °æ¿ì 
+##### ì„œë²„ return ê°’
+* delegate json return value 
 ~~~json
-{	"status": "success",
-	"place": {
+
+	{
 		"category": "Cafe",
 		"placename": "inalang cafe",
 		"name": "inalang cafe",
-		"tags": "ÀÎ¾Æ¶û",
+		"tags": "ì¸ì•„ë‘",
 		"lat_est": 37.468679941805902,
 		"loplat_id": 12014,
 		"floor": 1,
@@ -92,26 +98,18 @@ BuildSetting ÀÇ Header Search Path¿¡ $(PROJECT_DIR)/LoplatSDK.framework/include/
 		"client_code": null,
 		"accuracy": 0.5
 	},
-	"type": "searchplace"
 }~~~
-* À§Ä¡¸¦ ¸ø Ã£Àº °æ¿ì
-~~~json
-{ "status": "fail", "reason": "Location Acquisition Fail", "type": "searchplace" }
-~~~
-#### 7. Start parameter ¼³¸í
+#### 7. Start parameter ì„¤ëª…
 ~~~objectivec
 loplat=[Loplat getLoplat:@"test" client_secret:@"test"];
-    [loplat startLocationUpdate:180 BatterySaveMode:2];// ¾÷µ¥ÀÌÆ® °£°İÀ» ÃÊ´ÜÀ§·Î ¼³Á¤°¡´É
+    [loplat startLocationUpdate:180];// ì—…ë°ì´íŠ¸ ê°„ê²©ì„ ì´ˆë‹¨ìœ„ë¡œ ì„¤ì •ê°€ëŠ¥
     loplat.delegate=self;
 ~~~
 startLocationUpdate : Searching interval 
-BatterySaveMode : (1~3)
-1 : Heavy Battery Consumption
-2 : Reasonable Battery Consumption
-3 : Light Batter Consumption (possibly be bad accuracy)
-#### 8. Swift ±¸Çö
+
+#### 8. Swift êµ¬í˜„
 <img src ="http://i.imgur.com/JCJcinH.png">
-*   ¾Æ¹« Objective-C ÆÄÀÏÀ» »ı¼ºÇÏ¸é Bridge-Header ÆÄÀÏÀ» ¸¸µé¶ó´Â ¾Ë¸²Ã¢ÀÌ ¶ß´Âµ¥ ÀÌ¶§ µ¿ÀÇ ÇÏ¸é bridge fileµéÀ» ÀÚµ¿À¸·Î ¸¸µé¾î ÁØ´Ù.
+*   ì•„ë¬´ Objective-C íŒŒì¼ì„ ìƒì„±í•˜ë©´ Bridge-Header íŒŒì¼ì„ ë§Œë“¤ë¼ëŠ” ì•Œë¦¼ì°½ì´ ëœ¨ëŠ”ë° ì´ë•Œ ë™ì˜ í•˜ë©´ bridge fileë“¤ì„ ìë™ìœ¼ë¡œ ë§Œë“¤ì–´ ì¤€ë‹¤.
 -(ProjectName)-Bridging-Header.h
 ~~~objectivec
     #import <LoplatSDK/Loplat.h>`
@@ -125,17 +123,17 @@ BatterySaveMode : (1~3)
         var loplat:Loplat!
         func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
             // Override point for customization after application launch.
-            loplat = Loplat.getLoplat("test",client_secret: "test") // client_id,client_secret ¼³Á¤
-            loplat.startLocationUpdate(60) // update Interval ¼³Á¤(ÃÊ´ÜÀ§)
+            loplat = Loplat.getLoplat("test",client_secret: "test") // client_id,client_secret ì„¤ì •
+            loplat.startLocationUpdate(180) // update Interval ì„¤ì •(ì´ˆë‹¨ìœ„)
             loplat.delegate=self
             return true
         }
     func DidLoplatReport(result: [NSObject : AnyObject]!) {
-    // Loplat Delegate ÇÁ·ÎÅäÄİ ±¸Çö (Delegate callbackÀ» ±¸ÇöÇØ ÁÖ¼¼¿ä)
+    // Loplat Delegate í”„ë¡œí† ì½œ êµ¬í˜„ (Delegate callbackì„ êµ¬í˜„í•´ ì£¼ì„¸ìš”)
           }  
 ~~~
-** Background mode ¼³Á¤Áß Location Update´Â Apple submission½Ã¿¡ Apple ±âÁØ¿¡ ÀûÇÕÇÏÁö ¾ÊÀº ApplicationÀÌ »ç¿ëÇÑ´Ù°í ÆÇ´ÜÇÒ ½Ã reject »çÀ¯°¡ µÉ ¼ö ÀÖ½À´Ï´Ù. Design Guide¸¦ È®ÀÎÇÏ½Ã°í, ÁøÇàÇØ ÁÖ¼¼¿ä.  
-#### 9. Test Mode/ Production Mode »ç¿ë¹ı 
-º» SDK¸¦ »ç¿ëÇÏ½Ã·Á¸é, hello@cyranoproject.com À¸·Î Bundle ID¿Í È¸»çÀÌ¸§À» ¾Ë·ÁÁÖ¼¼¿ä. Test ModeÀÎ °æ¿ì¿¡´Â µî·Ï°ú µ¿½Ã¿¡ Test Mode¸¦ °ğ¹Ù·Î »ç¿ëÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù. Production ModeÀÇ °æ¿ì¿¡µµ ¸¶Âù°¡Áö·Î À§ÀÇ ÀÌ¸ŞÀÏ·Î °°Àº Á¤º¸¸¦ ¾Ë·ÁÁÖ¼¼¿ä. Production Mode SDK¸¦ release ¹ŞÀ¸¼Å¼­ »ç¿ëÇÏ¼Å¾ß ÇÕ´Ï´Ù. 
+** Background mode ì„¤ì •ì¤‘ Location UpdateëŠ” Apple submissionì‹œì— Apple ê¸°ì¤€ì— ì í•©í•˜ì§€ ì•Šì€ Applicationì´ ì‚¬ìš©í•œë‹¤ê³  íŒë‹¨í•  ì‹œ reject ì‚¬ìœ ê°€ ë  ìˆ˜ ìˆìŠµë‹ˆë‹¤. Design Guideë¥¼ í™•ì¸í•˜ì‹œê³ , ì§„í–‰í•´ ì£¼ì„¸ìš”.  
+#### 9. Test Mode/ Production Mode ì‚¬ìš©ë²• 
+ë³¸ SDKë¥¼ ì‚¬ìš©í•˜ì‹œë ¤ë©´, hello@cyranoproject.com ìœ¼ë¡œ Bundle IDì™€ íšŒì‚¬ì´ë¦„ì„ ì•Œë ¤ì£¼ì„¸ìš”. Test Modeì¸ ê²½ìš°ì—ëŠ” ë“±ë¡ê³¼ ë™ì‹œì— Test Modeë¥¼ ê³§ë°”ë¡œ ì‚¬ìš©í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤. Production Modeì˜ ê²½ìš°ì—ë„ ë§ˆì°¬ê°€ì§€ë¡œ ìœ„ì˜ ì´ë©”ì¼ë¡œ ê°™ì€ ì •ë³´ë¥¼ ì•Œë ¤ì£¼ì„¸ìš”. Production Mode SDKë¥¼ release ë°›ìœ¼ì…”ì„œ ì‚¬ìš©í•˜ì…”ì•¼ í•©ë‹ˆë‹¤. 
 #### Trouble Shooting
-¸¸¾à ÄÄÆÄÀÏÀÌ ¿Ï·áµÇ¾úÀ¸³ª, run time exception ¹ß»ı½Ã¿¡´Â 4¹ø ³»¿ë°ú °°ÀÌ framework°ú binary¿¡ ¸ğµÎ frameworkÀ» Ãß°¡ÇÏ¿´´ÂÁö È®ÀÎ ÇØ ÁÖ¼¼¿ä.
+ë§Œì•½ ì»´íŒŒì¼ì´ ì™„ë£Œë˜ì—ˆìœ¼ë‚˜, run time exception ë°œìƒì‹œì—ëŠ” 4ë²ˆ ë‚´ìš©ê³¼ ê°™ì´ frameworkê³¼ binaryì— ëª¨ë‘ frameworkì„ ì¶”ê°€í•˜ì˜€ëŠ”ì§€ í™•ì¸ í•´ ì£¼ì„¸ìš”.
