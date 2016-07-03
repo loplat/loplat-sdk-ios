@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,RefreshDelegate {
+class ViewController: UIViewController,Refreshdelegate {
     
     @IBOutlet var webview : UIWebView!
     @IBOutlet var startbtn : UIButton!
@@ -110,7 +110,7 @@ class ViewController: UIViewController,RefreshDelegate {
             app.loplat=Loplat.getLoplat("test", client_secret:"test")
         }
         
-        let name = app.loplat.getCurrentPlace()["place"]!["name"] as! String
+        var name = app.loplat.getCurrentPlace()["place"]!["name"] as! String
         
         
         if(name.isEmpty){
@@ -126,6 +126,16 @@ class ViewController: UIViewController,RefreshDelegate {
             
             self.presentViewController(alert, animated: true, completion: nil)
         }else{
+            
+            let accuray = app.loplat.getCurrentPlace()["place"]!["accuracy"] as! Float
+            let threshold = app.loplat.getCurrentPlace()["place"]!["threshold"] as! Float
+            
+            if(accuray < threshold ){
+                name=name+" 근처"
+            }
+
+            
+            
             let alert = UIAlertController(title: "현재위치", message: name, preferredStyle: UIAlertControllerStyle.Alert)
             
             

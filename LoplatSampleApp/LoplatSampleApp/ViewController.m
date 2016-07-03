@@ -96,8 +96,18 @@
     
     UIAlertController *alert;
     if([place objectForKey:@"place"]!=nil){
+    
+        NSString *name=[[place objectForKey:@"place"] objectForKey:@"name"];
+        float accuary=[[[place objectForKey:@"place"] valueForKey:@"accuracy"]floatValue];
+        float threshold=[[[place objectForKey:@"place"] valueForKey:@"threshold"]floatValue];
+        if(accuary<threshold){
+            name=[name stringByAppendingString:@"근처"];
+        }
+
+        
+        
     alert = [UIAlertController alertControllerWithTitle:@"현재위치"
-                                                message:[[place objectForKey:@"place"]objectForKey:@"name"]
+                                                message:name
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     }else{
         alert = [UIAlertController alertControllerWithTitle:@"현재위치"
@@ -125,6 +135,7 @@
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     NSString *urlString=[NSString stringWithFormat:@"http://i-handsome.com/tc/loplat/bssid_db_check.php?bundle=%@",bundleIdentifier];
     [self.WebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
+    [super viewDidAppear:NO];
 }
 
 @end

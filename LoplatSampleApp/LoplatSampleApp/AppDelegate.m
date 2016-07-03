@@ -74,6 +74,15 @@
 
     
     NSString *name=[currentPlace objectForKey:@"name"];
+    
+    float accuary=[[currentPlace valueForKey:@"accuracy"] floatValue];
+    float threshold=[[currentPlace valueForKey:@"threshold"] floatValue];
+    
+    if(accuary<threshold){
+        name=[name stringByAppendingString:@"근처"];
+    }
+
+    
     NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://i-handsome.com/tc/loplat/bssid_report.php?bssid=%@&category=1&bundle=%@&placename=%@",bssid,bundleIdentifier,[name stringByAddingPercentEncodingWithAllowedCharacters:set]]]
@@ -112,6 +121,12 @@
 
     
     NSString *name=[previousPlace objectForKey:@"name"];
+    float accuary=[[previousPlace valueForKey:@"accuracy"] floatValue];
+    float threshold=[[previousPlace valueForKey:@"threshold"] floatValue];
+    if(accuary<threshold){
+        name=[name stringByAppendingString:@"근처"];
+    }
+    
     NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://i-handsome.com/tc/loplat/bssid_report.php?bssid=%@&category=2&bundle=%@&placename=%@",bssid,bundleIdentifier,[name stringByAddingPercentEncodingWithAllowedCharacters:set]]]

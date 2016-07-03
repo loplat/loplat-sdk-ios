@@ -1,4 +1,9 @@
-﻿#### Note ####
+#### Note ####
+* If you want to see loplat REST API, please refer to https://github.com/loplat/loplat-rest-api for details
+* If you want to see Plengi Android SDK, please refer to https://github.com/loplat/loplat-sdk-android for details 
+
+### Loplat iOS SDK Settings
+AGENDA
 * If you want to see loplat REST API, please refer to https://github.com/loplat/loplat-rest-api for details
 * If you want to see Plengi Android SDK, please refer to https://github.com/loplat/loplat-sdk-android for details 
 
@@ -42,7 +47,7 @@ Location Update V 체크
 #### 5. Header 경로 설정 
 BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/LoplatSDK.framework/include/AppleLocationLib를 추가한다.
 <img src = "http://i.imgur.com/7ZPStaT.png">
-#### 6. Loplat Service Start 구현
+6. Loplat Service Start 구현
 *   AppDelegate.h
 ~~~objectivec
      #import <UIKit/UIKit.h>
@@ -71,7 +76,6 @@ BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/LoplatSDK.framework/includ
 	}
 	// currentPlace와 previousPlace는 서버 return값의 위치를 찾은 경우의 json의 place tag와 같은 정보입니다. 
 ~~~
-
 ##### 서버 return 값
 * delegate json return value 
 ~~~json
@@ -94,9 +98,7 @@ BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/LoplatSDK.framework/includ
 		"client_code": null,
 		"accuracy": 0.5
 	},
-}
-~~~
-
+}~~~
 #### 7. Start parameter 설명
 ~~~objectivec
 loplat=[Loplat getLoplat:@"test" client_secret:@"test"];

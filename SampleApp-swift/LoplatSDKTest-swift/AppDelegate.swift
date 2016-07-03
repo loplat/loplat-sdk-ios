@@ -68,6 +68,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,LoplatDelegate {
     func DidEnterPlace(currentPlace: [NSObject : AnyObject]!) {
         
         var name = currentPlace["name"] as! String
+        let accuray = currentPlace["accuray"] as! Float
+        let threshold = currentPlace["threshold"] as! Float
+        
+        if(accuray < threshold ){
+            name=name+" 근처"
+        }
+        
 
         var bssid = ""
         
@@ -107,7 +114,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,LoplatDelegate {
     
     func DidLeavePlace(previousPlace: [NSObject : AnyObject]!) {
         var name = previousPlace["name"] as! String
+        let accuray = previousPlace["accuray"] as! Float
+        let threshold = previousPlace["threshold"] as! Float
         
+        if(accuray < threshold ){
+            name=name+" 근처"
+        }
+
         var bssid = ""
         
         if let interfaces:CFArray! = CNCopySupportedInterfaces() {
