@@ -1,11 +1,6 @@
 #### Note ####
 * If you want to see loplat REST API, please refer to https://github.com/loplat/loplat-rest-api for details
-* If you want to see Plengi Android SDK, please refer to https://github.com/loplat/loplat-sdk-android for details 
-
-### Loplat iOS SDK Settings
-AGENDA
-* If you want to see loplat REST API, please refer to https://github.com/loplat/loplat-rest-api for details
-* If you want to see Plengi Android SDK, please refer to https://github.com/loplat/loplat-sdk-android for details 
+* If you want to see Plengi Android SDK, please refer to https://github.com/loplat/loplat-sdk-android for details  
 
 ## Loplat iOS SDK
 
