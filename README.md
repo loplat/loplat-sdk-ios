@@ -11,7 +11,9 @@
 * 2016.06.7 - initial release
 
 ### Loplat iOS SDK Settings
+
 AGENDA
+
 1. Background Mode 설정 
 2. info.plist에 http: 서버 설정
 3. info.plist 사용자 동의 안내문 설정 
@@ -20,6 +22,7 @@ AGENDA
 6. Callback delegate 구현 (사용자용) 및 서버 결과값 예시
 7. Start Parameter 설명
 8. Swift 프로젝트에서 iOS SDK 호출법
+
 9. Test Mode/ Production Mdoe 사용법
 
 #### 1. Background Mode 설정 (Project Setting → Capability)
@@ -51,7 +54,8 @@ BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/LoplatSDK.framework/includ
     @property (strong, nonatomic) UIWindow *window;
     @property (strong, nonatomic) Loplat *loplat;
     @end
-    ~~~
+~~~
+
 *   AppDelegate.m
 ~~~objectivec
     @synthesize loplat;
@@ -70,13 +74,13 @@ BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/LoplatSDK.framework/includ
     
 	}
 	// currentPlace와 previousPlace는 서버 return값의 위치를 찾은 경우의 json의 place tag와 같은 정보입니다. 
-    ~~~
+~~~
 
 ##### 서버 return 값
 * delegate json return value 
-~~~json
 
-	{
+~~~json
+    {
 		"category": "Cafe",
 		"placename": "inalang cafe",
 		"name": "inalang cafe",
@@ -100,8 +104,8 @@ BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/LoplatSDK.framework/includ
 #### 7. Start parameter 설명
 ~~~objectivec
 loplat=[Loplat getLoplat:@"test" client_secret:@"test"];
-    [loplat startLocationUpdate:180];// 업데이트 간격을 초단위로 설정가능
-    loplat.delegate=self;
+[loplat startLocationUpdate:180];// 업데이트 간격을 초단위로 설정가능
+loplat.delegate=self;
 ~~~
 startLocationUpdate : Searching interval 
 
