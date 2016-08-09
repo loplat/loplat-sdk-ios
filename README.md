@@ -113,7 +113,7 @@ startLocationUpdate : Searching interval
 *   아무 Objective-C 파일을 생성하면 Bridge-Header 파일을 만들라는 알림창이 뜨는데 이때 동의 하면 bridge file들을 자동으로 만들어 준다.
 -(ProjectName)-Bridging-Header.h
 ~~~objectivec
-    #import <LoplatSDK/Loplat.h>`
+    #import <LoplatSDK/Loplat.h>
 ~~~
 *   AppDelegate.swift
 ~~~objectivec
