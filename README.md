@@ -22,7 +22,6 @@ AGENDA
 6. Callback delegate 구현 (사용자용) 및 서버 결과값 예시
 7. Start Parameter 설명
 8. Swift 프로젝트에서 iOS SDK 호출법
-
 9. Test Mode/ Production Mdoe 사용법
 
 #### 1. Background Mode 설정 (Project Setting → Capability)
@@ -118,7 +117,7 @@ startLocationUpdate : Searching interval
 ~~~
 *   AppDelegate.swift
 ~~~objectivec
-     #import UIKit
+    #import UIKit
     @UIApplicationMain
     class AppDelegate: UIResponder, UIApplicationDelegate,LoplatDelegate {
         var window: UIWindow?
