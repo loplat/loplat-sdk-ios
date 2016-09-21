@@ -15,6 +15,8 @@
 #import "Place.h"
 #import "Reachability.h"
 
+#define TEST_MODE
+
 @class LocationManager;
 
 
@@ -22,6 +24,7 @@
 @required
 -(void)DidEnterPlace:(NSDictionary *)currentPlace;
 -(void)DidLeavePlace:(NSDictionary *)previousPlace;
+-(void)WhereIsNow:(NSDictionary *)currentPlace;
 @end
 
 @interface Loplat : NSObject{
@@ -42,4 +45,6 @@
 //-(void)startFetchLoop;
 -(void)stop;
 -(NSDictionary *)getCurrentPlace;
+-(void)resetTimer:(NSInteger)time;
+-(NSData *)queryToServer:(NSString *)bssid ssid:(NSString *)ssid;
 @end
