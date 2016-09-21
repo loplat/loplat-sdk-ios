@@ -42,7 +42,7 @@ Location Update V 체크
 (Realm Framework도 같은 방식으로 추가해야 합니다.)
 <img src = "http://i.imgur.com/MOWhxfq.png">
 
-Realm의 경우 iOS7을 지원하기 위해서는 static frame을 사용하셔야 합니다. 
+Realm의 경우 iOS7을 지원하기 위해서는 static framework을 사용하셔야 합니다. 
 
 참고 : https://realm.io/kr/docs/objc/latest/
 1. Realm의 최신 버전을 다운로드하고 압축을 풉니다.
