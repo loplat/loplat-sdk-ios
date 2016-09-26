@@ -44,7 +44,7 @@ Location Update V 체크
 
 Realm의 경우 iOS7을 지원하기 위해서는 static framework을 사용하셔야 합니다. 
 
-참고 : https://realm.io/kr/docs/objc/latest/
+참고 : https://realm.io/kr/docs/objc/latest/ 
 1. Realm의 최신 버전을 다운로드하고 압축을 풉니다. 
 2. ios/static/ 디렉토리에서 Realm.framework 을 선택하여 Xcode 프로젝트의 File Navigation에 넣습니다. 이때, Copy items if needed 이 선택된지 확인하고, Finish 버튼을 누릅니다. 
 3. Xcode의 File Navigator에서 프로젝트를 클릭합니다. 어플리케이션 대상을 선택하고 Build Phases 탭으로 이동합니다. Link Binary with Libraries 의 +를 클릭하여 libc++.tbd 를 추가합니다. 
