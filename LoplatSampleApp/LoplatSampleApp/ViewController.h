@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
-#import <LoplatSDK/Loplat.h>
+#import "Loplat.h"
 
 @interface ViewController : UIViewController<RefreshDelegate>
 

@@ -74,7 +74,7 @@ class ViewController: UIViewController,Refreshdelegate {
             let app = UIApplication.sharedApplication().delegate as! AppDelegate
             
             if((app.loplat == nil)){
-                app.loplat=Loplat.getLoplat("test", client_secret:"test")
+                app.loplat=Loplat.getLoplat("test", client_secret:"test", is_return_mainthread : false)
             }
             
             app.loplat.startLocationUpdate(180)
@@ -107,8 +107,7 @@ class ViewController: UIViewController,Refreshdelegate {
         let app = UIApplication.sharedApplication().delegate as! AppDelegate
         
         if((app.loplat == nil)){
-            app.loplat=Loplat.getLoplat("test", client_secret:"test")
-        }
+            app.loplat=Loplat.getLoplat("test", client_secret:"test", is_return_mainthread : false)        }
         
         var name = app.loplat.getCurrentPlace()["place"]!["name"] as! String
         

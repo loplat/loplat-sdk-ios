@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,LoplatDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        loplat = Loplat.getLoplat("test",client_secret: "test")
+        loplat = Loplat.getLoplat("test",client_secret: "test", is_return_mainthread:false)
         loplat.startLocationUpdate(180);
         loplat.delegate=self
         

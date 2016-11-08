@@ -12,8 +12,7 @@
 		7F9E66D41CEF0B7500581BFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F9E66D21CEF0B7500581BFA /* Main.storyboard */; };
 		7F9E66D61CEF0B7500581BFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F9E66D51CEF0B7500581BFA /* Assets.xcassets */; };
 		7F9E66D91CEF0B7500581BFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F9E66D71CEF0B7500581BFA /* LaunchScreen.storyboard */; };
-		7FB228FB1D22644000AACEE0 /* LoplatSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB228F91D22643800AACEE0 /* LoplatSDK.framework */; };
-		7FB228FC1D22644000AACEE0 /* LoplatSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB228F91D22643800AACEE0 /* LoplatSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7FA2AA351DD0889700294D59 /* libLoplatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FA2AA341DD0889700294D59 /* libLoplatSDK.a */; };
 		7FD905311CFF0A3F00C7ECBC /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD9052F1CFF0A3000C7ECBC /* Realm.framework */; };
 		7FD905321CFF0A3F00C7ECBC /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD9052F1CFF0A3000C7ECBC /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -26,7 +25,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				7FD905321CFF0A3F00C7ECBC /* Realm.framework in Embed Frameworks */,
-				7FB228FC1D22644000AACEE0 /* LoplatSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -42,7 +40,16 @@
 		7F9E66D81CEF0B7500581BFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F9E66DA1CEF0B7500581BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F9E66E51CEF0D3C00581BFA /* LoplatSDKTest-swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LoplatSDKTest-swift-Bridging-Header.h"; sourceTree = "<group>"; };
-		7FB228F91D22643800AACEE0 /* LoplatSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LoplatSDK.framework; sourceTree = "<group>"; };
+		7FA2AA251DD080E500294D59 /* BackgroundTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTaskManager.h; sourceTree = "<group>"; };
+		7FA2AA261DD080E500294D59 /* Location-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Location-Prefix.pch"; sourceTree = "<group>"; };
+		7FA2AA271DD080E500294D59 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		7FA2AA281DD080E500294D59 /* LocationShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationShareModel.h; sourceTree = "<group>"; };
+		7FA2AA291DD080E500294D59 /* LocationTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTracker.h; sourceTree = "<group>"; };
+		7FA2AA2B1DD080E500294D59 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
+		7FA2AA2C1DD080E500294D59 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		7FA2AA2D1DD080E500294D59 /* ScheduledLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduledLocationManager.h; sourceTree = "<group>"; };
+		7FA2AA301DD0885600294D59 /* Loplat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loplat.h; sourceTree = "<group>"; };
+		7FA2AA341DD0889700294D59 /* libLoplatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLoplatSDK.a; sourceTree = "<group>"; };
 		7FD9052F1CFF0A3000C7ECBC /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,8 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FA2AA351DD0889700294D59 /* libLoplatSDK.a in Frameworks */,
 				7FD905311CFF0A3F00C7ECBC /* Realm.framework in Frameworks */,
-				7FB228FB1D22644000AACEE0 /* LoplatSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,7 +69,8 @@
 		7F9E66C21CEF0B7500581BFA = {
 			isa = PBXGroup;
 			children = (
-				7FB228F91D22643800AACEE0 /* LoplatSDK.framework */,
+				7FA2AA341DD0889700294D59 /* libLoplatSDK.a */,
+				7FA2AA241DD080E500294D59 /* include */,
 				7FD9052F1CFF0A3000C7ECBC /* Realm.framework */,
 				7F9E66CD1CEF0B7500581BFA /* LoplatSDKTest-swift */,
 				7F9E66CC1CEF0B7500581BFA /* Products */,
@@ -89,6 +97,22 @@
 				7F9E66E51CEF0D3C00581BFA /* LoplatSDKTest-swift-Bridging-Header.h */,
 			);
 			path = "LoplatSDKTest-swift";
+			sourceTree = "<group>";
+		};
+		7FA2AA241DD080E500294D59 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				7FA2AA251DD080E500294D59 /* BackgroundTaskManager.h */,
+				7FA2AA261DD080E500294D59 /* Location-Prefix.pch */,
+				7FA2AA271DD080E500294D59 /* LocationManager.h */,
+				7FA2AA281DD080E500294D59 /* LocationShareModel.h */,
+				7FA2AA291DD080E500294D59 /* LocationTracker.h */,
+				7FA2AA2B1DD080E500294D59 /* Place.h */,
+				7FA2AA301DD0885600294D59 /* Loplat.h */,
+				7FA2AA2C1DD080E500294D59 /* Reachability.h */,
+				7FA2AA2D1DD080E500294D59 /* ScheduledLocationManager.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,6 +148,7 @@
 				TargetAttributes = {
 					7F9E66CA1CEF0B7500581BFA = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -285,18 +310,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				ENABLE_BITCODE = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hieonn Ceu Kim (7SLV7UW64B)";
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/LoplatSDK.framework/include/AppleLocationLib";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/include";
 				INFOPLIST_FILE = "LoplatSDKTest-swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hansomecompany.LoplatSDKTest-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "LoplatSDKTest-swift/LoplatSDKTest-swift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -305,17 +336,23 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				ENABLE_BITCODE = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hieonn Ceu Kim (7SLV7UW64B)";
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/LoplatSDK.framework/include/AppleLocationLib";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/include";
 				INFOPLIST_FILE = "LoplatSDKTest-swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hansomecompany.LoplatSDKTest-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "LoplatSDKTest-swift/LoplatSDKTest-swift-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

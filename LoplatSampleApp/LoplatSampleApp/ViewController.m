@@ -60,7 +60,7 @@
     }else{
         AppDelegate *app=(AppDelegate *)[[UIApplication sharedApplication] delegate];
         
-        app.loplat=[Loplat getLoplat:@"test" client_secret:@"test"];
+        app.loplat=[Loplat getLoplat:@"test" client_secret:@"test" is_return_mainthread:NO];
         
         [app.loplat startLocationUpdate:180];
         
@@ -89,7 +89,7 @@
 -(IBAction)currentPlace:(id)sender{
     AppDelegate *app=(AppDelegate *)[[UIApplication sharedApplication] delegate];
     if(app.loplat==nil){
-        app.loplat=[Loplat getLoplat:@"test" client_secret:@"test"];
+        app.loplat=[Loplat getLoplat:@"test" client_secret:@"test" is_return_mainthread:NO];
     }
     
     NSDictionary *place=[app.loplat getCurrentPlace];

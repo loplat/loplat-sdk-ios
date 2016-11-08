@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7FB228F71D2263E900AACEE0 /* LoplatSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB228F51D2263DF00AACEE0 /* LoplatSDK.framework */; };
-		7FB228F81D2263E900AACEE0 /* LoplatSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB228F51D2263DF00AACEE0 /* LoplatSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7FA2AA331DD0888A00294D59 /* libLoplatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FA2AA321DD0888A00294D59 /* libLoplatSDK.a */; };
 		7FD905271CFF02A300C7ECBC /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD905251CFF028500C7ECBC /* Realm.framework */; };
 		7FD905281CFF02A300C7ECBC /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7FD905251CFF028500C7ECBC /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DBF5D7551CF5BBFB003D5714 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF5D7541CF5BBFB003D5714 /* main.m */; };
@@ -46,7 +45,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				7FD905281CFF02A300C7ECBC /* Realm.framework in Embed Frameworks */,
-				7FB228F81D2263E900AACEE0 /* LoplatSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,7 +52,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		7FB228F51D2263DF00AACEE0 /* LoplatSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LoplatSDK.framework; sourceTree = "<group>"; };
+		7FA2AA181DD07E7100294D59 /* BackgroundTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTaskManager.h; sourceTree = "<group>"; };
+		7FA2AA191DD07E7100294D59 /* Location-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Location-Prefix.pch"; sourceTree = "<group>"; };
+		7FA2AA1A1DD07E7100294D59 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		7FA2AA1B1DD07E7100294D59 /* LocationShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationShareModel.h; sourceTree = "<group>"; };
+		7FA2AA1C1DD07E7100294D59 /* LocationTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTracker.h; sourceTree = "<group>"; };
+		7FA2AA1E1DD07E7100294D59 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
+		7FA2AA1F1DD07E7100294D59 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		7FA2AA201DD07E7100294D59 /* ScheduledLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduledLocationManager.h; sourceTree = "<group>"; };
+		7FA2AA311DD0886B00294D59 /* Loplat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loplat.h; sourceTree = "<group>"; };
+		7FA2AA321DD0888A00294D59 /* libLoplatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLoplatSDK.a; sourceTree = "<group>"; };
 		7FD905251CFF028500C7ECBC /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		DBF5D7501CF5BBFB003D5714 /* LoplatSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoplatSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF5D7541CF5BBFB003D5714 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -79,8 +86,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FA2AA331DD0888A00294D59 /* libLoplatSDK.a in Frameworks */,
 				7FD905271CFF02A300C7ECBC /* Realm.framework in Frameworks */,
-				7FB228F71D2263E900AACEE0 /* LoplatSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,10 +108,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7FA2AA171DD07E7100294D59 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				7FA2AA311DD0886B00294D59 /* Loplat.h */,
+				7FA2AA181DD07E7100294D59 /* BackgroundTaskManager.h */,
+				7FA2AA191DD07E7100294D59 /* Location-Prefix.pch */,
+				7FA2AA1A1DD07E7100294D59 /* LocationManager.h */,
+				7FA2AA1B1DD07E7100294D59 /* LocationShareModel.h */,
+				7FA2AA1C1DD07E7100294D59 /* LocationTracker.h */,
+				7FA2AA1E1DD07E7100294D59 /* Place.h */,
+				7FA2AA1F1DD07E7100294D59 /* Reachability.h */,
+				7FA2AA201DD07E7100294D59 /* ScheduledLocationManager.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
 		DBF5D7471CF5BBFB003D5714 = {
 			isa = PBXGroup;
 			children = (
-				7FB228F51D2263DF00AACEE0 /* LoplatSDK.framework */,
+				7FA2AA321DD0888A00294D59 /* libLoplatSDK.a */,
+				7FA2AA171DD07E7100294D59 /* include */,
 				7FD905251CFF028500C7ECBC /* Realm.framework */,
 				DBF5D7521CF5BBFB003D5714 /* LoplatSampleApp */,
 				DBF5D76C1CF5BBFB003D5714 /* LoplatSampleAppTests */,
@@ -450,9 +474,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/LoplatSDK.framework/include/AppleLocationLib";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/include";
 				INFOPLIST_FILE = LoplatSampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.handsome.loplat.sample.LoplatSampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -471,9 +499,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/LoplatSDK.framework/include/AppleLocationLib";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/include";
 				INFOPLIST_FILE = LoplatSampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.handsome.loplat.sample.LoplatSampleApp;

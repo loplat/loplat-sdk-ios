@@ -19,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    loplat=[Loplat getLoplat:@"test" client_secret:@"test"];
+    loplat=[Loplat getLoplat:@"test" client_secret:@"test" is_return_mainthread:NO];
     [loplat startLocationUpdate:180];// 업데이트 간격을 초단위로 설정가능
     loplat.delegate=self;
     

@@ -5,6 +5,10 @@
 ## Loplat iOS SDK
 
 ### History
+* 2016.11.7
+    - framework -> static library 전환
+    - is_return_mainthread 추가
+
 * 2016.06.13 
 	- 배터리 퍼포먼스 개선
 
@@ -38,9 +42,9 @@ Location Update V 체크
     <key>NSLocationAlwaysUsageDescription</key>
         <string>사용자 동의 안내 문장을 넣어주세요</string>
 ~~~
-#### 4. 다운 받은 LoplatSDK.framework 추가 (Project Setting → General → Embedded Binaries에도 그림과 같이 추가)
-(Realm Framework도 같은 방식으로 추가해야 합니다.)
-<img src = "http://i.imgur.com/MOWhxfq.png">
+#### 4. 다운 받은 libLoplatSDK.a 와 include폴더 추가, Realm.framework 추가
+(아래 그림과 같이 libLoplatSDK.a 와 include폴더를 프로젝트에 추가, Realm.framework는 Linked Frameworks and Libraries 와 Embedded Binaries에 모두 추가되어야 합니다.)
+<img src = "http://i.imgur.com/jM3yFVC.png">
 
 Realm의 경우 iOS7을 지원하기 위해서는 static framework을 사용하셔야 합니다. 
 
@@ -53,13 +57,13 @@ Realm의 경우 iOS7을 지원하기 위해서는 static framework을 사용하�
 
 
 #### 5. Header 경로 설정 
-BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/LoplatSDK.framework/include/AppleLocationLib를 추가한다.
-<img src = "http://i.imgur.com/7ZPStaT.png">
+BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/include를 추가한다.
+<img src = "http://i.imgur.com/arvY1NX.png">
 6. Loplat Service Start 구현
 *   AppDelegate.h
 ~~~objectivec
      #import <UIKit/UIKit.h>
-     #import <LoplatSDK/Loplat.h>
+     #import "Loplat.h"
     @interface AppDelegate : UIResponder <UIApplicationDelegate,LoplatDelegate>
     @property (strong, nonatomic) UIWindow *window;
     @property (strong, nonatomic) Loplat *loplat;
@@ -70,7 +74,7 @@ BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/LoplatSDK.framework/includ
 ~~~objectivec
     @synthesize loplat;
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-        loplat=[Loplat getLoplat:@"test" client_secret:@"test"]; // client_id,client_secret을 입력
+        loplat=[Loplat getLoplat:@"test" client_secret:@"test" is_return_mainthread:NO]; // client_id,client_secret, is_return_mainthread : delegate를 메인스레드에서 실행여부를 입력
         [loplat startLocationUpdate:180];// 업데이트 간격을 초단위로 설정가능
         [loplat getCurrentPlace]; // 현재 위치 정보 return
         loplat.delegate=self;
@@ -113,7 +117,7 @@ BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/LoplatSDK.framework/includ
 
 #### 7. Start parameter 설명
 ~~~objectivec
-loplat=[Loplat getLoplat:@"test" client_secret:@"test"];
+loplat=[Loplat getLoplat:@"test" client_secret:@"test" is_return_mainthread:NO]
 [loplat startLocationUpdate:180];// 업데이트 간격을 초단위로 설정가능
 loplat.delegate=self;
 ~~~
@@ -124,7 +128,7 @@ startLocationUpdate : Searching interval
 *   아무 Objective-C 파일을 생성하면 Bridge-Header 파일을 만들라는 알림창이 뜨는데 이때 동의 하면 bridge file들을 자동으로 만들어 준다.
 -(ProjectName)-Bridging-Header.h
 ~~~objectivec
-    #import <LoplatSDK/Loplat.h>
+    #import "Loplat.h"
 ~~~
 *   AppDelegate.swift
 ~~~objectivec
@@ -135,7 +139,7 @@ startLocationUpdate : Searching interval
         var loplat:Loplat!
         func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
             // Override point for customization after application launch.
-            loplat = Loplat.getLoplat("test",client_secret: "test") // client_id,client_secret 설정
+            loplat = Loplat.getLoplat("test",client_secret: "test", is_return_mainthread:false) // client_id,client_secret 설정, is_return_mainthread :delegate를 메인스레드에서 실행여부
             loplat.startLocationUpdate(180) // update Interval 설정(초단위)
             loplat.delegate=self
             return true

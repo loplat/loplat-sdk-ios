@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <LoplatSDK/Loplat.h>
+#import "Loplat.h"
 
 @protocol RefreshDelegate
 
