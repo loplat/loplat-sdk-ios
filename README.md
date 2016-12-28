@@ -5,6 +5,12 @@
 ## Loplat iOS SDK
 
 ### History
+* 2016.12.27
+    - iOS sdk version 0.9.0 release
+        - 업데이트 사항
+            1. init시 현재 위치 장소 정보를 delegate에 return 함
+            2. LTE상태에서는 서버 연결하지 않도록 설정
+
 * 2016.11.7
     - framework -> static library 전환
     - is_return_mainthread 추가
