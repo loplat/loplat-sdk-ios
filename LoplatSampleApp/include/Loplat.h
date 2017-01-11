@@ -13,7 +13,6 @@
 #import <NetworkExtension/NetworkExtension.h>
 #import "LocationTracker.h"
 #import "Place.h"
-#import "Reachability.h"
 
 #define TEST_MODE
 
@@ -43,8 +42,6 @@
 +(Loplat *)getLoplat:(NSString *)client_id client_secret:(NSString *)client_secret is_return_mainthread:(BOOL)is_return_mainthread;
 -(void)startLocationUpdate:(int)interval;
 -(void)restart;
-//-(void)startAudioLoop;
-//-(void)startFetchLoop;
 -(void)stop;
 -(NSDictionary *)getCurrentPlace;
 -(void)resetTimer:(NSInteger)time;

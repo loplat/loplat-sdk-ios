@@ -18,26 +18,12 @@
 
 @property (nonatomic) CLLocationManager * anotherLocationManager;
 
-@property (nonatomic) CLLocationCoordinate2D myLastLocation;
-@property (nonatomic) CLLocationAccuracy myLastLocationAccuracy;
-
-@property (nonatomic) CLLocationCoordinate2D myLocation;
-@property (nonatomic) CLLocationAccuracy myLocationAccuracy;
-
-@property (nonatomic) NSMutableDictionary *myLocationDictInPlist;
-@property (nonatomic) NSMutableArray *myLocationArrayInPlist;
-
-@property (nonatomic) BOOL afterResume;
 @property Loplat *loplat;
 
 + (id)sharedManager;
 
 - (void)startMonitoringLocation;
 - (void)restartMonitoringLocation;
-
-- (void)addResumeLocationToPList;
-- (void)addLocationToPList:(BOOL)fromResume;
-- (void)addApplicationStatusToPList:(NSString*)applicationStatus;
 - (void)stopMonitoring;
 
 @end
