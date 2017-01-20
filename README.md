@@ -5,8 +5,13 @@
 ## Loplat iOS SDK
 
 ### History
+* 2017.01.20
+    - iOS sdk version 0.1.1 release
+        - 업데이트 사항: bundle id check api 주소 변경
+    - **공지사항** : Sample app의 web view가 서버 주소 이전 작업으로 인하여 당분간 장소 인식 결과 화면이 보이지 않음
+
 * 2016.12.27
-    - iOS sdk version 0.9.0 release
+    - iOS sdk version 0.1.0 release
         - 업데이트 사항
             1. init시 현재 위치 장소 정보를 delegate에 return 함
             2. LTE상태에서는 서버 연결하지 않도록 설정
