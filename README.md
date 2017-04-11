@@ -162,6 +162,6 @@ startLocationUpdate : Searching interval
 ~~~
 ** Background mode 설정중 Location Update는 Apple submission시에 Apple 기준에 적합하지 않은 Application이 사용한다고 판단할 시 reject 사유가 될 수 있습니다. Design Guide를 확인하시고, 진행해 주세요.  
 #### 9. Test Mode/ Production Mode 사용법 
-본 SDK를 사용하시려면, mjlee@loplat.com 으로 Bundle ID와 회사이름을 알려주세요. Test Mode인 경우에는 등록과 동시에 Test Mode를 곧바로 사용하실 수 있습니다. Production Mode의 경우에도 마찬가지로 위의 이메일로 같은 정보를 알려주세요. Production Mode SDK를 release 받으셔서 사용하셔야 합니다. 
+본 SDK를 사용하시려면, yeddie@loplat.com 으로 Bundle ID와 회사이름을 알려주세요. Test Mode인 경우에는 등록과 동시에 Test Mode를 곧바로 사용하실 수 있습니다. Production Mode의 경우에도 마찬가지로 위의 이메일로 같은 정보를 알려주세요. Production Mode SDK를 release 받으셔서 사용하셔야 합니다. 
 #### Trouble Shooting
 만약 컴파일이 완료되었으나, run time exception 발생시에는 4번 내용과 같이 framework과 binary에 모두 framework을 추가하였는지 확인 해 주세요.
