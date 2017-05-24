@@ -25,7 +25,7 @@
     app.delegate=self;
     
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-    NSString *urlString=[NSString stringWithFormat:@"http://i-handsome.com/tc/loplat/bssid_db_check.php?bundle=%@",bundleIdentifier];
+    NSString *urlString=[NSString stringWithFormat:@"http://handsomeus.com/tc/loplat/bssid_db_check.php?bundle=%@",bundleIdentifier];
     [self.WebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -126,14 +126,14 @@
 
 -(IBAction)refresh:(id)sender{
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-    NSString *urlString=[NSString stringWithFormat:@"http://i-handsome.com/tc/loplat/bssid_db_check.php?bundle=%@",bundleIdentifier];
+    NSString *urlString=[NSString stringWithFormat:@"http://handsomeus.com/tc/loplat/bssid_db_check.php?bundle=%@",bundleIdentifier];
     [self.WebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
 }
 
 
 -(void)refreshwebview{
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-    NSString *urlString=[NSString stringWithFormat:@"http://i-handsome.com/tc/loplat/bssid_db_check.php?bundle=%@",bundleIdentifier];
+    NSString *urlString=[NSString stringWithFormat:@"http://handsomeus.com/tc/loplat/bssid_db_check.php?bundle=%@",bundleIdentifier];
     [self.WebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
     [super viewDidAppear:NO];
 }

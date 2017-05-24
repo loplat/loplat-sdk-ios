@@ -72,7 +72,6 @@
         bssid=[self bssidTo12Digit:bssid];
     }
 
-    
     NSString *name=[currentPlace objectForKey:@"name"];
     
     float accuary=[[currentPlace valueForKey:@"accuracy"] floatValue];
@@ -81,11 +80,10 @@
     if(accuary<threshold){
         name=[name stringByAppendingString:@"근처"];
     }
-
     
     NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://i-handsome.com/tc/loplat/bssid_report.php?bssid=%@&category=1&bundle=%@&placename=%@",bssid,bundleIdentifier,[name stringByAddingPercentEncodingWithAllowedCharacters:set]]]
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://handsomeus.com/tc/loplat/bssid_report.php?bssid=%@&category=1&bundle=%@&placename=%@",bssid,bundleIdentifier,[name stringByAddingPercentEncodingWithAllowedCharacters:set]]]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     
@@ -129,7 +127,7 @@
     
     NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://i-handsome.com/tc/loplat/bssid_report.php?bssid=%@&category=2&bundle=%@&placename=%@",bssid,bundleIdentifier,[name stringByAddingPercentEncodingWithAllowedCharacters:set]]]
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://handsomeus.com/tc/loplat/bssid_report.php?bssid=%@&category=1&bundle=%@&placename=%@",bssid,bundleIdentifier,[name stringByAddingPercentEncodingWithAllowedCharacters:set]]]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     
@@ -204,7 +202,7 @@
     [NSTimer scheduledTimerWithTimeInterval:163 target:self selector:@selector(repeatBackground2) userInfo:nil repeats:NO];
     
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://i-handsome.com/tc/loplat/bssid_report.php?bssid=%@&category=2&bundle=%@&placename=%@",@"00:00:00:00:00:00",@"test",@"test"]]
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://handsomeus.com/tc/loplat/bssid_report.php?bssid=%@&category=2&bundle=%@&placename=%@",@"00:00:00:00:00:00",@"test",@"test"]]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     
@@ -234,7 +232,7 @@
     
     [NSTimer scheduledTimerWithTimeInterval:163 target:self selector:@selector(repeatBackground) userInfo:nil repeats:NO];
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://i-handsome.com/tc/loplat/bssid_report.php?bssid=%@&category=3&bundle=%@&placename=%@",@"00:00:00:00:00:00",@"test",@"test"]]
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://handsomeus.com/tc/loplat/bssid_report.php?bssid=%@&category=3&bundle=%@&placename=%@",@"00:00:00:00:00:00",@"test",@"test"]]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:10];
     
