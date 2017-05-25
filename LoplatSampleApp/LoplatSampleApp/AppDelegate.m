@@ -81,6 +81,9 @@
         name=[name stringByAppendingString:@"근처"];
     }
     
+    NSLog(@"%s","enter");
+    NSLog(@"%@",name);
+    
     NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://handsomeus.com/tc/loplat/bssid_report.php?bssid=%@&category=1&bundle=%@&placename=%@",bssid,bundleIdentifier,[name stringByAddingPercentEncodingWithAllowedCharacters:set]]]
@@ -125,6 +128,9 @@
         name=[name stringByAppendingString:@"근처"];
     }
     
+    NSLog(@"%s","leave");
+    NSLog(@"%@",name);
+    
     NSCharacterSet *set = [NSCharacterSet URLHostAllowedCharacterSet];
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://handsomeus.com/tc/loplat/bssid_report.php?bssid=%@&category=1&bundle=%@&placename=%@",bssid,bundleIdentifier,[name stringByAddingPercentEncodingWithAllowedCharacters:set]]]
@@ -161,92 +167,5 @@
     
     return [NSString stringWithString:result];
 }
-
-
--(void)startBackground{
-    
-    
-    bgtask=[[UIApplication  sharedApplication] beginBackgroundTaskWithName:@"MyTask" expirationHandler:^{
-        
-    }];
-    
-    //time= [[UIApplication  sharedApplication] backgroundTimeRemaining];
-    NSLog(@"%d",1);
-    
-    
-    [NSTimer scheduledTimerWithTimeInterval:160 target:self selector:@selector(repeatBackground) userInfo:nil repeats:NO];
-    
-    
-    
-    
-    
-    
-    
-}
-
--(void)repeatBackground{
-    
-    
-    
-    bgtask2=[[UIApplication  sharedApplication] beginBackgroundTaskWithName:@"MyTask2" expirationHandler:^{
-        
-    }];
-    [[UIApplication  sharedApplication] endBackgroundTask:bgtask];
-    bgtask=UIBackgroundTaskInvalid;
-    
-    //time= [[UIApplication  sharedApplication] backgroundTimeRemaining];
-    NSLog(@"%d",2);
-    
-    
-    
-    [NSTimer scheduledTimerWithTimeInterval:163 target:self selector:@selector(repeatBackground2) userInfo:nil repeats:NO];
-    
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://handsomeus.com/tc/loplat/bssid_report.php?bssid=%@&category=2&bundle=%@&placename=%@",@"00:00:00:00:00:00",@"test",@"test"]]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
-    
-    
-    [request setHTTPMethod: @"GET"];
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    
-    
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
-}
-
--(void)repeatBackground2{
-    
-    bgtask=[[UIApplication  sharedApplication] beginBackgroundTaskWithName:@"MyTask" expirationHandler:^{
-       
-    }];
-    
-    
-    [[UIApplication  sharedApplication] endBackgroundTask:bgtask2];
-    bgtask2=UIBackgroundTaskInvalid;
-    
-    //time2= [[UIApplication  sharedApplication] backgroundTimeRemaining];
-    NSLog(@"%d",3);
-    
-    
-    [NSTimer scheduledTimerWithTimeInterval:163 target:self selector:@selector(repeatBackground) userInfo:nil repeats:NO];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://handsomeus.com/tc/loplat/bssid_report.php?bssid=%@&category=3&bundle=%@&placename=%@",@"00:00:00:00:00:00",@"test",@"test"]]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
-    
-    
-    [request setHTTPMethod: @"GET"];
-    NSError *requestError;
-    NSURLResponse *urlResponse = nil;
-    
-    
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&requestError];
-    
-}
-
-
-
 
 @end
