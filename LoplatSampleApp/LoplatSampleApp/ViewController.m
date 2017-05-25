@@ -40,6 +40,7 @@
     
     if(self.running){
         AppDelegate *app=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+        //loplat sdk stop
         [app.loplat stop];
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"STOP"
@@ -58,10 +59,13 @@
         [self.startbtn setTitle:@"START" forState:UIControlStateNormal];
         
     }else{
+        
         AppDelegate *app=(AppDelegate *)[[UIApplication sharedApplication] delegate];
         
+        //loplat sdk init
         app.loplat=[Loplat getLoplat:@"test" client_secret:@"test" is_return_mainthread:NO];
         
+        //loplat sdk start
         [app.loplat startLocationUpdate:180];
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"START"
