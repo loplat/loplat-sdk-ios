@@ -66,7 +66,7 @@
         app.loplat=[Loplat getLoplat:@"test" client_secret:@"test" is_return_mainthread:NO];
         
         //loplat sdk start
-        [app.loplat startLocationUpdate:180];
+        [app.loplat startLocationUpdate:10];
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"START"
                                                                        message:@"로플렛을 시작합니다."
