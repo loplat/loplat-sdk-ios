@@ -5,6 +5,11 @@
 ## Loplat iOS SDK
 
 ### History
+* 2017.06.05
+    - Sample App 수정
+        - 업데이트 사항: Background fetch 설정 제외, Requeired background modes 수정
+    - Relam.framework 추가 방법 내용 수정 
+
 * 2017.01.20
     - iOS sdk version 0.1.1 release
         - 업데이트 사항: bundle id check api 주소 변경
@@ -56,6 +61,9 @@ Location Update V 체크
 #### 4. 다운 받은 libLoplatSDK.a 와 include폴더 추가, Realm.framework 추가
 (아래 그림과 같이 libLoplatSDK.a 와 include폴더를 프로젝트에 추가, Realm.framework는 Linked Frameworks and Libraries 와 Embedded Binaries에 모두 추가되어야 합니다.)
 <img src = "http://i.imgur.com/jM3yFVC.png">
+
+BuildRealm.framework를 사용하여 App Store 등록을 위해서 아래와 같이 Build Phases에서 run script를 추가해야 합니다.
+<img src = "https://storage.googleapis.com/loplat-storage/public/image/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202017-06-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%205.59.57.png">
 
 Realm의 경우 iOS7을 지원하기 위해서는 static framework을 사용하셔야 합니다. 
 
