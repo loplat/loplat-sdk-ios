@@ -31,7 +31,6 @@
 	<string>샘플앱입니다. 동의해 주세요</string>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>fetch</string>
 		<string>location</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
