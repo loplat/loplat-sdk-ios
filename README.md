@@ -4,32 +4,6 @@
 
 ## Loplat iOS SDK
 
-### History
-* 2017.06.05
-    - Sample App 수정
-        - 업데이트 사항: Background fetch 설정 제외, Requeired background modes 수정
-    - Relam.framework 추가 방법 내용 수정 
-
-* 2017.01.20
-    - iOS sdk version 0.1.1 release
-        - 업데이트 사항: bundle id check api 주소 변경
-    - **공지사항** : Sample app의 web view가 서버 주소 이전 작업으로 인하여 당분간 장소 인식 결과 화면이 보이지 않음
-
-* 2016.12.27
-    - iOS sdk version 0.1.0 release
-        - 업데이트 사항
-            1. init시 현재 위치 장소 정보를 delegate에 return 함
-            2. LTE상태에서는 서버 연결하지 않도록 설정
-
-* 2016.11.7
-    - framework -> static library 전환
-    - is_return_mainthread 추가
-
-* 2016.06.13 
-	- 배터리 퍼포먼스 개선
-
-* 2016.06.7 - initial release
-
 ### Loplat iOS SDK Settings
 
 AGENDA
@@ -169,3 +143,30 @@ startLocationUpdate : Searching interval
 본 SDK를 사용하시려면, yeddie@loplat.com 으로 Bundle ID와 회사이름을 알려주세요. Test Mode인 경우에는 등록과 동시에 Test Mode를 곧바로 사용하실 수 있습니다. Production Mode의 경우에도 마찬가지로 위의 이메일로 같은 정보를 알려주세요. Production Mode SDK를 release 받으셔서 사용하셔야 합니다. 
 #### Trouble Shooting
 만약 컴파일이 완료되었으나, run time exception 발생시에는 4번 내용과 같이 framework과 binary에 모두 framework을 추가하였는지 확인 해 주세요.
+
+### History
+* 2017.06.05
+    - Sample App 수정
+        - 업데이트 사항: Background fetch 설정 제외, Requeired background modes 수정
+    - Relam.framework 추가 방법 내용 수정 
+
+* 2017.01.20
+    - iOS sdk version 0.1.1 release
+        - 업데이트 사항: bundle id check api 주소 변경
+    - **공지사항** : Sample app의 web view가 서버 주소 이전 작업으로 인하여 당분간 장소 인식 결과 화면이 보이지 않음
+
+* 2016.12.27
+    - iOS sdk version 0.1.0 release
+        - 업데이트 사항
+            1. init시 현재 위치 장소 정보를 delegate에 return 함
+            2. LTE상태에서는 서버 연결하지 않도록 설정
+
+* 2016.11.7
+    - framework -> static library 전환
+    - is_return_mainthread 추가
+
+* 2016.06.13 
+	- 배터리 퍼포먼스 개선
+
+* 2016.06.7 - initial release
+
