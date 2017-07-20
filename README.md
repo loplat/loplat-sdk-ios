@@ -95,7 +95,6 @@ BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/include를 추가한다.
 		"category": "Cafe",
 		"name": "inalang cafe",
 		"tags": "인아랑",
-		"lat_est": 37.468679941805902,
 		"loplat_id": 12014,
 		"floor": 1,
 		"lat": 37.468468000000001,
