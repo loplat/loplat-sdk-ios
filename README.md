@@ -91,7 +91,7 @@ BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/include를 추가한다.
 * delegate json return value 
 
 ~~~json
-    {
+	{
 		"category": "Cafe",
 		"name": "inalang cafe",
 		"tags": "인아랑",
@@ -103,8 +103,7 @@ BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/include를 추가한다.
 		"threshold": 0.40000000000000002,
 		"client_code": null,
 		"accuracy": 0.5
-	},
-}
+	 }
 ~~~
 
 #### 7. Start parameter 설명
