@@ -99,9 +99,8 @@ BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/include를 추가한다.
 		"loplat_id": 12014,
 		"floor": 1,
 		"lat": 37.468468000000001,
-		"threshold": 0.40000000000000002,
 		"lng": 126.936708,
-		"lng_est": 126.93979161384047,
+		"threshold": 0.40000000000000002,
 		"client_code": null,
 		"accuracy": 0.5
 	},
