@@ -37,6 +37,9 @@ Location Update V 체크
 <img src = "http://i.imgur.com/jM3yFVC.png">
 
 BuildRealm.framework를 사용하여 App Store 등록을 위해서 아래와 같이 Build Phases에서 run script를 추가해야 합니다.
+    - bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh"
+
+
 <img src = "https://storage.googleapis.com/loplat-storage/public/image/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202017-06-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%205.59.57.png">
 
 Realm의 경우 iOS7을 지원하기 위해서는 static framework을 사용하셔야 합니다. 
@@ -145,6 +148,10 @@ startLocationUpdate : Searching interval
 만약 컴파일이 완료되었으나, run time exception 발생시에는 4번 내용과 같이 framework과 binary에 모두 framework을 추가하였는지 확인 해 주세요.
 
 ### History
+* 2017.07.20
+    - iOS sdk versio 0.1.2 release
+        - 업데이트 사항 : 위치 인식 성능 개선
+            
 * 2017.06.05
     - Sample App 수정
         - 업데이트 사항: Background fetch 설정 제외, Requeired background modes 수정
