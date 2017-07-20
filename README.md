@@ -37,6 +37,7 @@ Location Update V 체크
 <img src = "http://i.imgur.com/jM3yFVC.png">
 
 BuildRealm.framework를 사용하여 App Store 등록을 위해서 아래와 같이 Build Phases에서 run script를 추가해야 합니다.
+    
     - bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh"
 
 
