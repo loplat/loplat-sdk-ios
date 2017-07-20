@@ -13,8 +13,10 @@
 #import <NetworkExtension/NetworkExtension.h>
 #import "LocationTracker.h"
 #import "Place.h"
+#import <sys/utsname.h>
 
 #define TEST_MODE
+#define VERSION @"0.1.2"
 
 @class LocationManager;
 
@@ -47,4 +49,6 @@
 -(void)resetTimer:(NSInteger)time;
 -(void)queryToServer:(NSString *)bssid ssid:(NSString *)ssid;
 -(void)PlaceToDelegate:(NSData *)data;
+-(NSString *)getUserAgent;
+-(NSDictionary *) getRequestMsg:(NSString *)bssid ssid: (NSString *)ssid;
 @end
