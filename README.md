@@ -1,179 +1,402 @@
-#### Note ####
-* If you want to see loplat REST API, please refer to https://github.com/loplat/loplat-rest-api for details
-* If you want to see Plengi Android SDK, please refer to https://github.com/loplat/loplat-sdk-android for details  
+﻿##### Plengi SDK (for iOS)
 
-## Loplat iOS SDK
+```loplat_warning
+loplat SDK (Plengi)는 시뮬레이터는 지원하지 않습니다.
+타겟이 시뮬레이터인 경우, 컴파일 오류가 발생할 수 있습니다.
+```
 
-### Loplat iOS SDK Settings
+```loplat_caution
+loplat SDK 버전 1.0 미만 버전은 곧 서비스가 중단될 예정이오니,
+업데이트를 꼭 해주세요.
+```
 
-AGENDA
+## Installation
+### 프로젝트에 Plengi SDK 적용하기
+#### 1. Cocoapod 적용하기
+- loplat SDK (Plengi SDK)를 사용하기 위해서는 Cocoapod 을 사용해야합니다. Cocoapod은 Mac/iOS 개발 프로젝트의 라이브러리 관리 도구이며, 쉽게 생각해서 안드로이드의 Gradle 같은 존재입니다. 프로젝트에 이미 Cocoapod 을 사용하고 있다면, 다음 단계 [2. Cocoapod에 Plengi SDK 사용 명시하기](https://github.com/loplat/loplat-sdk-ios#2.%20Cocoapod%EC%97%90%20Plengi%20SDK%20%EC%82%AC%EC%9A%A9%20%EB%AA%85%EC%8B%9C%ED%95%98%EA%B8%B0) 으로 넘어가세요.
 
-1. Background Mode 설정 
-2. info.plist에 http: 서버 설정
-3. info.plist 사용자 동의 안내문 설정 
-4. Loplat iOS SDK Framework 추가, Realm Frmework 추가 
-5. Header 경로 설정
-6. Callback delegate 구현 (사용자용) 및 서버 결과값 예시
-7. Start Parameter 설명
-8. Swift 프로젝트에서 iOS SDK 호출법
-9. Test Mode/ Production Mdoe 사용법
+##### Cocoapod 설치하기
+- Cocoapod 바이너리를 설치합니다. 터미널에 아래의 명령어를 입력하세요.
+	```bash
+	$ sudo gem install cocoapods
+	```
+##### 프로젝트에 Cocoapod 사용하기
+- 프로젝트에서 Cocoapod 모듈을 활성화합니다. 터미널에 아래의 명령어를 입력하세요.
+	```bash
+	$ cd $PROJECT_PATH
+	$ pod init
+	```
+	이제 해당 XCode 프로젝트에서 Cocoapod을 사용할 준비가 완료되었습니다.
 
-#### 1. Background Mode 설정 (Project Setting → Capability)
-Location Update V 체크
-<img src="http://i.imgur.com/MFeYHIT.png">
-#### 2. info.plist http 서버 설정
-#### 3. info.plist 사용자 동의 안내 설정
-~~~xml
-    <key>NSAppTransportSecurity</key>
-        <dict>
-            <key>NSAllowsArbitraryLoads</key>
-            <true/>
-        </dict>
-    <key>NSLocationAlwaysUsageDescription</key>
-        <string>사용자 동의 안내 문장을 넣어주세요</string>
-~~~
-#### 4. 다운 받은 libLoplatSDK.a 와 include폴더 추가, Realm.framework 추가
-(아래 그림과 같이 libLoplatSDK.a 와 include폴더를 프로젝트에 추가, Realm.framework는 Linked Frameworks and Libraries 와 Embedded Binaries에 모두 추가되어야 합니다.)
-<img src = "http://i.imgur.com/jM3yFVC.png">
+##### Cocoapod에 Plengi SDK 추가하기
+- 위의 명령어를 실행하면 프로젝트 폴더에 **Podfile** 이라는 파일이 생성됩니다.
+	Podfile을 텍스트 편집기로 열면 아래와 같은 형식의 내용이 등장합니다.
+	```Podfile
+	platform :ios, '8.0'
+	# use_frameworks!
 
-BuildRealm.framework를 사용하여 App Store 등록을 위해서 아래와 같이 Build Phases에서 run script를 추가해야 합니다.
-    
-    - bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh"
+	target 'MyApp' do
+	  pod 'AFNetworking', '~> 2.6'
+	  pod 'ORStackView', '~> 3.0'
+	  pod 'SwiftyJSON', '~> 2.3'
+	end
+	```
 
+	Podfile 의  target 태그안에
+	```Podfile
+	pod 'PlaceEngine'
+	```
+	을 입력한 후, 저장합니다.
 
-<img src = "https://storage.googleapis.com/loplat-storage/public/image/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202017-06-05%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%205.59.57.png">
-
-Realm의 경우 iOS7을 지원하기 위해서는 static framework을 사용하셔야 합니다. 
-
-참고 : https://realm.io/kr/docs/objc/latest/
-
-1. Realm의 최신 버전을 다운로드하고 압축을 풉니다. 
-2. ios/static/ 디렉토리에서 Realm.framework 을 선택하여 Xcode 프로젝트의 File Navigation에 넣습니다. 이때, Copy items if needed 이 선택된지 확인하고, Finish 버튼을 누릅니다. 
-3. Xcode의 File Navigator에서 프로젝트를 클릭합니다. 어플리케이션 대상을 선택하고 Build Phases 탭으로 이동합니다. Link Binary with Libraries 의 +를 클릭하여 libc++.tbd 를 추가합니다. 
-4. Swift로 Realm을 사용한다면 Swift/RLMSupport.swift 파일을 Xcode의 File Navigator에 넣은 후 Copy items if needed 를 선택합니다.
+	**만약, Swift를 사용한다면, **
+	Podfile에 `# uses_frameworks` 을 주석을 해제합니다. (#을 지우면 됨)
 
 
-#### 5. Header 경로 설정 
-BuildSetting 의 Header Search Path에 $(PROJECT_DIR)/include를 추가한다.
-<img src = "http://i.imgur.com/arvY1NX.png">
-6. Loplat Service Start 구현
-*   AppDelegate.h
-~~~objectivec
-     #import <UIKit/UIKit.h>
-     #import "Loplat.h"
-    @interface AppDelegate : UIResponder <UIApplicationDelegate,LoplatDelegate>
-    @property (strong, nonatomic) UIWindow *window;
-    @property (strong, nonatomic) Loplat *loplat;
-    @end
-~~~
+##### Cocoapod 라이브러리 설치하기
+- 아래의 명령어를 터미널에 입력하여 라이브러리를 적용합니다.
+	```bash
+	$ pod install
+	```
 
-*   AppDelegate.m
-~~~objectivec
-    @synthesize loplat;
-    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-        loplat=[Loplat getLoplat:@"test" client_secret:@"test" is_return_mainthread:NO]; // client_id,client_secret, is_return_mainthread : delegate를 메인스레드에서 실행여부를 입력
-        [loplat startLocationUpdate:180];// 업데이트 간격을 초단위로 설정가능
-        [loplat getCurrentPlace]; // 현재 위치 정보 return
-        loplat.delegate=self;
-        return YES;
-    }
-	-(void)DidEnterPlace:(NSDictionary *)currentPlace {
-			// callback을 구현해 주세요.     
+이제 라이브러리 적용 작업이 모두 완료되었습니다!!
+
+### Cocoapod이 적용된 프로젝트 열기
+- Cocoapod이 적용된 프로젝트를 열기 위해서는 확장자가 **.xcodeproj** 를 열면 안되며, 워크스페이스 파일  **.xcworkspace** 파일을 열여야 합니다.
+
+
+## SDK 사용하기
+
+### 앱 권한 추가하기
+##### 권한 추가하기
+- Plengi SDK를 사용하기 위해서는 권한을 추가해야합니다. 필요한 권한은 아래와 같습니다.
+	```xcode_permissions
+	Background Modes 
+	- Location Updates
+	- Uses Bluetooth LE accessories
+	- Background fetch
+
+	Wireless Accessories Configuration
+	```
+
+	XCode 에서 **프로젝트 > Capabilities**에 들어가 위 권한 목록에 있는 권한들을 허용해줍니다.
+	
+	![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_1.png)
+	
+##### 위치 권한 사용 명시하기
+iOS 11 이상부터 위치권한을 사용하기 위해서는 사용자에게 피드백 문구를 제공해야 합니다.
+앱 상황에 맞는 문구를 추가하세요.
+`info.plist` 파일에 아래 값을 추가합니다.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- 중간 생략 -->
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>예 : 현재 위치를 판별하기 위해 위치정보를 사용합니다.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>예 : 현재 위치를 판별하기 위해 위치정보를 사용합니다.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>예 : 현재 위치를 판별하기 위해 위치정보를 사용합니다.</string>
+</dict>
+</plist>
+```
+
+위의 코드를 XCode에서 보면 아래와 같습니다.
+![XCode info.plist](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_2.png)
+
+
+### import 하기
+Objective-C를 사용하는 프로젝트와, Swift를 사용하는 프로젝트에서 loplat SDK를 적용하는 방법이 다릅니다.
+
+##### 헤더파일 포함하기
+`AppDelegate.h` (Objective-C) / `AppDelegate.swift` (Swift) 파일에, 아래의 구문을 추가해줍니다.
+
+```objectivec
+#import <PlaceEngine/PlaceEngine-Swift.h>
+```
+```swift
+import PlaceEngine
+```
+
+### PlaceDelegate 선언하기
+- Objective-C
+	`AppDelegate.h` 파일 클래스 선언부를 아래와 같이 수정합니다.
+	```objectivec
+	@interface AppDelegate : UIResponder <UIApplicationDelegate, PlaceDelegate>
+	```
+	`AppDelegate.h` 파일 아래, 변수를 추가합니다.
+	```objectivec
+	@property (strong, nonatomic) UIWindow *window;
+	@property (strong, nonatomic) Plengi *plengi; //추가된 줄
+	```
+
+	`AppDelegate.m` 파일에 아래의 3개의 이벤트를 추가합니다. (3개의 이벤트는 무조건 있어야합니다.)
+	```objectivec
+	@implementation AppDelegate
+	@synthesize plengi;				// 추가된 줄
+
+	// ********** 중간 생략 ********** //
+
+	- (void)whereIsNow:(Place *)currentPlace {
+		// loplat SDK를 통해 현재 실내 위치를 불러왔을 때
+		// 인식된 실내 위치 정보는 currentPlace 변수 안에 저장됨
 	}
-	-(void)DidLeavePlace:(NSDictionary *)previousPlace {
-			// callback을 구현해 주세요. 
-    
+
+	- (void)didLeavePlace:(Place *)previousPlace {
+		// loplat SDK가 사용자의 위치를 트래킹할 때, 장소를 떠났다고 인식했을 때
+		// 방금 사용자가 떠난 실내 위치 정보는 previousPlace 변수 안에 저장됨
 	}
-	// currentPlace와 previousPlace는 서버 return값의 위치를 찾은 경우의 json의 place tag와 같은 정보입니다. 
-~~~
 
-##### 서버 return 값
-* delegate json return value 
+	- (void)didEnterPlace:(Place *)currentPlace {
+		// loplat SDK가 사용자의 위치를 트래킹할 때, 다른 장소에 들어왔다고 인식했을 때
+		// 방금 사용자가 들어온 실내 위치 정보는 currentPlace 변수 안에 저장됨
+	}
+	@end
+	```
 
-~~~json
-	{
-		"category": "Cafe",
-		"name": "inalang cafe",
-		"tags": "인아랑",
-		"loplat_id": 12014,
-		"floor": 1,
-		"lat": 37.468468000000001,
-		"lng": 126.936708,
-		"lat_est": 37.468679941805902,
-		"lng_est": 126.93979161384047,
-		"threshold": 0.40000000000000002,
-		"client_code": null,
-		"accuracy": 0.5
-	 }
-~~~
+- Swift
+	`AppDelegate.swift` 파일 클래스 선언부를 아래와 같이 수정합니다.
+	```swift
+	class AppDelegate: UIResponder, UIApplicationDelegate, PlaceDelegate {
+		var plengi: Plengi?
+	```
 
-#### 7. Start parameter 설명
-~~~objectivec
-loplat=[Loplat getLoplat:@"test" client_secret:@"test" is_return_mainthread:NO]
-[loplat startLocationUpdate:180];// 업데이트 간격을 초단위로 설정가능
-loplat.delegate=self;
-~~~
-startLocationUpdate : Searching interval 
+	`AppDelegate.swift` 파일에 아래의 3개의 이벤트를 추가합니다. (3개의 이벤트는 무조건 있어야합니다.)
+	```swift
+	func didEnterPlace(_ currentPlace: Place) {
+		// loplat SDK를 통해 현재 실내 위치를 불러왔을 때
+		// 인식된 실내 위치 정보는 currentPlace 변수 안에 저장됨
+	}
 
-#### 8. Swift 구현
-<img src ="http://i.imgur.com/JCJcinH.png">
-*   아무 Objective-C 파일을 생성하면 Bridge-Header 파일을 만들라는 알림창이 뜨는데 이때 동의 하면 bridge file들을 자동으로 만들어 준다.
+	func didLeavePlace(_ previousPlace: Place?) {
+		// loplat SDK가 사용자의 위치를 트래킹할 때, 장소를 떠났다고 인식했을 때
+		// 방금 사용자가 떠난 실내 위치 정보는 previousPlace 변수 안에 저장됨
+	}
 
--(ProjectName)-Bridging-Header.h
-~~~objectivec
-    #import "Loplat.h"
-~~~
-*   AppDelegate.swift
-~~~objectivec
-    #import UIKit
-    @UIApplicationMain
-    class AppDelegate: UIResponder, UIApplicationDelegate,LoplatDelegate {
-        var window: UIWindow?
-        var loplat:Loplat!
-        func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-            // Override point for customization after application launch.
-            loplat = Loplat.getLoplat("test",client_secret: "test", is_return_mainthread:false) // client_id,client_secret 설정, is_return_mainthread :delegate를 메인스레드에서 실행여부
-            loplat.startLocationUpdate(180) // update Interval 설정(초단위)
-            loplat.delegate=self
-            return true
-        }
-    func DidLoplatReport(result: [NSObject : AnyObject]!) {
-    // Loplat Delegate 프로토콜 구현 (Delegate callback을 구현해 주세요)
-          }  
-~~~
-** Background mode 설정중 Location Update는 Apple submission시에 Apple 기준에 적합하지 않은 Application이 사용한다고 판단할 시 reject 사유가 될 수 있습니다. Design Guide를 확인하시고, 진행해 주세요.  
-#### 9. Test Mode/ Production Mode 사용법 
-본 SDK를 사용하시려면, yeddie@loplat.com 으로 Bundle ID와 회사이름을 알려주세요. Test Mode인 경우에는 등록과 동시에 Test Mode를 곧바로 사용하실 수 있습니다. Production Mode의 경우에도 마찬가지로 위의 이메일로 같은 정보를 알려주세요. Production Mode SDK를 release 받으셔서 사용하셔야 합니다. 
-#### Trouble Shooting
-만약 컴파일이 완료되었으나, run time exception 발생시에는 4번 내용과 같이 framework과 binary에 모두 framework을 추가하였는지 확인 해 주세요.
+	func didEnterPlace(_ currentPlace: Place) {
+		// loplat SDK가 사용자의 위치를 트래킹할 때, 다른 장소에 들어왔다고 인식했을 때
+		// 방금 사용자가 들어온 실내 위치 정보는 currentPlace 변수 안에 저장됨
+	}
+	``` 
 
-### History
-* 2017.07.20
-    - iOS sdk versio 0.1.2 release
+### PlaceEngine 초기화
+Plengi (PlaceEngine)을 사용하기 위해 초기화 작업을 진행합니다.
+- Objective-C
+	`AppDelegate.m` 파일의 `application_didFinishLaunchingWithOptions` 이벤트에 아래의 코드를 추가합니다.
+	```objectivec
+	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+		// ********** 중간 생략 ********** //
+		plengi = [Plengi initPlaceEngineWithClient_id:@"로플랫에서 발급받은 클라이언트 ID" client_secret:@"로플랫에서 발급받은 클라이언트 키" isRMainThread: false];
+		plengi.delegate = self;
+		// ********** 중간 생략 ********** //
+	}
+	``` 
+
+- Swift
+	`AppDelegate.swift` 파일의 `application_didFinishLaunchingWithOptions` 이벤트에 아래의 코드를 추가합니다.
+	```swift
+	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [IOApplicationLaunchOptionsKey: Any]?) -> Bool {
+		// ********** 중간 생략 ********** //
+		plengi = Plengi.initPlaceEngine(client_id: "로플랫에서 발급받은 클라이언트 ID", client_secret: "로플랫에서 발급받은 클라이언트 키", isRMainThread: false)
+		plengi?.delegate = self
+		// ********** 중간 생략 ********** //
+	}
+	```
+
+### PlaceEngine 사용하기
+##### GPS 정확도 설정
+loplat SDK가 위치를 확인할 때에 사용하는 GPS의 성능을 조정할 수 있습니다.
+
+- Objective-C
+	```objectivec
+	plengi.gpsRecognitionType = PlengiGPSRecognitionLevelDEFAULT; 	// 기본값 (정확도 보통)
+	plengi.gpsRecognitionType = PlengiGPSRecognitionLevelHIGH; 		// 매우 높음(정확도 높음, 배터리 소모량 증가)
+	plengi.gpsRecognitionType = PlengiGPSRecognitionLevelTHREE_KILLOMETER; // 반경 3km 오차발생 (배터리 소모량 매우 적음)
+	```
+
+- Swift
+	```swift
+	plengi?.gpsRecognitionType = .DEFAULT				// 기본값 (정확도 보통)
+	plengi?.gpsRecognitionType = .HIGH					// 매우 높음 (정확도 높음, 배터리 소모량 증가)
+	plengi?.gpsRecognitionType = .THREE_KILLOMETER		// 반경 3km 오차 발생 (배터리 소모량 매우 적음)
+	```
+
+##### 실내 인식 정확도 설정
+loplat SDK가 위치를 인식할 때에 BLE를 사용할지 설정합니다.
+
+**iOS의 정책에 따라 Wi-Fi 를 스캔할 수 있는 권한은 시스템만 존재하기 때문에, 기본값은 현재 연결되어있는 AP 정보, 위경도만을 가지고 파악합니다. BLE를 사용하면 SDK가 위치를 인식하는데에 같이 사용하기 때문에 정확도가 많이 향상됩니다.**
+
+- Objective-C
+	```objectivec
+	plengi.recognitionType = PlengiLocationRecognitionLevelHigh;		// BLE 사용
+	plengi.recognitionType = PlengiLocationRecognitionLevelNormal;		// BLE 사용 안함
+	```
+
+- Swift
+	```swift
+	plengi?.recognitionType = .High			// BLE 사용
+	plengi?.recognitionType = .Normal		// BLE 사용 안함
+	```
+
+
+##### 블루투스가 꺼져있을 경우, 사용자에게 켜달라고 요청보내기
+- Objective-C
+	```objectivec
+	[plengi requestBluetooth];
+	```
+
+- Swift
+	```swift
+	plengi?.requestBluetooth()
+	```
+
+##### 위치 인식하기
+- Objective-C
+	```objectivec
+	[plengi refreshLocation];
+	```
+
+- Swift
+	```swift
+	plengi?.refreshLocation()
+	```
+
+`refreshLocation` 메소드를 호출하면 `PlaceDelegate` 에 `whereIsNow` 이벤트가 호출됩니다.
+
+##### 위치 트래킹하기
+초단위로 사용자의 위치를 트래킹하여 사용자가 어느 위치에 있는지, 장소를 떠났는지, 새로운 장소에 도착했는지 알 수 있습니다.
+- Objective-C
+	```objectivec
+	[plengi start:120]; //120초에 한번씩 업데이트
+	// (주기가 너무 짧으면 배터리 소모량이 엄청 많아집니다. 권장은 60초 이상입니다.)
+	```
+
+- Swift
+	```swift
+	plengi?.start(120)	// 120초에 한번씩 업데이트
+	// (주기가 너무 짧으면 배터리 소모량이 엄청 많아집니다. 권장은 60초 이상입니다.
+	```
+
+`start` 메소드를 사용할 경우 자동으로 백그라운드에서도 위치정보를 받아와 이벤트를 받을 수 있습니다.
+백그라운드에서 이벤트를 받고싶지 않다면, `AppDelegate` 클래스에서 `applicationDidEnterBackground` 에서 `stop` 메소드를 사용하세요.
+
+##### 위치 트래킹 중지하기
+- Objective-C
+	```objectivec
+	[plengi stop];
+	```
+
+- Swift
+	```swift
+	plengi.stop()
+	```
+
+### Gravity 사용하기
+#### 권한 설정하기
+##### 권한 요청하기
+Gravity를 통해 푸시메시지를 받으려면, 사용자로부터 권한을 받아야합니다.
+`AppDelegate.m` / `AppDelegate.swift` 파일에 아래와 같은 권한허용 코드를 추가합니다.
+- Objective-C
+	```objectivec
+	@import UserNotifications;
+
+	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+		// ********** 중간 생략 ********** //
+		UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+		[center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound) 
+			completionHandler:^(BOOL granted, NSError * _Nullable error) {
+			// 권한 허용되었을 때의 처리코드
+		}
+	}
+	```
+
+- Swift
+	```swift
+	import UserNotifications
+	
+	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+		// ********** 중간 생략 ********** //
+		if #available(iOS 10, *) {
+			UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in }
+			application.registerForRemoteNotifications()
+		} else if #available(iOS 9, *) {
+			UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
+			UIApplication.shared.registerForRemoteNotifications()
+		}
+		// ********** 이하 생략 ********** //
+	}
+	```
+
+##### Gravity 활성화하기
+Gravity (loplat Ad.)를 사용하기 위해서는 SDK상에서 활성화 메소드를 실행해야합니다.
+`AppDelegate.m` / `AppDelegate.swift` 파일에 `application_didFinishLaunchingWithOptions`메소드에 아래와 같은 코드를 추가합니다.
+- Objective-C
+	```objectivec
+	[plengi enableAd];
+	[plengi registerLoplatAdvertisement];
+	```
+
+- Swift
+	```swift
+	plengi?.enableAd()
+	plengi?.registerLoplatAdvertisement()
+	```
+**Gravity에서 푸시 알림을 받기 위해서는 `start` / `refreshLocation` 메소드를 호출해주세요. (`start` 메소드를 사용할 경우 주기의 권장은 60초 이상입니다.)
+
+##### Gravity 푸시알림 등록하기
+Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막 작업을 한번 더 해줘야 합니다.
+`AppDelegate.m` / `AppDelegate.swift` 파일에 `application_handleActionWithIdentifier` 이벤트를 추가하고, 아래의 코드를 추가하세요.
+- Objective-C
+	```objectivec
+	- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
+		[plengi processLoplatAdvertisement:application handleActionWithIdentifier:identifier for:notification completionHandler:completionHandler];
+	}
+	```
+
+- Swift
+	```swift
+	func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, completionHandler: @escaping () -> Void) {
+		plengi?.processLoplatAdvertisement(application, handleActionWithIdentifier: identifier, for: notification, completionHandler: completionHandler)
+	}
+	```
+
+## History
+##### 2018. 02. 05
+- iOS SDK Version v1 릴리즈 준비
+	- Objective-C 에서 Swift로 framework 형식으로 변경 (정적파일 > framework로 변경됨)
+	- 전체 API 변경
+	- BLE 스캔 추가
+	- developers.loplat.com 과 README.md 연동
+
+##### 2017. 07. 20
+- iOS sdk version 0.1.2 release
         - 업데이트 사항 : 위치 인식 성능 개선
-            
-* 2017.06.05
-    - Sample App 수정
+
+##### 2017.06.05
+- Sample App 수정
         - 업데이트 사항: Background fetch 설정 제외, Requeired background modes 수정
-    - Relam.framework 추가 방법 내용 수정 
+- Relam.framework 추가 방법 내용 수정 
 
-* 2017.01.20
-    - iOS sdk version 0.1.1 release
-        - 업데이트 사항: bundle id check api 주소 변경
-    - **공지사항** : Sample app의 web view가 서버 주소 이전 작업으로 인하여 당분간 장소 인식 결과 화면이 보이지 않음
+##### 2017.01.20
+- iOS sdk version 0.1.1 release
+	- 업데이트 사항: bundle id check api 주소 변경
+- **공지사항** : Sample app의 web view가 서버 주소 이전 작업으로 인하여 당분간 장소 인식 결과 화면이 보이지 않음
 
-* 2016.12.27
-    - iOS sdk version 0.1.0 release
-        - 업데이트 사항
-            1. init시 현재 위치 장소 정보를 delegate에 return 함
-            2. LTE상태에서는 서버 연결하지 않도록 설정
+##### 2016.12.27
+- iOS sdk version 0.1.0 release
+- 업데이트 사항
+	1. init시 현재 위치 장소 정보를 delegate에 return 함
+	2. LTE상태에서는 서버 연결하지 않도록 설정
 
-* 2016.11.7
-    - framework -> static library 전환
-    - is_return_mainthread 추가
+##### 2016.11.7
+- framework -> static library 전환
+- is_return_mainthread 추가
 
-* 2016.06.13 
-	- 배터리 퍼포먼스 개선
+##### 2016.06.13 
+- 배터리 퍼포먼스 개선
 
-* 2016.06.7 - initial release
+##### 2016.06.7
+- initial release
 
