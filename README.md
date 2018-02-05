@@ -60,6 +60,7 @@
 
 #### Cocoapod 라이브러리 설치하기
 - 아래의 명령어를 터미널에 입력하여 라이브러리를 적용합니다.
+	
 	```bash
 	$ pod install
 	```
@@ -124,10 +125,11 @@ Objective-C를 사용하는 프로젝트와, Swift를 사용하는 프로젝트�
 `AppDelegate.h` (Objective-C) / `AppDelegate.swift` (Swift) 파일에, 아래의 구문을 추가해줍니다.
 
 ```objectivec
-#import <PlaceEngine/PlaceEngine-Swift.h>
+  #import <PlaceEngine/PlaceEngine-Swift.h>
 ```
+
 ```swift
-import PlaceEngine
+  import PlaceEngine
 ```
 
 
