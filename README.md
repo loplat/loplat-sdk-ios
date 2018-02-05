@@ -18,6 +18,7 @@
 
 #### Cocoapod 설치하기
 - Cocoapod 바이너리를 설치합니다. 터미널에 아래의 명령어를 입력하세요.
+	
 	```bash
 	$ sudo gem install cocoapods
 	```
