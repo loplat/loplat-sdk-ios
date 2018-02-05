@@ -15,11 +15,14 @@ loplat SDK 버전 1.0 미만 버전은 곧 서비스가 중단될 예정이오�
 #### 1. Cocoapod 적용하기
 - loplat SDK (Plengi SDK)를 사용하기 위해서는 Cocoapod 을 사용해야합니다. Cocoapod은 Mac/iOS 개발 프로젝트의 라이브러리 관리 도구이며, 쉽게 생각해서 안드로이드의 Gradle 같은 존재입니다. 프로젝트에 이미 Cocoapod 을 사용하고 있다면, 다음 단계 [2. Cocoapod에 Plengi SDK 사용 명시하기](https://github.com/loplat/loplat-sdk-ios#2.%20Cocoapod%EC%97%90%20Plengi%20SDK%20%EC%82%AC%EC%9A%A9%20%EB%AA%85%EC%8B%9C%ED%95%98%EA%B8%B0) 으로 넘어가세요.
 
+
 ##### Cocoapod 설치하기
 - Cocoapod 바이너리를 설치합니다. 터미널에 아래의 명령어를 입력하세요.
 	```bash
 	$ sudo gem install cocoapods
 	```
+
+
 ##### 프로젝트에 Cocoapod 사용하기
 - 프로젝트에서 Cocoapod 모듈을 활성화합니다. 터미널에 아래의 명령어를 입력하세요.
 	```bash
@@ -27,6 +30,7 @@ loplat SDK 버전 1.0 미만 버전은 곧 서비스가 중단될 예정이오�
 	$ pod init
 	```
 	이제 해당 XCode 프로젝트에서 Cocoapod을 사용할 준비가 완료되었습니다.
+
 
 ##### Cocoapod에 Plengi SDK 추가하기
 - 위의 명령어를 실행하면 프로젝트 폴더에 **Podfile** 이라는 파일이 생성됩니다.
@@ -48,8 +52,9 @@ loplat SDK 버전 1.0 미만 버전은 곧 서비스가 중단될 예정이오�
 	```
 	을 입력한 후, 저장합니다.
 
-	**만약, Swift를 사용한다면, **
+	**만약, Swift를 사용한다면,**
 	Podfile에 `# uses_frameworks` 을 주석을 해제합니다. (#을 지우면 됨)
+
 
 
 ##### Cocoapod 라이브러리 설치하기
@@ -59,6 +64,8 @@ loplat SDK 버전 1.0 미만 버전은 곧 서비스가 중단될 예정이오�
 	```
 
 이제 라이브러리 적용 작업이 모두 완료되었습니다!!
+
+
 
 ### Cocoapod이 적용된 프로젝트 열기
 - Cocoapod이 적용된 프로젝트를 열기 위해서는 확장자가 **.xcodeproj** 를 열면 안되며, 워크스페이스 파일  **.xcworkspace** 파일을 열여야 합니다.
@@ -82,6 +89,7 @@ loplat SDK 버전 1.0 미만 버전은 곧 서비스가 중단될 예정이오�
 	
 	![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_1.png)
 	
+	
 ##### 위치 권한 사용 명시하기
 iOS 11 이상부터 위치권한을 사용하기 위해서는 사용자에게 피드백 문구를 제공해야 합니다.
 앱 상황에 맞는 문구를 추가하세요.
@@ -103,6 +111,7 @@ iOS 11 이상부터 위치권한을 사용하기 위해서는 사용자에게 �
 </plist>
 ```
 
+
 위의 코드를 XCode에서 보면 아래와 같습니다.
 ![XCode info.plist](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_2.png)
 
@@ -119,6 +128,7 @@ Objective-C를 사용하는 프로젝트와, Swift를 사용하는 프로젝트�
 ```swift
 import PlaceEngine
 ```
+
 
 ### PlaceDelegate 선언하기
 - Objective-C
@@ -181,6 +191,7 @@ import PlaceEngine
 	}
 	``` 
 
+
 ### PlaceEngine 초기화
 Plengi (PlaceEngine)을 사용하기 위해 초기화 작업을 진행합니다.
 - Objective-C
@@ -205,6 +216,7 @@ Plengi (PlaceEngine)을 사용하기 위해 초기화 작업을 진행합니다.
 	}
 	```
 
+
 ### PlaceEngine 사용하기
 ##### GPS 정확도 설정
 loplat SDK가 위치를 확인할 때에 사용하는 GPS의 성능을 조정할 수 있습니다.
@@ -222,6 +234,7 @@ loplat SDK가 위치를 확인할 때에 사용하는 GPS의 성능을 조정할
 	plengi?.gpsRecognitionType = .HIGH					// 매우 높음 (정확도 높음, 배터리 소모량 증가)
 	plengi?.gpsRecognitionType = .THREE_KILLOMETER		// 반경 3km 오차 발생 (배터리 소모량 매우 적음)
 	```
+
 
 ##### 실내 인식 정확도 설정
 loplat SDK가 위치를 인식할 때에 BLE를 사용할지 설정합니다.
