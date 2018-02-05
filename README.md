@@ -12,8 +12,8 @@ loplat SDK 버전 1.0 미만 버전은 곧 서비스가 중단될 예정이오�
 
 ## Installation
 ### 프로젝트에 Plengi SDK 적용하기
-#### 1. Cocoapod 적용하기
-- loplat SDK (Plengi SDK)를 사용하기 위해서는 Cocoapod 을 사용해야합니다. Cocoapod은 Mac/iOS 개발 프로젝트의 라이브러리 관리 도구이며, 쉽게 생각해서 안드로이드의 Gradle 같은 존재입니다. 프로젝트에 이미 Cocoapod 을 사용하고 있다면, 다음 단계 [2. Cocoapod에 Plengi SDK 사용 명시하기](https://github.com/loplat/loplat-sdk-ios#2.%20Cocoapod%EC%97%90%20Plengi%20SDK%20%EC%82%AC%EC%9A%A9%20%EB%AA%85%EC%8B%9C%ED%95%98%EA%B8%B0) 으로 넘어가세요.
+#### Cocoapod 적용하기
+- loplat SDK (Plengi SDK)를 사용하기 위해서는 Cocoapod 을 사용해야합니다. Cocoapod은 Mac/iOS 개발 프로젝트의 라이브러리 관리 도구이며, 쉽게 생각해서 안드로이드의 Gradle 같은 존재입니다. 프로젝트에 이미 Cocoapod 을 사용하고 있다면, 다음 단계 [프로젝트에 Cocoapod 사용하기](https://github.com/loplat/loplat-sdk-ios#%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90%20Cocoapod%20%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0) 으로 넘어가세요.
 
 
 ##### Cocoapod 설치하기
