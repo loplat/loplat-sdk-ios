@@ -49,7 +49,7 @@
 
 	Podfile 의  target 태그안에
 	```Podfile
-	pod 'PlaceEngine'
+	pod 'MiniPlengi'
 	```
 	을 입력한 후, 저장합니다.
 
@@ -126,11 +126,11 @@ Objective-C를 사용하는 프로젝트와, Swift를 사용하는 프로젝트�
 `AppDelegate.h` (Objective-C) / `AppDelegate.swift` (Swift) 파일에, 아래의 구문을 추가해줍니다.
 
 ```objectivec
-  #import <PlaceEngine/PlaceEngine-Swift.h>
+  #import <MiniPlengi/MiniPlengi-Swift.h>
 ```
 
 ```swift
-  import PlaceEngine
+  import MiniPlengi
 ```
 
 
