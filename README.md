@@ -98,10 +98,10 @@ iOS 11 이상부터 위치권한을 사용하기 위해서는 사용자에게 �
 `info.plist` 파일에 아래 값을 추가합니다.
 
 ```xml
-<?xml version="1.0" encoding="UTF-8">
-<!DOCTYPE plist PUBLIC "=//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
+  <?xml version="1.0" encoding="UTF-8">
+  <!DOCTYPE plist PUBLIC "=//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+  <plist version="1.0">
+  <dict>
 	<!-- 중간 생략 -->
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>예 : 현재 위치를 판별하기 위해 위치정보를 사용합니다.</string>
@@ -110,8 +110,8 @@ iOS 11 이상부터 위치권한을 사용하기 위해서는 사용자에게 �
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>예 : 현재 위치를 판별하기 위해 위치정보를 사용합니다.</string>
 	<!-- 이하 생략 -->
-</dict>
-</plist>
+  </dict>
+  </plist>
 ```
 
 
