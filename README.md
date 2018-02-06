@@ -98,8 +98,8 @@ iOS 11 이상부터 위치권한을 사용하기 위해서는 사용자에게 �
 `info.plist` 파일에 아래 값을 추가합니다.
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<?xml version="1.0" encoding="UTF-8">
+<!DOCTYPE plist PUBLIC "=//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<!-- 중간 생략 -->
@@ -109,6 +109,7 @@ iOS 11 이상부터 위치권한을 사용하기 위해서는 사용자에게 �
 	<string>예 : 현재 위치를 판별하기 위해 위치정보를 사용합니다.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>예 : 현재 위치를 판별하기 위해 위치정보를 사용합니다.</string>
+	<!-- 이하 생략 -->
 </dict>
 </plist>
 ```
@@ -359,7 +360,7 @@ Gravity (loplat Ad.)를 사용하기 위해서는 SDK상에서 활성화 메소�
 	plengi?.enableAd()
 	plengi?.registerLoplatAdvertisement()
 	```
-**Gravity에서 푸시 알림을 받기 위해서는 `start` / `refreshLocation` 메소드를 호출해주세요. (`start` 메소드를 사용할 경우 주기의 권장은 60초 이상입니다.)
+**Gravity에서 푸시 알림을 받기 위해서는 `start` / `refreshLocation` 메소드를 호출해주세요. (`start` 메소드를 사용할 경우 주기의 권장은 60초 이상입니다.)**
 
 ##### Gravity 푸시알림 등록하기
 Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막 작업을 한번 더 해줘야 합니다.
@@ -388,11 +389,11 @@ Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막
 
 #### 2017. 07. 20
 - iOS sdk version 0.1.2 release
-        - 업데이트 사항 : 위치 인식 성능 개선
+	- 업데이트 사항 : 위치 인식 성능 개선
 
 #### 2017.06.05
 - Sample App 수정
-        - 업데이트 사항: Background fetch 설정 제외, Requeired background modes 수정
+	- 업데이트 사항: Background fetch 설정 제외, Requeired background modes 수정
 - Relam.framework 추가 방법 내용 수정 
 
 #### 2017.01.20
