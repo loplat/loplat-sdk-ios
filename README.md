@@ -62,6 +62,7 @@
 - 아래의 명령어를 터미널에 입력하여 라이브러리를 적용합니다.
 	
 	```bash
+	$ pod update
 	$ pod install
 	```
 
@@ -87,6 +88,20 @@
 	Wireless Accessories Configuration
 	```
 
+##### 권한을 사용하는 이유
+- Background Modes - Location Updates
+	- 백그라운드에서도 위치 정보를 수신하기 위해 사용합니다.
+
+- Background Modes - Uses Bluetooth LE accessories
+	- 백그라운드에서도 BLE를 스캔하여 위치 인식에 정확도를 향상하기 위해 사용합니다.
+
+- Bacoground Modes - Background fetch
+	- 백그라운드에서 loplat 서버로부터 위치정보를 수신하기 위해 사용합니다.
+
+- Wireless Accessories Configuration
+	- 백그라운드에서 BLE를 사용하기 위해 사용합니다.
+	
+
 	XCode 에서 **프로젝트 > Capabilities**에 들어가 위 권한 목록에 있는 권한들을 허용해줍니다.
 	
 	![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_1.png)
@@ -95,6 +110,7 @@
 #### 위치 권한 사용 명시하기
 iOS 11 이상부터 위치권한을 사용하기 위해서는 사용자에게 피드백 문구를 제공해야 합니다.
 앱 상황에 맞는 문구를 추가하세요.
+**(아래는 샘플이며, 샘플처럼 사유가 같을 경우 앱스토어에서 반려될 수 있습니다.)**
 `info.plist` 파일에 아래 값을 추가합니다.
 
 ```xml
@@ -227,8 +243,8 @@ loplat SDK가 위치를 확인할 때에 사용하는 GPS의 성능을 조정할
 
 - Objective-C
 	```objectivec
-	plengi.gpsRecognitionType = PlengiGPSRecognitionLevelDEFAULT; 	// 기본값 (정확도 보통)
-	plengi.gpsRecognitionType = PlengiGPSRecognitionLevelHIGH; 		// 매우 높음(정확도 높음, 배터리 소모량 증가)
+	plengi.gpsRecognitionType = PlengiGPSRecognitionLevelDEFAULT; 	// 기본값 (정확도 보통 (오차범위 1Km))
+	plengi.gpsRecognitionType = PlengiGPSRecognitionLevelHIGH; 		// 권장 : 매우 높음(정확도 높음)
 	plengi.gpsRecognitionType = PlengiGPSRecognitionLevelTHREE_KILLOMETER; // 반경 3km 오차발생 (배터리 소모량 매우 적음)
 	```
 
@@ -286,14 +302,14 @@ loplat SDK가 위치를 인식할 때에 BLE를 사용할지 설정합니다.
 초단위로 사용자의 위치를 트래킹하여 사용자가 어느 위치에 있는지, 장소를 떠났는지, 새로운 장소에 도착했는지 알 수 있습니다.
 - Objective-C
 	```objectivec
-	[plengi start:120]; //120초에 한번씩 업데이트
-	// (주기가 너무 짧으면 배터리 소모량이 엄청 많아집니다. 권장은 60초 이상입니다.)
+	[plengi start:30]; //30초에 한번씩 업데이트
+	// (권장은 30초 이상입니다. 주기가 짧으면 짧을수록, 배터리 사용량이 더 많아집니다.)
 	```
 
 - Swift
 	```swift
-	plengi?.start(120)	// 120초에 한번씩 업데이트
-	// (주기가 너무 짧으면 배터리 소모량이 엄청 많아집니다. 권장은 60초 이상입니다.
+	plengi?.start(30)	// 30초에 한번씩 업데이트
+	// (권장은 30초 이상입니다. 주기가 짧으면 짧을수록, 배터리 사용량이 더 많아집니다.)
 	```
 
 `start` 메소드를 사용할 경우 자동으로 백그라운드에서도 위치정보를 받아와 이벤트를 받을 수 있습니다.
@@ -360,7 +376,7 @@ Gravity (loplat Ad.)를 사용하기 위해서는 SDK상에서 활성화 메소�
 	plengi?.enableAd()
 	plengi?.registerLoplatAdvertisement()
 	```
-**Gravity에서 푸시 알림을 받기 위해서는 `start` / `refreshLocation` 메소드를 호출해주세요. (`start` 메소드를 사용할 경우 주기의 권장은 60초 이상입니다.)**
+**Gravity에서 푸시 알림을 받기 위해서는  `plengi.start()`  메소드를 사용하기 전에 저 위 2개의 메소드를 호출해주세요.**
 
 ##### Gravity 푸시알림 등록하기
 Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막 작업을 한번 더 해줘야 합니다.
@@ -379,7 +395,14 @@ Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막
 	}
 	```
 
+(샘플앱을 참조하세요. https://github.com/loplat/loplat-sdk-ios)
+**(현재 샘플앱은 Swift용으로 되어 있습니다. 동작확인은 Swift용으로 해주세요. Objective-C용 샘플앱은 리빌딩 중이오니, 곧 업로드 할 예정입니다.)**
+(샘플앱도 Cocoapod을 사용합니다. Cocoapod 사용법은 위에 명시되어 있습니다.)
+
 ## History
+#### 2018. 03. 12
+- iOS SDK Version v1 릴리즈
+
 #### 2018. 02. 05
 - iOS SDK Version v1 릴리즈 준비
 	- Objective-C 에서 Swift로 framework 형식으로 변경 (정적파일 > framework로 변경됨)
