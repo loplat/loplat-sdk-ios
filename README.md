@@ -87,33 +87,31 @@
 
 	Wireless Accessories Configuration
 	```
-
-##### 권한을 사용하는 이유
-- Background Modes - Location Updates
-	- 백그라운드에서도 위치 정보를 수신하기 위해 사용합니다.
-
-- Background Modes - Uses Bluetooth LE accessories
-	- 백그라운드에서도 BLE를 스캔하여 위치 인식에 정확도를 향상하기 위해 사용합니다.
-
-- Bacoground Modes - Background fetch
-	- 백그라운드에서 loplat 서버로부터 위치정보를 수신하기 위해 사용합니다.
-
-- Wireless Accessories Configuration
-	- 백그라운드에서 BLE를 사용하기 위해 사용합니다.
 	
-
 	XCode 에서 **프로젝트 > Capabilities**에 들어가 위 권한 목록에 있는 권한들을 허용해줍니다.
 	
 	![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_1.png)
 	
-	
+	##### 권한을 사용하는 이유
+	- Background Modes - Location Updates
+		- 백그라운드에서도 위치 정보를 수신하기 위해 사용합니다.
+
+	- Background Modes - Uses Bluetooth LE accessories
+		- 백그라운드에서도 BLE를 스캔하여 위치 인식에 정확도를 향상하기 위해 사용합니다.
+
+	- Bacoground Modes - Background fetch
+		- 백그라운드에서 loplat 서버로부터 위치정보를 수신하기 위해 사용합니다.
+
+	- Wireless Accessories Configuration
+		- 백그라운드에서 BLE를 사용하기 위해 사용합니다.	
+
 #### 위치 권한 사용 명시하기
 iOS 11 이상부터 위치권한을 사용하기 위해서는 사용자에게 피드백 문구를 제공해야 합니다.
 앱 상황에 맞는 문구를 추가하세요.
 **(아래는 샘플이며, 샘플처럼 사유가 같을 경우 앱스토어에서 반려될 수 있습니다.)**
 `info.plist` 파일에 아래 값을 추가합니다.
 
-```xml
+```xl
   <?xml version="1.0" encoding="UTF-8">
   <!DOCTYPE plist PUBLIC "=//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
   <plist version="1.0">
