@@ -49,11 +49,11 @@
 
 	Podfile 의  target 태그안에
 	```Podfile
-	pod 'MiniPlengi', '~> 1.0.2'
+	pod 'MiniPlengi', '~> 1.0.3'
 	```
 	을 입력한 후, 저장합니다.
 
-	**만약, Swift를 사용한다면,**
+	**만약, 사용하는 라이브러리 중에 Swift를 하나라도 사용한다면,**
 	Podfile에 `# uses_frameworks` 을 주석을 해제합니다. (#을 지우면 됨)
 
 
