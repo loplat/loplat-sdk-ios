@@ -212,6 +212,7 @@ Objective-C를 사용하는 프로젝트와, Swift를 사용하는 프로젝트�
 
 ### PlaceEngine 초기화
 Plengi (PlaceEngine)을 사용하기 위해 초기화 작업을 진행합니다.
+#### 1. 일반적인 초기화방법
 - Objective-C
 	`AppDelegate.m` 파일의 `application_didFinishLaunchingWithOptions` 이벤트에 아래의 코드를 추가합니다.
 	```objectivec
@@ -235,13 +236,12 @@ Plengi (PlaceEngine)을 사용하기 위해 초기화 작업을 진행합니다.
 	```
 
 
-### PlaceEngine 사용하기
-#### 앱이 아예 종료(Process Killed) 되었을 때 백그라운드로 다시 실행시키기
+#### 2. Plengi 인스턴스를 `application_didFinishLaunchingWithOptions` 에서 호출하지 않았을 때
 loplat SDK는 iOS 위치정보 업데이트 메소드 `startMonitoringSignificantLocationChanges` 를 통해 앱이 사용자에 의해 종료(Process Killed) 되었을 때에도 백그라운드로 다시 실행할 수 있는 코드가 내장되어 있습니다.
 
 이 이벤트는 iOS에서 마지막으로 받은 위치에서 대략적으로 약 500m 차이가 나야만 발생하는 이벤트입니다. 즉, 사용자가 앱을 종료한 후, 사용자가 약 500m 정도 이동하면 시스템으로부터 해당 이벤트를 받아 앱이 백그라운드로 다시 살아나게 됩니다.
 
-**`startMonitoringSignificantLocationChanges` 이벤트를 받았을 때, Plengi 인스턴스를 초기화하는 작업을 해줘야합니다.**
+**`startMonitoringSignificantLocationChanges` 이벤트를 받았을 때, 시스템에서 `AppDelegate` 의 `application_didFinishLaunchingWithOptions` 메소드를 호출합니다. Plengi 인스턴스를 `application_didFinishLaunchingWithOptions` 에서 호출하지 않았을 때는 아래의 방식으로 꼭 초기화해주세요.**
 
 `AppDelegate.m / AppDelegate.swift` 파일의 `application_didFinishLaunchingWithOptions` 메소드에 아래의 코드를 추가합니다.
 
@@ -274,6 +274,11 @@ loplat SDK는 iOS 위치정보 업데이트 메소드 `startMonitoringSignifican
 		// ********** 이하 생략 ********** //
 	}
 	```
+
+
+### PlaceEngine 사용하기
+
+
 
 #### GPS 정확도 설정
 loplat SDK가 위치를 확인할 때에 사용하는 GPS의 성능을 조정할 수 있습니다.
