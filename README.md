@@ -279,6 +279,7 @@ loplat SDK는 iOS 위치정보 업데이트 메소드 `startMonitoringSignifican
 `PlaceDelegate` 에서 장소정보를 가지고 있는 객체입니다.
 
 - Place
+
 	```swift
 	public var loplat_id: Int					// 장소 ID
 	public var name: String						// 장소 이름
