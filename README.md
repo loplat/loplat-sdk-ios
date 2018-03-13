@@ -275,11 +275,26 @@ loplat SDK는 iOS 위치정보 업데이트 메소드 `startMonitoringSignifican
 	}
 	```
 
+### Place 객체
+`PlaceDelegate` 에서 장소정보를 가지고 있는 객체입니다.
+
+```swift
+public var loplat_id: Int					// 장소 ID
+public var name: String						// 장소 이름
+public var tags: String?					// 장소와 관련된 태그 (Nullable)
+public var floor: Int						// 층 정보
+public var lat: Double						// 장소의 위도
+public var lng: Double						// 장소의 경도
+public var accuracy: Double					// 정확도
+public var threshold: Double				// 한계치
+public var client_code: String?				// 고객사 코드 (Nullable)
+public var category: String					// 장소 카테고리
+public var address: String?					// 장소 (구) 주소 (Nullable)
+public var address_road: String?			// 장소 (도로명) 주소 (Nullable)
+public var post: String?					// 장소 우편번호 (Nullable)
+```
 
 ### PlaceEngine 사용하기
-
-
-
 #### GPS 정확도 설정
 loplat SDK가 위치를 확인할 때에 사용하는 GPS의 성능을 조정할 수 있습니다.
 
