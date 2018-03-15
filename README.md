@@ -49,7 +49,7 @@
 
 	Podfile 의  target 태그안에
 	```Podfile
-	pod 'MiniPlengi', '~> 1.0.3'
+	pod 'MiniPlengi', '~> 1.0.4'
 	```
 	을 입력한 후, 저장합니다.
 
@@ -167,9 +167,9 @@ Objective-C를 사용하는 프로젝트와, Swift를 사용하는 프로젝트�
 
 	// ********** 중간 생략 ********** //
 
-	- (void)whereIsNow:(Place *)currentPlace {
+	- (void)whereIsNow:(PlengiResponse *)plengiResponse {
 		// loplat SDK를 통해 현재 실내 위치를 불러왔을 때
-		// 인식된 실내 위치 정보는 currentPlace 변수 안에 저장됨
+		// 인식된 실내 위치 정보는 plengiResponse로 저장됨
 	}
 
 	- (void)didLeavePlace:(Place *)previousPlace {
@@ -193,9 +193,9 @@ Objective-C를 사용하는 프로젝트와, Swift를 사용하는 프로젝트�
 
 	`AppDelegate.swift` 파일에 아래의 3개의 이벤트를 추가합니다. (3개의 이벤트는 무조건 있어야합니다.)
 	```swift
-	func didEnterPlace(_ currentPlace: Place) {
+	func whereIsNow(_ plengiResponse: PlengiResponse) {
 		// loplat SDK를 통해 현재 실내 위치를 불러왔을 때
-		// 인식된 실내 위치 정보는 currentPlace 변수 안에 저장됨
+		// 인식된 실내 위치 정보는 plengiResponse로 저장됨
 	}
 
 	func didLeavePlace(_ previousPlace: Place?) {
@@ -275,25 +275,56 @@ loplat SDK는 iOS 위치정보 업데이트 메소드 `startMonitoringSignifican
 	}
 	```
 
-### Place 객체
+### PlengiResponse 객체
 `PlaceDelegate` 에서 장소정보를 가지고 있는 객체입니다.
+*`@objc` 키워드는 Objective-C에서도 동일하다는 의미입니다.*
+*`let` 키워드는 변하지 않은 값이라는 것을 의미합니다.*
+
+- PlengiResponse
+
+	```swift
+	@objc public let responseStatus: String				// 서버 응답 상태 (success / failed 둘중 하나)
+	@objc public let place: Place?						// 인식된 장소정보 (responseStatus가 failed일 경우 Null)
+	@objc public let area: Area?						// 인식된 상관정보 (Nullable)
+	@objc public let complex: Complex?					// 인식된 복합몰 정보 (Nullable)
+	```
 
 - Place
 
 	```swift
-	public var loplat_id: Int					// 장소 ID
-	public var name: String						// 장소 이름
-	public var tags: String?					// 장소와 관련된 태그 (Nullable)
-	public var floor: Int						// 층 정보
-	public var lat: Double						// 장소의 위도
-	public var lng: Double						// 장소의 경도
-	public var accuracy: Double					// 정확도
-	public var threshold: Double				// 한계치
-	public var client_code: String?				// 고객사 코드 (Nullable)
-	public var category: String					// 장소 카테고리
-	public var address: String?					// 장소 (구) 주소 (Nullable)
-	public var address_road: String?			// 장소 (도로명) 주소 (Nullable)
-	public var post: String?					// 장소 우편번호 (Nullable)
+	@objc public let loplat_id: Int						// 장소 ID
+	@objc public let name: String						// 장소 이름
+	@objc public let tags: String?						// 장소와 관련된 태그 (Nullable)
+	@objc public let floor: Int							// 층 정보
+	@objc public let lat: Double						// 장소의 위도
+	@objc public let lng: Double						// 장소의 경도
+	@objc public let accuracy: Double					// 정확도
+	@objc public let threshold: Double					// 한계치
+	@objc public let client_code: String?				// 고객사 코드 (Nullable)
+	@objc public let category: String					// 장소 카테고리
+	@objc public let address: String?					// 장소 (구) 주소 (Nullable)
+	@objc public let address_road: String?				// 장소 (도로명) 주소 (Nullable)
+	@objc public let post: String?						// 장소 우편번호 (Nullable)
+	```
+
+- Area
+
+	```swift
+	@objc public let id: Int							// 상권 ID
+	@objc public let name: String						// 상권 이름
+	@objc public let tag: String						// 상권 지역
+	@objc public let lat: Double						// 상권 위도
+	@objc public let lng: Double						// 상권 경도
+	```
+
+- Complex
+
+	```swift
+	@objc public let id: Int					// 복합몰 ID
+	@objc public let name: String				// 복합몰 이름
+	@objc public let branch_name: String		// 복합몰 지점
+	@objc public let category: String			// 복합몰 카테고리
+	@objc public let category_code: String		// 복합몰 카테고리 코드
 	```
 
 ### PlaceEngine 사용하기
