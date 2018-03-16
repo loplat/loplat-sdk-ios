@@ -52,7 +52,7 @@
 
 	Podfile 의  target 태그안에
 	```Podfile
-	pod 'MiniPlengi', '~> 1.0.5-simul'
+	pod 'MiniPlengi', '~> 1.0.5'
 	```
 	을 입력한 후, 저장합니다.
 
@@ -60,7 +60,7 @@
 
 	Podfile 의  target 태그안에
 	```Podfile
-	pod 'MiniPlengi', '~> 1.0.5'
+	pod 'MiniPlengi', '~> 1.0.5-simul'
 	```
 	을 입력한 후, 저장합니다.
 	**시뮬레이터 버전으로 앱스토어에 배포할 경우, 반려사유가 됩니다.**
