@@ -1,11 +1,5 @@
 ﻿##### Plengi SDK (for iOS)
 
-```loplat_warning
-  loplat SDK (Plengi)는 시뮬레이터는 지원하지 않습니다.
-  타겟이 시뮬레이터인 경우, Cocoapod Repo를 시뮬레이터용을 사용해야합니다.
-  자세한 내용은 아래를 참고하세요.
-```
-
 ```loplat_caution
   loplat SDK 버전 1.0 미만 버전은 곧 서비스가 중단될 예정이오니,
   업데이트를 꼭 해주세요.
@@ -52,18 +46,9 @@
 
 	Podfile 의  target 태그안에
 	```Podfile
-	pod 'MiniPlengi', '~> 1.0.5'
+	pod 'MiniPlengi', '~> 1.0.6'
 	```
 	을 입력한 후, 저장합니다.
-
-- 빌드 환경이 **시뮬레이터일 경우**
-
-	Podfile 의  target 태그안에
-	```Podfile
-	pod 'MiniPlengi', '~> 1.0.5-simul'
-	```
-	을 입력한 후, 저장합니다.
-	**시뮬레이터 버전으로 앱스토어에 배포할 경우, 반려사유가 됩니다.**
 
 
 	**만약, 사용하는 라이브러리 중에 Swift를 하나라도 사용한다면,**
