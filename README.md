@@ -455,13 +455,13 @@ Gravity (loplat Ad.)를 사용하기 위해서는 SDK상에서 활성화 메소�
 `AppDelegate.m` / `AppDelegate.swift` 파일에 `application_didFinishLaunchingWithOptions`메소드에 아래와 같은 코드를 추가합니다.
 - Objective-C
 	```objectivec
-	[plengi enableAd];
+	[plengi enableAdWithIsEnabled:TRUE];
 	[plengi registerLoplatAdvertisement];
 	```
 
 - Swift
 	```swift
-	plengi?.enableAd()
+	plengi?.enableAd(isEnabled: true)
 	plengi?.registerLoplatAdvertisement()
 	```
 **Gravity에서 푸시 알림을 받기 위해서는  `plengi.start()`  메소드를 사용하기 전에 저 위 2개의 메소드를 호출해주세요.**
@@ -483,11 +483,30 @@ Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막
 	}
 	```
 
+#### Gravity 비활성화하기
+사용자가 푸시알림 동의를 하지 않을경우 등, 특정 시나리오에 따라 광고 수신을 허용하지 않을 경우, 아래의 메소드를 호출하여 Gravity 사용을 중지합니다.
+- Objective-C
+	```objectivec
+	[plengi enableAdWithIsEnabled:FALSE];
+	```
+
+- Swift
+	```swift
+	plengi?.enableAd(isEnabled: false)
+	```
+
+
 (샘플앱을 참조하세요. https://github.com/loplat/loplat-sdk-ios)
 **(현재 샘플앱은 Swift용으로 되어 있습니다. 동작확인은 Swift용으로 해주세요. Objective-C용 샘플앱은 리빌딩 중이오니, 곧 업로드 할 예정입니다.)**
 (샘플앱도 Cocoapod을 사용합니다. Cocoapod 사용법은 위에 명시되어 있습니다.)
 
 ## History
+#### 2018. 03. 29
+- iOS SDK Version 1.0.61
+		- iOS SDK 누적 업데이트 포함
+		- 장소 검색을 할 때 사용하는 내부 알고리즘 변경
+		- 특정 상황에서 SDK가 강제중지되어 앱이 강제중지 되는 버그 수정
+
 #### 2018. 03. 12
 - iOS SDK Version v1 릴리즈
 
