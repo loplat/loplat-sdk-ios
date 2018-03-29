@@ -46,7 +46,7 @@
 
 	Podfile 의  target 태그안에
 	```Podfile
-	pod 'MiniPlengi', '~> 1.0.6'
+	pod 'MiniPlengi', '~> 1.0.61'
 	```
 	을 입력한 후, 저장합니다.
 
@@ -270,6 +270,8 @@ loplat SDK는 iOS 위치정보 업데이트 메소드 `startMonitoringSignifican
 		// ********** 이하 생략 ********** //
 	}
 	```
+	
+**중요 : initPlaceEngine을 호출할 시 plengi 객체가 null일경우가 있습니다.  이 경우, Client ID / Secret 이 잘못된 경우입니다. plengi 객체가 null일경우, 제대로 초기화가 되지 않았단 걸 의미합니다.**
 
 ### PlengiResponse 객체
 `PlaceDelegate` 에서 장소정보를 가지고 있는 객체입니다.
