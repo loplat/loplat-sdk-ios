@@ -46,7 +46,7 @@
 
 	Podfile 의  target 태그안에
 	```Podfile
-	pod 'MiniPlengi', '~> 1.0.61'
+	pod 'MiniPlengi', '~> 1.0.7'
 	```
 	을 입력한 후, 저장합니다.
 
@@ -501,6 +501,12 @@ Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막
 (샘플앱도 Cocoapod을 사용합니다. Cocoapod 사용법은 위에 명시되어 있습니다.)
 
 ## History
+#### 2018. 04. 03
+- iOS SDK Version 1.0.7
+		- iOS 11.3 SDK로 업그레이드
+		- Swift 4.0 > 4.1로 업그레이드
+		- PlaceDelegate 에서 Leave / Enter Event 가 제대로 오지 않는 버그 수정
+
 #### 2018. 03. 29
 - iOS SDK Version 1.0.61
 		- iOS SDK 누적 업데이트 포함
