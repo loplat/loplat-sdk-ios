@@ -46,12 +46,12 @@
 
 	Podfile 의  target 태그안에
 	```Podfile
-	pod 'MiniPlengi', '~> 1.0.7'
+	pod 'MiniPlengi', '1.0.7'
 	```
 	을 입력한 후, 저장합니다.
 
 
-	**만약, 사용하는 라이브러리 중에 Swift를 하나라도 사용한다면,**
+	**SDK가 Swift를 사용하기 때문에,**
 	Podfile에 `# uses_frameworks` 을 주석을 해제합니다. (#을 지우면 됨)
 
 #### Cocoapod 라이브러리 설치하기
@@ -67,7 +67,7 @@
 
 
 ### Cocoapod이 적용된 프로젝트 열기
-- Cocoapod이 적용된 프로젝트를 열기 위해서는 확장자가 **.xcodeproj** 를 열면 안되며, 워크스페이스 파일  **.xcworkspace** 파일을 열여야 합니다.
+Cocoapod이 적용된 프로젝트를 열기 위해서는 확장자가 **.xcodeproj** 를 열면 안되며, 워크스페이스 파일  **.xcworkspace** 파일을 열여야 합니다.
 
 
 ## SDK 사용하기
