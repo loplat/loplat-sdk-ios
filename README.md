@@ -50,9 +50,7 @@
 	```
 	을 입력한 후, 저장합니다.
 
-
-	**SDK가 Swift를 사용하기 때문에,**
-	Podfile에 `# uses_frameworks` 을 주석을 해제합니다. (#을 지우면 됨)
+	**SDK가 Swift를 사용하기 때문에, Podfile에 `# uses_frameworks` 을 주석을 해제합니다. (#을 지우면 됨)**
 
 #### Cocoapod 라이브러리 설치하기
 - 아래의 명령어를 터미널에 입력하여 라이브러리를 적용합니다.
@@ -67,6 +65,7 @@
 
 
 ### Cocoapod이 적용된 프로젝트 열기
+
 Cocoapod이 적용된 프로젝트를 열기 위해서는 확장자가 **.xcodeproj** 를 열면 안되며, 워크스페이스 파일  **.xcworkspace** 파일을 열여야 합니다.
 
 
