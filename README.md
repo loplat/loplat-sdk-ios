@@ -46,7 +46,7 @@
 
 	Podfile 의  target 태그안에
 	```Podfile
-	pod 'MiniPlengi', '1.0.7'
+	pod 'MiniPlengi', '1.0.71'
 	```
 	을 입력한 후, 저장합니다.
 
@@ -500,6 +500,10 @@ Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막
 (샘플앱도 Cocoapod을 사용합니다. Cocoapod 사용법은 위에 명시되어 있습니다.)
 
 ## History
+#### 2018. 04. 19
+- iOS SDK Version 1.0.71
+		- 특정상황에서 Plengi.init을 할 경우, unzeof 에서 오류나는 버그 수정
+
 #### 2018. 04. 03
 - iOS SDK Version 1.0.7
 		- iOS 11.3 SDK로 업그레이드
