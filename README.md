@@ -46,7 +46,7 @@
 
 	Podfile 의  target 태그안에
 	```Podfile
-	pod 'MiniPlengi', '1.0.71'
+	pod 'MiniPlengi', '1.0.8'
 	```
 	을 입력한 후, 저장합니다.
 
@@ -136,10 +136,12 @@ Objective-C를 사용하는 프로젝트와, Swift를 사용하는 프로젝트�
 
 ```objectivec
   #import <MiniPlengi/MiniPlengi-Swift.h>
+  #import <UserNotifications/UserNotifications.h> // Gravity를 사용할 경우
 ```
 
 ```swift
   import MiniPlengi
+  import UserNotifications // Gravity를 사용할 경우
 ```
 
 
@@ -147,7 +149,7 @@ Objective-C를 사용하는 프로젝트와, Swift를 사용하는 프로젝트�
 - Objective-C
 	`AppDelegate.h` 파일 클래스 선언부를 아래와 같이 수정합니다.
 	```objectivec
-	@interface AppDelegate : UIResponder <UIApplicationDelegate, PlaceDelegate>
+	@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate, PlaceDelegate>
 	```
 	`AppDelegate.h` 파일 아래, 변수를 추가합니다.
 	```objectivec
@@ -156,6 +158,8 @@ Objective-C를 사용하는 프로젝트와, Swift를 사용하는 프로젝트�
 	```
 
 	`AppDelegate.m` 파일에 아래의 3개의 이벤트를 추가합니다. (3개의 이벤트는 무조건 있어야합니다.)
+	단, Gravity를 사용하지 않을 경우, 아래 2개의 이벤트 `userNotificationCenter` 는 생략할 수 있습니다.
+	
 	```objectivec
 	@implementation AppDelegate
 	@synthesize plengi;				// 추가된 줄
@@ -176,17 +180,33 @@ Objective-C를 사용하는 프로젝트와, Swift를 사용하는 프로젝트�
 		// loplat SDK가 사용자의 위치를 트래킹할 때, 다른 장소에 들어왔다고 인식했을 때
 		// 방금 사용자가 들어온 실내 위치 정보는 currentPlace 변수 안에 저장됨
 	}
+	
+	// ********** 중간 생략 ********** //
+	// ********** Gravity를 쓸 경우에만 아래 추가 ********** //
+
+	- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler  API_AVAILABLE(ios(10.0)){
+		completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound); 
+		// iOS 10 이상에서도 포그라운드에서 알림을 띄울 수 있도록 하는 코드 (가이드에는 뱃지, 소리, 경고 를 사용하지만, 개발에 따라 빼도 상관 무)
+	}
+
+	- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler  API_AVAILABLE(ios(10.0)){
+		[plengi processLoplatAdvertisement:center didReceive: response withCompletionHandler:completionHandler];
+		completionHandler();
+		// loplat SDK가 사용자의 알림 트래킹 (Click, Dismiss) 를 처리하기 위한 코드
+	}
 	@end
 	```
 
 - Swift
 	`AppDelegate.swift` 파일 클래스 선언부를 아래와 같이 수정합니다.
 	```swift
-	class AppDelegate: UIResponder, UIApplicationDelegate, PlaceDelegate {
+	class AppDelegate: UIResponder, UIApplicationDelegate, PlaceDelegate, UNUserNotificationCenterDelegate {
 		var plengi: Plengi?
 	```
 
 	`AppDelegate.swift` 파일에 아래의 3개의 이벤트를 추가합니다. (3개의 이벤트는 무조건 있어야합니다.)
+	단, Gravity를 사용하지 않을 경우, 아래 2개의 이벤트 `userNotificationCenter` 는 생략할 수 있습니다.
+	
 	```swift
 	func whereIsNow(_ plengiResponse: PlengiResponse) {
 		// loplat SDK를 통해 현재 실내 위치를 불러왔을 때
@@ -201,6 +221,21 @@ Objective-C를 사용하는 프로젝트와, Swift를 사용하는 프로젝트�
 	func didEnterPlace(_ currentPlace: Place) {
 		// loplat SDK가 사용자의 위치를 트래킹할 때, 다른 장소에 들어왔다고 인식했을 때
 		// 방금 사용자가 들어온 실내 위치 정보는 currentPlace 변수 안에 저장됨
+	}
+
+	// ********** Gravity를 쓸 경우에만 아래 추가 ********** //
+
+	@available(iOS  10.0, *)
+	func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+		plengi?.processLoplatAdvertisement(center, didReceive: response, withCompletionHandler: completionHandler)
+		completionHandler()
+		// loplat SDK가 사용자의 알림 트래킹 (Click, Dismiss) 를 처리하기 위한 코드
+	}
+
+	@available(iOS  10.0, *)
+	func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+		completionHandler([.alert, .sound, .badge])
+		// iOS 10 이상에서도 포그라운드에서 알림을 띄울 수 있도록 하는 코드 (가이드에는 뱃지, 소리, 경고 를 사용하지만, 개발에 따라 빼도 상관 무)
 	}
 	``` 
 
@@ -473,12 +508,20 @@ Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막
 	- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
 		[plengi processLoplatAdvertisement:application handleActionWithIdentifier:identifier for:notification completionHandler:completionHandler];
 	}
+
+	- (void)applicationWillEnterForeground:(UIApplication *)application {
+		[NSNotificationCenter.defaultCenter  postNotificationName:@"processAdvertisement"  object:nil];
+	}
 	```
 
 - Swift
 	```swift
 	func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, completionHandler: @escaping () -> Void) {
 		plengi?.processLoplatAdvertisement(application, handleActionWithIdentifier: identifier, for: notification, completionHandler: completionHandler)
+	}
+
+	func applicationWillEnterForeground(_ application: UIApplication) {
+		NotificationCenter.default.post(name: NSNotification.Name(rawValue: "processAdvertisement"), object: nil) // SDK 내부 이벤트 호출 (정확한 처리를 위해 권장)
 	}
 	```
 
@@ -500,6 +543,13 @@ Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막
 (샘플앱도 Cocoapod을 사용합니다. Cocoapod 사용법은 위에 명시되어 있습니다.)
 
 ## History
+#### 2018. 05. 09
+- iOS SDK Version 1.0.8
+		- 그래비티가 비활성화되어 있는 경우에도 광고가 수신되는 버그 수정
+		- 그래비티 알림 클릭시 아무런 이벤트도 발생되지 않는 버그 수정
+		- 그래비티에서 웹으로 이동시, SDK 자체 WebView로 띄우도록 변경
+		- 그래비티에서 캠페인 테스트 모드일 경우 알림이 한번만 나오는 버그 수정
+	
 #### 2018. 04. 19
 - iOS SDK Version 1.0.71
 		- 특정상황에서 Plengi.init을 할 경우, unzeof 에서 오류나는 버그 수정
