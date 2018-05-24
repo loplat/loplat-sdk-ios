@@ -133,6 +133,7 @@ Objective-C를 사용하는 프로젝트와, Swift를 사용하는 프로젝트�
 
 #### 헤더파일 포함하기
 `AppDelegate.h` (Objective-C) / `AppDelegate.swift` (Swift) 파일에, 아래의 구문을 추가해줍니다.
+Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야합니다.
 
 ```objectivec
   #import <MiniPlengi/MiniPlengi-Swift.h>
@@ -183,6 +184,7 @@ Objective-C를 사용하는 프로젝트와, Swift를 사용하는 프로젝트�
 	
 	// ********** 중간 생략 ********** //
 	// ********** Gravity를 쓸 경우에만 아래 추가 ********** //
+	// ********** iOS 10 이상에서 광고알림이 올 경우 처리하기 위한 이벤트 ********** //
 
 	- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler  API_AVAILABLE(ios(10.0)){
 		completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound); 
@@ -519,6 +521,15 @@ Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막
 	- (void)applicationWillEnterForeground:(UIApplication *)application {
 		[NSNotificationCenter.defaultCenter  postNotificationName:@"processAdvertisement"  object:nil];
 	}
+
+	- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void  (^)(UNNotificationPresentationOptions))completionHandler API_AVAILABLE(ios(10.0)) {  
+	completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);  // iOS 10 이상에서도 포그라운드에서 알림을 띄울 수 있도록 하는 코드 (가이드에는 뱃지, 소리, 경고 를 사용하지만, 개발에 따라 빼도 상관 무)  
+	}  
+
+	- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void  (^)(void))completionHandler API_AVAILABLE(ios(10.0)) {  
+		[plengi processLoplatAdvertisement:center didReceive: response withCompletionHandler:completionHandler]; 
+		completionHandler();  // loplat SDK가 사용자의 알림 트래킹 (Click, Dismiss) 를 처리하기 위한 코드  
+	}
 	```
 
 - Swift
@@ -529,6 +540,17 @@ Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막
 
 	func applicationWillEnterForeground(_ application: UIApplication) {
 		NotificationCenter.default.post(name: NSNotification.Name(rawValue: "processAdvertisement"), object: nil) // SDK 내부 이벤트 호출 (정확한 처리를 위해 권장)
+	}
+
+	@available(iOS 10.0,  *) 
+	func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping ()  ->  Void) { 
+		plengi?.processLoplatAdvertisement(center, didReceive: response, withCompletionHandler: completionHandler) 
+		completionHandler()  // loplat SDK가 사용자의 알림 트래킹 (Click, Dismiss) 를 처리하기 위한 코드  
+	} 
+
+	@available(iOS 10.0, *)
+	func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping  (UNNotificationPresentationOptions) -> Void) { 
+		completionHandler([.alert,  .sound,  .badge])  // iOS 10 이상에서도 포그라운드에서 알림을 띄울 수 있도록 하는 코드 (가이드에는 뱃지, 소리, 경고 를 사용하지만, 개발에 따라 빼도 상관 무)  			
 	}
 	```
 
@@ -546,7 +568,7 @@ Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막
 
 
 (샘플앱을 참조하세요. https://github.com/loplat/loplat-sdk-ios)
-**(현재 샘플앱은 Swift용으로 되어 있습니다. 동작확인은 Swift용으로 해주세요. Objective-C용 샘플앱은 리빌딩 중이오니, 곧 업로드 할 예정입니다.)**
+**(현재 샘플앱은 Swift용으로 되어 있습니다. 동작확인은 Swift용으로 해주세요. Objective-C용 샘플앱은 리빌딩 중이오니, 업로드 할 예정입니다.)**
 (샘플앱도 Cocoapod을 사용합니다. Cocoapod 사용법은 위에 명시되어 있습니다.)
 
 ## History
