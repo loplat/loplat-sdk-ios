@@ -464,6 +464,9 @@ Gravity를 통해 푸시메시지를 받으려면, 사용자로부터 권한을 
 			completionHandler:^(BOOL granted, NSError * _Nullable error) {
 			// 권한 허용되었을 때의 처리코드
 		}
+		
+		[UNUserNotificationCenter currentNotificationCenter].delegate = self
+		// ********** 이하 생략 ********** //
 	}
 	```
 
@@ -479,6 +482,10 @@ Gravity를 통해 푸시메시지를 받으려면, 사용자로부터 권한을 
 		} else if #available(iOS 9, *) {
 			UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
 			UIApplication.shared.registerForRemoteNotifications()
+		}
+
+		if  #available(iOS  10.0, *) {
+			UNUserNotificationCenter.current().delegate = self
 		}
 		// ********** 이하 생략 ********** //
 	}
