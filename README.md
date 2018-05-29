@@ -332,7 +332,7 @@ loplat SDK는 iOS 위치정보 업데이트 메소드 `startMonitoringSignifican
 	@objc public let floor: Int							// 층 정보
 	@objc public let lat: Double						// 장소의 위도
 	@objc public let lng: Double						// 장소의 경도
-	@objc public let accuracy: Double					// 정확도
+	@objc public let accuracy: Double					// 정확도 (accuracy > threshold 비교 필요)
 	@objc public let threshold: Double					// 한계치
 	@objc public let client_code: String?				// 고객사 코드 (Nullable)
 	@objc public let category: String					// 장소 카테고리
@@ -360,6 +360,9 @@ loplat SDK는 iOS 위치정보 업데이트 메소드 `startMonitoringSignifican
 	@objc public let category: String			// 복합몰 카테고리
 	@objc public let category_code: String		// 복합몰 카테고리 코드
 	```
+
+	Place 객체에서 *accuracy > threshold* 여야만 Enter 이벤트입니다.
+	저 조건이 맞지 않는경우 Near (옆에 있는 매장) 입니다.
 
 ### PlaceEngine 사용하기
 #### GPS 정확도 설정
