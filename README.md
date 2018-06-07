@@ -158,7 +158,7 @@ Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야�
 	@property (strong, nonatomic) Plengi *plengi; //추가된 줄
 	```
 
-	`AppDelegate.m` 파일에 아래의 3개의 이벤트를 추가합니다. (3개의 이벤트는 무조건 있어야합니다.)
+	`AppDelegate.m` 파일에 아래의 이벤트를 추가합니다.
 	단, Gravity를 사용하지 않을 경우, 아래 2개의 이벤트 `userNotificationCenter` 는 생략할 수 있습니다.
 	
 	```objectivec
@@ -167,19 +167,36 @@ Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야�
 
 	// ********** 중간 생략 ********** //
 
-	- (void)whereIsNow:(PlengiResponse *)plengiResponse {
-		// loplat SDK를 통해 현재 실내 위치를 불러왔을 때
-		// 인식된 실내 위치 정보는 plengiResponse로 저장됨
-	}
+	- (void)responsePlaceEvent:(PlengiResponse *)plengiResponse {
+		if ([plengiResponse result] == Result.SUCCESS) {
+			if ([plengiResponse type] == ResponseType.PLACE) { // FOREGROUND
+				// 아래 백그라운드일 때 코드 참조
+			} else if ([plengiResponse type] == ResponseType.PLACE_EVENT) { // BACKGROUND
+				if ([plengiResponse placeEvent] == PlaceEvent.ENTER) {
+					// 사용자가 장소에 들어왔을 때
+				} else if ([plengiResponse placeEvent] == PlaceEvent.NEARBY) {
+					// NEARBY로 인식되었을 때
+				} else if ([plengiResponse placeEvent] == PlaceEvent.LEAVE) {
+					// 사용자가 장소를 떠났을 때
+				}
 
-	- (void)didLeavePlace:(Place *)previousPlace {
-		// loplat SDK가 사용자의 위치를 트래킹할 때, 장소를 떠났다고 인식했을 때
-		// 방금 사용자가 떠난 실내 위치 정보는 previousPlace 변수 안에 저장됨
-	}
+				if ([plengiResponse place] != NULL) {
+					// PlaceEvent가 NEARBY 일 경우, NEARBY로 인식된 장소 정보가 넘어옴
+					// PlaceEvent가 ENTER일 경우, 들어온 장소 정보 객체가 넘어옴
+					// PlaceEvent가 LEAVE일 경우, 떠난 장소 정보 객체가 넘어옴
+				}
 
-	- (void)didEnterPlace:(Place *)currentPlace {
-		// loplat SDK가 사용자의 위치를 트래킹할 때, 다른 장소에 들어왔다고 인식했을 때
-		// 방금 사용자가 들어온 실내 위치 정보는 currentPlace 변수 안에 저장됨
+				if ([plengiResponse complex] != NULL) {
+					// 복합몰이 인식되었을 때
+				}
+
+				if ([plengiResponse area] != NULL) {
+					// 상권이 인식되었을 때
+				}
+			}
+		} else {
+			// Network Failed
+		}
 	}
 	
 	// ********** 중간 생략 ********** //
@@ -206,25 +223,41 @@ Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야�
 		var plengi: Plengi?
 	```
 
-	`AppDelegate.swift` 파일에 아래의 3개의 이벤트를 추가합니다. (3개의 이벤트는 무조건 있어야합니다.)
+	`AppDelegate.swift` 파일에 아래의 이벤트를 추가합니다.
 	단, Gravity를 사용하지 않을 경우, 아래 2개의 이벤트 `userNotificationCenter` 는 생략할 수 있습니다.
 	
 	```swift
-	func whereIsNow(_ plengiResponse: PlengiResponse) {
-		// loplat SDK를 통해 현재 실내 위치를 불러왔을 때
-		// 인식된 실내 위치 정보는 plengiResponse로 저장됨
-	}
+	func responsePlaceEvent(_ plengiResponse: PlengiResponse) {
+		if plengiResponse.result == PlengiResponse.Result.SUCCESS {
+			if plengiResponse.type == PlengiResponse.ResponseType.PLACE { // FOREGROUND
+				// 처리 로직은 아래 백그라운드 참조
+			} else if plengiResponse.type == PlengiResponse.ResponseType.PLACE_EVENT { // BACKGROUND
+				if plengiResponse.placeEvent == PlengiResponse.PlaceEvent.ENTER {
+					
+				} else if plengiResponse.placeEvent == PlengiResponse.PlaceEvent.NEARBY {
 
-	func didLeavePlace(_ previousPlace: Place?) {
-		// loplat SDK가 사용자의 위치를 트래킹할 때, 장소를 떠났다고 인식했을 때
-		// 방금 사용자가 떠난 실내 위치 정보는 previousPlace 변수 안에 저장됨
-	}
+				} else if plengiResponse.placeEvent == PlengiResponse.PlaceEvent.LEAVE {
 
-	func didEnterPlace(_ currentPlace: Place) {
-		// loplat SDK가 사용자의 위치를 트래킹할 때, 다른 장소에 들어왔다고 인식했을 때
-		// 방금 사용자가 들어온 실내 위치 정보는 currentPlace 변수 안에 저장됨
-	}
+				}
 
+				if plengiResponse.place != nil {
+					// PlaceEvent가 NEARBY 일 경우, NEARBY 로 인식된 장소 정보가 넘어옴
+					// PlaceEvent가 ENTER 일 경우, 들어온 장소 정보 객체가 넘어옴
+					// PlaceEvent가 LEAVE 일 경우, 떠난 장소 정보 객체가 넘어옴
+				}
+	
+				if plengiResponse.complex != nil {
+					// 복합몰이 인식되었을 때
+				}
+
+				if plengiResponse.area != nil {
+					// 상권이 인식되었을 때
+				}
+			}
+		} else {
+			// Network Failed
+		}
+	}
 	// ********** Gravity를 쓸 경우에만 아래 추가 ********** //
 
 	@available(iOS  10.0, *)
@@ -312,16 +345,7 @@ loplat SDK는 iOS 위치정보 업데이트 메소드 `startMonitoringSignifican
 ### PlengiResponse 객체
 `PlaceDelegate` 에서 장소정보를 가지고 있는 객체입니다.
 *`@objc` 키워드는 Objective-C에서도 동일하다는 의미입니다.*
-*`let` 키워드는 변하지 않은 값이라는 것을 의미합니다.*
-
-- PlengiResponse
-
-	```swift
-	@objc public let responseStatus: String				// 서버 응답 상태 (success / failed 둘중 하나)
-	@objc public let place: Place?						// 인식된 장소정보 (responseStatus가 failed일 경우 Null)
-	@objc public let area: Area?						// 인식된 상관정보 (Nullable)
-	@objc public let complex: Complex?					// 인식된 복합몰 정보 (Nullable)
-	```
+*`let` 키워드는 변하지 않는 값이라는 것을 의미합니다.*
 
 - Place
 
