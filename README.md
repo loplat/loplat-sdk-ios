@@ -599,6 +599,12 @@ Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막
 (샘플앱도 Cocoapod을 사용합니다. Cocoapod 사용법은 위에 명시되어 있습니다.)
 
 ## History
+#### 2018. 06. 07.
+- iOS SDK Version 1.1.0
+		- PlaceDelegate를 하나로 간소화 (안드로이드와 동일하게 변경)
+		- PlaceDelegate 처리 로직 변경
+		- NEARBY로 인식할 경우에도 didEnterPlace, didLeavePlace 이벤트가 발생하는 버그 수정
+
 #### 2018. 05. 09
 - iOS SDK Version 1.0.8
 		- 그래비티가 비활성화되어 있는 경우에도 광고가 수신되는 버그 수정
