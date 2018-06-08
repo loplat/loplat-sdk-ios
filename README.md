@@ -46,7 +46,7 @@
 
 	Podfile 의  target 태그안에
 	```Podfile
-	pod 'MiniPlengi', '1.0.8'
+	pod 'MiniPlengi', '1.1.0'
 	```
 	을 입력한 후, 저장합니다.
 
