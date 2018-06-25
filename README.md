@@ -46,7 +46,7 @@
 
 	Podfile 의  target 태그안에
 	```Podfile
-	pod 'MiniPlengi', '1.1.0'
+	pod 'MiniPlengi', '1.1.1'
 	```
 	을 입력한 후, 저장합니다.
 
@@ -146,11 +146,11 @@ Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야�
 ```
 
 
-### PlaceDelegate 선언하기
+### PlaceDelegate, PlaceEngineDelegate 선언하기
 - Objective-C
 	`AppDelegate.h` 파일 클래스 선언부를 아래와 같이 수정합니다.
 	```objectivec
-	@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate, PlaceDelegate>
+	@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate, PlaceDelegate, PlengiEngineDelegate>
 	```
 	`AppDelegate.h` 파일 아래, 변수를 추가합니다.
 	```objectivec
@@ -166,24 +166,28 @@ Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야�
 	@synthesize plengi;				// 추가된 줄
 
 	// ********** 중간 생략 ********** //
+	// loplat SDK가 정상적으로 초기화 되었을 때 이벤트
+	- (void)isPlengiInitSuccessfully:(Plengi*)plengi {
+		// plengi: 초기화 완료된 Plengi 객체를 쓰면 됨
+		plengi.delegate = self;
+	}
+
+	// loplat SDK가 정상적으로 초기화 되지 않았을 때의 이벤트
+	- (void)isPlengiInitFailed:(NSString*)result {
+		// result : 초기화 실패 이유
+	}
 
 	- (void)responsePlaceEvent:(PlengiResponse *)plengiResponse {
 		if ([plengiResponse result] == Result.SUCCESS) {
-			if ([plengiResponse type] == ResponseType.PLACE) { // FOREGROUND
-				// 아래 백그라운드일 때 코드 참조
-			} else if ([plengiResponse type] == ResponseType.PLACE_EVENT) { // BACKGROUND
-				if ([plengiResponse placeEvent] == PlaceEvent.ENTER) {
-					// 사용자가 장소에 들어왔을 때
-				} else if ([plengiResponse placeEvent] == PlaceEvent.NEARBY) {
-					// NEARBY로 인식되었을 때
-				} else if ([plengiResponse placeEvent] == PlaceEvent.LEAVE) {
-					// 사용자가 장소를 떠났을 때
-				}
-
+			if ([plengiResponse type] == ResponseType.PLACE_EVENT) {
 				if ([plengiResponse place] != NULL) {
-					// PlaceEvent가 NEARBY 일 경우, NEARBY로 인식된 장소 정보가 넘어옴
-					// PlaceEvent가 ENTER일 경우, 들어온 장소 정보 객체가 넘어옴
-					// PlaceEvent가 LEAVE일 경우, 떠난 장소 정보 객체가 넘어옴
+					if ([plengiResponse placeEvent] == PlaceEvent.ENTER) {
+						// 사용자가 장소에 들어왔을 때
+					} else if ([plengiResponse placeEvent] == PlaceEvent.NEARBY) {
+						// NEARBY로 인식되었을 때
+					} else if ([plengiResponse placeEvent] == PlaceEvent.LEAVE) {
+						// 사용자가 장소를 떠났을 때
+					}
 				}
 
 				if ([plengiResponse complex] != NULL) {
@@ -195,7 +199,13 @@ Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야�
 				}
 			}
 		} else {
-			// Network Failed
+			// 위치 인식 실패도 포함
+			// [plengiResponse errorReason] 에 위치 인식 실패 / 오류 이유가 포함됨
+			if ([plengiResponse result] == Result.SUCCESS) {
+				// [plengiResponse errorReason] 을 통해 오류로그 확인
+			} else if ([plengiResponse result] == Result.ERROR_CLOUD_ACCESS) {
+				// [plengiResponse errorReason] 을 통해 오류로그 확인
+			}
 		}
 	}
 	
@@ -219,7 +229,7 @@ Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야�
 - Swift
 	`AppDelegate.swift` 파일 클래스 선언부를 아래와 같이 수정합니다.
 	```swift
-	class AppDelegate: UIResponder, UIApplicationDelegate, PlaceDelegate, UNUserNotificationCenterDelegate {
+	class AppDelegate: UIResponder, UIApplicationDelegate, PlaceDelegate, PlengiEngineDelegate, UNUserNotificationCenterDelegate {
 		var plengi: Plengi?
 	```
 
@@ -227,23 +237,26 @@ Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야�
 	단, Gravity를 사용하지 않을 경우, 아래 2개의 이벤트 `userNotificationCenter` 는 생략할 수 있습니다.
 	
 	```swift
+	func isPlengiInitSuccessfully(_ plengi: Plengi) {
+		// plengi: 초기화 완료된 Plengi 객체를 쓰면 됨
+		plengi.delegate = self
+	}
+
+	func isPlengiInitFailed(_ reason: String) {
+		// result : 초기화 실패 이유
+	}
+	
 	func responsePlaceEvent(_ plengiResponse: PlengiResponse) {
 		if plengiResponse.result == PlengiResponse.Result.SUCCESS {
-			if plengiResponse.type == PlengiResponse.ResponseType.PLACE { // FOREGROUND
-				// 처리 로직은 아래 백그라운드 참조
-			} else if plengiResponse.type == PlengiResponse.ResponseType.PLACE_EVENT { // BACKGROUND
-				if plengiResponse.placeEvent == PlengiResponse.PlaceEvent.ENTER {
-					
-				} else if plengiResponse.placeEvent == PlengiResponse.PlaceEvent.NEARBY {
-
-				} else if plengiResponse.placeEvent == PlengiResponse.PlaceEvent.LEAVE {
-
-				}
-
+			if plengiResponse.type == PlengiResponse.ResponseType.PLACE_EVENT { // BACKGROUND
 				if plengiResponse.place != nil {
-					// PlaceEvent가 NEARBY 일 경우, NEARBY 로 인식된 장소 정보가 넘어옴
-					// PlaceEvent가 ENTER 일 경우, 들어온 장소 정보 객체가 넘어옴
-					// PlaceEvent가 LEAVE 일 경우, 떠난 장소 정보 객체가 넘어옴
+					if plengiResponse.placeEvent == PlengiResponse.PlaceEvent.ENTER {
+						// PlaceEvent가 NEARBY 일 경우, NEARBY 로 인식된 장소 정보가 넘어옴
+					} else if plengiResponse.placeEvent == PlengiResponse.PlaceEvent.NEARBY {
+						// PlaceEvent가 ENTER 일 경우, 들어온 장소 정보 객체가 넘어옴
+					} else if plengiResponse.placeEvent == PlengiResponse.PlaceEvent.LEAVE {
+						// PlaceEvent가 LEAVE 일 경우, 떠난 장소 정보 객체가 넘어옴
+					}
 				}
 	
 				if plengiResponse.complex != nil {
@@ -255,7 +268,13 @@ Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야�
 				}
 			}
 		} else {
-			// Network Failed
+			// 위치 인식 실패도 포함
+			// [plengiResponse errorReason] 에 위치 인식 실패 / 오류 이유가 포함됨
+			if plengiResponse.result == PlengiResponse.Result.FAIL {
+				// plengiResponse.errorReason을 통해 오류 확인
+			} else if plengiResponse.result == PlengiResponse.Result.ERROR_CLOUD_ACCESS {
+				// plengiResponse.errorReason을 통해 오류 확인
+			}
 		}
 	}
 	// ********** Gravity를 쓸 경우에만 아래 추가 ********** //
@@ -283,8 +302,7 @@ Plengi (PlaceEngine)을 사용하기 위해 초기화 작업을 진행합니다.
 	```objectivec
 	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 		// ********** 중간 생략 ********** //
-		plengi = [Plengi initPlaceEngineWithClient_id:@"로플랫에서 발급받은 클라이언트 ID" client_secret:@"로플랫에서 발급받은 클라이언트 키" isRMainThread: false];
-		plengi.delegate = self;
+		[Plengi initPlaceEngineWithClient_id:@"로플랫에서 발급받은 클라이언트 ID" client_secret:@"로플랫에서 발급받은 클라이언트 키" engineInitDelegate: self];
 		// ********** 중간 생략 ********** //
 	}
 	``` 
@@ -294,8 +312,7 @@ Plengi (PlaceEngine)을 사용하기 위해 초기화 작업을 진행합니다.
 	```swift
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [IOApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// ********** 중간 생략 ********** //
-		plengi = Plengi.initPlaceEngine(client_id: "로플랫에서 발급받은 클라이언트 ID", client_secret: "로플랫에서 발급받은 클라이언트 키", isRMainThread: false)
-		plengi?.delegate = self
+		Plengi.initPlaceEngine(client_id: "로플랫에서 발급받은 클라이언트 ID", client_secret: "로플랫에서 발급받은 클라이언트 키", engineInitDelegate: self)
 		// ********** 중간 생략 ********** //
 	}
 	```
@@ -317,9 +334,7 @@ loplat SDK는 iOS 위치정보 업데이트 메소드 `startMonitoringSignifican
 		if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
 			NSLog("App was restarted!"); // 디버깅용
 			
-			plengi = [Plengi initPlaceEngineWithClient_id:@"로플랫에서 발급받은 클라이언트 ID" client_secret:@"로플랫에서 발급받은 클라이언트 키" isRMainThread: false];
-			plengi.delegate = self;
-			[plengi start:30]; // 앱이 백그라운드로 살았을 때, 30초에 한번씩 사용자의 위치를 확인하여 처리함.
+			[Plengi initPlaceEngineWithClient_id:@"로플랫에서 발급받은 클라이언트 ID" client_secret:@"로플랫에서 발급받은 클라이언트 키" engineInitDelegate: self];
 		}	
 		// ********** 이하 생략 ********** //
 	}
@@ -331,16 +346,13 @@ loplat SDK는 iOS 위치정보 업데이트 메소드 `startMonitoringSignifican
 		// ********** 맨 위에다가 추가합니다. ********** //
 		if ((launchOptions?.index(forKey: UIApplicationLaunchOptionsKey.location)) != nil) {
 			print("App was restarted!") // 디버깅용
-			plengi = Plengi.initPlaceEngine(client_id: "로플랫에서 발급받은 클라이언트 ID", client_secret: "로플랫에서 발급받은 클라이언트 키", isRMainThread: false)
-			plengi?.delegate = self
-			plengi?.start(30); // 앱이 백그라운드로 살았을 때, 30초에 한번씩 사용자의 위치를 확인하여 처리함.
-			
+			Plengi.initPlaceEngine(client_id: "로플랫에서 발급받은 클라이언트 ID", client_secret: "로플랫에서 발급받은 클라이언트 키", engineInitDelegate: self)
 		}
 		// ********** 이하 생략 ********** //
 	}
 	```
 	
-**중요 : initPlaceEngine을 호출할 시 plengi 객체가 null일경우가 있습니다.  이 경우, Client ID / Secret 이 잘못된 경우입니다. plengi 객체가 null일경우, 제대로 초기화가 되지 않았단 걸 의미합니다.**
+**중요 : initPlaceEngine을 호출하면 EngineInitDelegate로 호출됩니다. 초기화가 완료될 경우 isPlengiInitSuccessfully 이벤트로 호출됩니다. 해당 이벤트로 넘어온 Plengi 객체를 사용하세요.**
 
 ### PlengiResponse 객체
 `PlaceDelegate` 에서 장소정보를 가지고 있는 객체입니다.
@@ -389,6 +401,19 @@ loplat SDK는 iOS 위치정보 업데이트 메소드 `startMonitoringSignifican
 	저 조건이 맞지 않는경우 Near (옆에 있는 매장) 입니다.
 
 ### PlaceEngine 사용하기
+#### Plengi 객체 접근하기
+Plengi 객체를 호출하려면 plengi 변수를 저장할 수도 있지만, 아래의 인스턴스 코드를 통해 접근할 수 있습니다.
+
+- Objective-C
+	```objc
+	[Plengi getInstance]
+	```
+
+- Swift
+	```swift
+	Plengi.getInstance()
+	```
+
 #### GPS 정확도 설정
 loplat SDK가 위치를 확인할 때에 사용하는 GPS의 성능을 조정할 수 있습니다.
 
@@ -426,6 +451,7 @@ loplat SDK가 위치를 인식할 때에 BLE를 사용할지 설정합니다.
 
 
 #### 블루투스가 꺼져있을 경우, 사용자에게 켜달라고 요청보내기
+
 - Objective-C
 	```objectivec
 	[plengi requestBluetooth];
@@ -436,7 +462,19 @@ loplat SDK가 위치를 인식할 때에 BLE를 사용할지 설정합니다.
 	plengi?.requestBluetooth()
 	```
 
-##### 위치 인식하기
+#### 위치 권한 요청하기
+- Objective-C
+	```objectivec
+	[plengi requestLocationPermission];
+	```
+
+- Swift
+	```swift
+	plengi?.requestLocationPermission()
+	```
+
+#### 위치 인식하기
+
 - Objective-C
 	```objectivec
 	[plengi refreshLocation];
@@ -453,14 +491,14 @@ loplat SDK가 위치를 인식할 때에 BLE를 사용할지 설정합니다.
 초단위로 사용자의 위치를 트래킹하여 사용자가 어느 위치에 있는지, 장소를 떠났는지, 새로운 장소에 도착했는지 알 수 있습니다.
 - Objective-C
 	```objectivec
-	[plengi start:30]; //30초에 한번씩 업데이트
-	// (권장은 30초 이상입니다. 주기가 짧으면 짧을수록, 배터리 사용량이 더 많아집니다.)
+	[plengi start:60]; // 60초에 한번씩 업데이트
+	// (최소 주기는 60초 입니다. 주기가 짧으면 짧을수록, 배터리 사용량이 더 많아집니다.)
 	```
 
 - Swift
 	```swift
-	plengi?.start(30)	// 30초에 한번씩 업데이트
-	// (권장은 30초 이상입니다. 주기가 짧으면 짧을수록, 배터리 사용량이 더 많아집니다.)
+	plengi?.start(60)	// 60초에 한번씩 업데이트
+	// (최소 주기는 60초 입니다. 주기가 짧으면 짧을수록, 배터리 사용량이 더 많아집니다.)
 	```
 
 `start` 메소드를 사용할 경우 자동으로 백그라운드에서도 위치정보를 받아와 이벤트를 받을 수 있습니다.
@@ -599,6 +637,14 @@ Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막
 (샘플앱도 Cocoapod을 사용합니다. Cocoapod 사용법은 위에 명시되어 있습니다.)
 
 ## History
+#### 2018. 06. 26.
+- iOS SDK Version 1.1.1
+		- PlengiEngineDelegate 추가 (안전한 Plengi 초기화)
+		- XCode 내부 도큐먼트 추가
+		- Plengi.init 내부 로직 변경 (BLE 메타데이터 다운로드 부분)
+		- Complex에서 지점명이 없는 곳에 방문했을 경우, SDK가 죽는 버그 수정
+		- 위치 권한 요청 API 추가
+
 #### 2018. 06. 07.
 - iOS SDK Version 1.1.0
 		- PlaceDelegate를 하나로 간소화 (안드로이드와 동일하게 변경)
