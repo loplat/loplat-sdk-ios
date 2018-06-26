@@ -133,7 +133,7 @@ Objective-C를 사용하는 프로젝트와, Swift를 사용하는 프로젝트�
 
 #### 헤더파일 포함하기
 `AppDelegate.h` (Objective-C) / `AppDelegate.swift` (Swift) 파일에, 아래의 구문을 추가해줍니다.
-Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야합니다.
+Gravity를 사용할 경우 UserNotificationsKit를 앱에 포함시켜야합니다.
 
 ```objectivec
   #import <MiniPlengi/MiniPlengi-Swift.h>
@@ -155,7 +155,6 @@ Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야�
 	`AppDelegate.h` 파일 아래, 변수를 추가합니다.
 	```objectivec
 	@property (strong, nonatomic) UIWindow *window;
-	@property (strong, nonatomic) Plengi *plengi; //추가된 줄
 	```
 
 	`AppDelegate.m` 파일에 아래의 이벤트를 추가합니다.
@@ -163,7 +162,6 @@ Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야�
 	
 	```objectivec
 	@implementation AppDelegate
-	@synthesize plengi;				// 추가된 줄
 
 	// ********** 중간 생략 ********** //
 	// loplat SDK가 정상적으로 초기화 되었을 때 이벤트
@@ -199,13 +197,12 @@ Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야�
 				}
 			}
 		} else {
-			// 위치 인식 실패도 포함
+			/* 여기서부터는 오류인 경우입니다 */
 			// [plengiResponse errorReason] 에 위치 인식 실패 / 오류 이유가 포함됨
-			if ([plengiResponse result] == Result.SUCCESS) {
-				// [plengiResponse errorReason] 을 통해 오류로그 확인
-			} else if ([plengiResponse result] == Result.ERROR_CLOUD_ACCESS) {
-				// [plengiResponse errorReason] 을 통해 오류로그 확인
-			}
+
+			// FAIL : 위치 인식 실패
+			// NETWORK_FAIL : 네트워크 오류
+			// ERROR_CLOUD_ACCESS : 클라이언트 ID/PW가 틀렸거나 인증되지 않은 사용자가 요청했을 때
 		}
 	}
 	
@@ -230,7 +227,6 @@ Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야�
 	`AppDelegate.swift` 파일 클래스 선언부를 아래와 같이 수정합니다.
 	```swift
 	class AppDelegate: UIResponder, UIApplicationDelegate, PlaceDelegate, PlengiEngineDelegate, UNUserNotificationCenterDelegate {
-		var plengi: Plengi?
 	```
 
 	`AppDelegate.swift` 파일에 아래의 이벤트를 추가합니다.
@@ -268,13 +264,12 @@ Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야�
 				}
 			}
 		} else {
-			// 위치 인식 실패도 포함
+			/* 여기서부터는 오류인 경우입니다 */
 			// [plengiResponse errorReason] 에 위치 인식 실패 / 오류 이유가 포함됨
-			if plengiResponse.result == PlengiResponse.Result.FAIL {
-				// plengiResponse.errorReason을 통해 오류 확인
-			} else if plengiResponse.result == PlengiResponse.Result.ERROR_CLOUD_ACCESS {
-				// plengiResponse.errorReason을 통해 오류 확인
-			}
+
+			// FAIL : 위치 인식 실패
+			// NETWORK_FAIL : 네트워크 오류
+			// ERROR_CLOUD_ACCESS : 클라이언트 ID/PW가 틀렸거나 인증되지 않은 사용자가 요청했을 때
 		}
 	}
 	// ********** Gravity를 쓸 경우에만 아래 추가 ********** //
@@ -296,6 +291,13 @@ Gravity를 사용할 경우 UserNotifications 키트를 앱에 포함시켜야�
 
 ### PlaceEngine 초기화
 Plengi (PlaceEngine)을 사용하기 위해 초기화 작업을 진행합니다.
+
+```loplat_warning
+  initPlaceEngine을 호출하면 PlengiEngineDelegate로 호출됩니다. 
+  초기화가 완료될 경우 isPlengiInitSuccessfully 이벤트로 호출됩니다. 
+  해당 이벤트로 넘어온 Plengi 객체를 사용하세요.
+```
+
 #### 1. 일반적인 초기화방법
 - Objective-C
 	`AppDelegate.m` 파일의 `application_didFinishLaunchingWithOptions` 이벤트에 아래의 코드를 추가합니다.
@@ -351,8 +353,6 @@ loplat SDK는 iOS 위치정보 업데이트 메소드 `startMonitoringSignifican
 		// ********** 이하 생략 ********** //
 	}
 	```
-	
-**중요 : initPlaceEngine을 호출하면 EngineInitDelegate로 호출됩니다. 초기화가 완료될 경우 isPlengiInitSuccessfully 이벤트로 호출됩니다. 해당 이벤트로 넘어온 Plengi 객체를 사용하세요.**
 
 ### PlengiResponse 객체
 `PlaceDelegate` 에서 장소정보를 가지고 있는 객체입니다.
@@ -403,6 +403,10 @@ loplat SDK는 iOS 위치정보 업데이트 메소드 `startMonitoringSignifican
 ### PlaceEngine 사용하기
 #### Plengi 객체 접근하기
 Plengi 객체를 호출하려면 plengi 변수를 저장할 수도 있지만, 아래의 인스턴스 코드를 통해 접근할 수 있습니다.
+
+```loplat_warning
+  initPlageEngine 을 통해 Plengi를 초기화하지 않았을 경우 nil(NULL)이 반환될 수 있습니다.
+```
 
 - Objective-C
 	```objc
@@ -643,6 +647,7 @@ Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막
 		- XCode 내부 도큐먼트 추가
 		- Plengi.init 내부 로직 변경 (BLE 메타데이터 다운로드 부분)
 		- Complex에서 지점명이 없는 곳에 방문했을 경우, SDK가 죽는 버그 수정
+		- start(), stop() 메소드에 성공, 실패여부를 반환하도록 추가
 		- 위치 권한 요청 API 추가
 
 #### 2018. 06. 07.
