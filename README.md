@@ -46,7 +46,7 @@
 
 	Podfile 의  target 태그안에
 	```Podfile
-	pod 'MiniPlengi', '1.1.1'
+	pod 'MiniPlengi', '1.1.2'
 	```
 	을 입력한 후, 저장합니다.
 
@@ -152,15 +152,11 @@ Gravity를 사용할 경우 UserNotificationsKit를 앱에 포함시켜야합니
 	```objectivec
 	@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate, PlaceDelegate, PlengiEngineDelegate>
 	```
-	`AppDelegate.h` 파일 아래, 변수를 추가합니다.
-	```objectivec
-	@property (strong, nonatomic) UIWindow *window;
-	```
-
-	`AppDelegate.m` 파일에 아래의 이벤트를 추가합니다.
+	
+`AppDelegate.m` 파일에 아래의 이벤트를 추가합니다.
 	단, Gravity를 사용하지 않을 경우, 아래 2개의 이벤트 `userNotificationCenter` 는 생략할 수 있습니다.
 	
-	```objectivec
+```objectivec
 	@implementation AppDelegate
 
 	// ********** 중간 생략 ********** //
@@ -221,10 +217,12 @@ Gravity를 사용할 경우 UserNotificationsKit를 앱에 포함시켜야합니
 		// loplat SDK가 사용자의 알림 트래킹 (Click, Dismiss) 를 처리하기 위한 코드
 	}
 	@end
-	```
+```
 
 - Swift
+
 	`AppDelegate.swift` 파일 클래스 선언부를 아래와 같이 수정합니다.
+
 	```swift
 	class AppDelegate: UIResponder, UIApplicationDelegate, PlaceDelegate, PlengiEngineDelegate, UNUserNotificationCenterDelegate {
 	```
@@ -489,7 +487,7 @@ loplat SDK가 위치를 인식할 때에 BLE를 사용할지 설정합니다.
 	plengi?.refreshLocation()
 	```
 
-`refreshLocation` 메소드를 호출하면 `PlaceDelegate` 에 `whereIsNow` 이벤트가 호출됩니다.
+`refreshLocation` 메소드를 호출하면 `PlaceDelegate` 에 `responsePlaceEvent ` 이벤트가 호출됩니다.
 
 #### 위치 트래킹하기
 초단위로 사용자의 위치를 트래킹하여 사용자가 어느 위치에 있는지, 장소를 떠났는지, 새로운 장소에 도착했는지 알 수 있습니다.
@@ -641,6 +639,10 @@ Gravity (loplat Ad.) 푸시 알림을 사용자가 받기 위해서는 마지막
 (샘플앱도 Cocoapod을 사용합니다. Cocoapod 사용법은 위에 명시되어 있습니다.)
 
 ## History
+#### 2018. 07. 12.
+- iOS SDK Version 1.1.2
+		- 빌드 시 CommonCrypto/CommonCrypto.h 링크 오류 수정
+
 #### 2018. 06. 26.
 - iOS SDK Version 1.1.1
 		- PlengiEngineDelegate 추가 (안전한 Plengi 초기화)
