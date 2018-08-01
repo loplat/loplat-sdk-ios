@@ -1,0 +1,35 @@
+PODS:
+  - Bohr (3.0.0)
+  - DynamicBlurView (2.0.2)
+  - MiniPlengi (1.1.2003)
+  - PopupDialog (0.8.0):
+    - DynamicBlurView (~> 2.0)
+  - SnapKit (4.0.0)
+
+DEPENDENCIES:
+  - Bohr
+  - MiniPlengi (from `/Users/dsa28s/Desktop/loplat-ios-sdk_v2/`)
+  - PopupDialog
+  - SnapKit (~> 4.0.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Bohr
+    - DynamicBlurView
+    - PopupDialog
+    - SnapKit
+
+EXTERNAL SOURCES:
+  MiniPlengi:
+    :podspec: "/Users/dsa28s/Desktop/loplat-ios-sdk_v2/"
+
+SPEC CHECKSUMS:
+  Bohr: 17b150766e54e1fb8ff417d85b830c7caafa8b4a
+  DynamicBlurView: aa6db4defc6e537eb86fc5e58dd3991666178399
+  MiniPlengi: c3f46821366c09f8cf6ced8aadf745da970afddd
+  PopupDialog: 11347197b6ac3e0548ac445d40ce68d1d407e9a0
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+
+PODFILE CHECKSUM: b6b950937da5630a54f056a93a6daa1c42635b89
+
+COCOAPODS: 1.5.3
