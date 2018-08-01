@@ -49,26 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PlaceDelegate, UNUserNoti
         }
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
-        
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        
-    }
-
     func applicationWillEnterForeground(_ application: UIApplication) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "processAdvertisement"), object: nil) // SDK 내부 이벤트 호출 (정확한 처리를 위해 권장)
     }
 
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        
-    }
-    
     func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, completionHandler: @escaping () -> Void) {
         Plengi.processLoplatAdvertisement(application, handleActionWithIdentifier: identifier, for: notification, completionHandler: completionHandler)
     }

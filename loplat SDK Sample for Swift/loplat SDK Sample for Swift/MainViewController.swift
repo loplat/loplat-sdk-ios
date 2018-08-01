@@ -20,9 +20,6 @@ class MainViewController: BOTableViewController {
     private var isLocationPermissionAllowed = false
     private var isNotificationPermissionAllowed = false
     
-    private var locationCell: BOButtonTableViewCell? = nil
-    private var notificationCell: BOButtonTableViewCell? = nil
-    
     override func setup() {
         super.setup()
         
@@ -78,13 +75,13 @@ class MainViewController: BOTableViewController {
                     cellObj.textField.placeholder = "client_id"
                 })
                 
-                section.addCell(BOTextTableViewCell(title: "클라이언트 비밀번호", key: "client_secret") { cell -> Void in
+                section.addCell(BOTextTableViewCell(title: "클라이언트 키", key: "client_secret") { cell -> Void in
                     let cellObj = cell as! BOTextTableViewCell
                     
                     cellObj.textField.placeholder = "client_secret"
                 })
                 
-                section.addCell(BOButtonTableViewCell(title: "SDK 초기화 (init)", key: "init") { cell in
+                section.addCell(BOButtonTableViewCell(title: "SDK 초기화", key: "init") { cell in
                     let cellObj = cell as! BOButtonTableViewCell
                     
                     cellObj.actionBlock = {
@@ -112,7 +109,7 @@ class MainViewController: BOTableViewController {
                     }
                 })
                 
-                section.addCell(BOButtonTableViewCell(title: "SDK 초기화 (ADID 사용안함) (init_wa)", key: "init_without_adid") { cell in
+                section.addCell(BOButtonTableViewCell(title: "SDK 초기화 (ADID 사용안함)", key: "init_without_adid") { cell in
                     let cellObj = cell as! BOButtonTableViewCell
                     
                     cellObj.actionBlock = {
@@ -175,7 +172,7 @@ class MainViewController: BOTableViewController {
         
         self.addSection(BOTableViewSection.init(headerTitle: "") { section -> Void in
             if let section = section {
-                section.addCell(BOButtonTableViewCell(title: "장소 요청 (refreshPlace)", key: "start") { cell in
+                section.addCell(BOButtonTableViewCell(title: "장소 요청 (refreshPlace)", key: "refreshPlace") { cell in
                     let cellObj = cell as! BOButtonTableViewCell
                     
                     cellObj.actionBlock = {
