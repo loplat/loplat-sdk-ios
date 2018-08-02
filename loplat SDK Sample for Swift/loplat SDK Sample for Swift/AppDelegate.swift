@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PlaceDelegate, UNUserNoti
                 let client_password = UserDefaults.standard.string(forKey: "client_secret") {
                 if client_id != "" && client_password != "" {
                     _ = Plengi.init(clientID: client_id, clientSecret: client_password)
+                    Plengi.start(UserDefaults.standard.integer(forKey: "integer"))
                 }
             }
         }

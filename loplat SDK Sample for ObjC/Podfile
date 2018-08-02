@@ -9,7 +9,7 @@ target 'loplat SDK Sample for ObjC' do
   pod 'SnapKit', '~> 4.0.0'
   pod 'Bohr'
   pod 'PopupDialog'
-  pod 'MiniPlengi', :podspec => '/Users/dsa28s/Desktop/loplat-ios-sdk_v2/'
+  pod 'MiniPlengi', '1.2.0'
 
   post_install do |installer|
         installer.pods_project.targets.each do |target|

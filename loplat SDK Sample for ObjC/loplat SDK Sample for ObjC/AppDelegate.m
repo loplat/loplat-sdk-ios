@@ -19,9 +19,12 @@
     if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
         NSString *client_id = [NSUserDefaults.standardUserDefaults stringForKey:@"client_id"];
         NSString *client_password = [NSUserDefaults.standardUserDefaults stringForKey:@"client_secret"];
+        NSInteger* integer = [NSUserDefaults.standardUserDefaults integerForKey:@"integer"];
         
         if (client_id != NULL && client_password != NULL) {
             [Plengi initWithClientID:client_id clientSecret:client_password echoCode:NULL useADID:TRUE];
+            [Plengi initWithClientID:client_id clientSecret:client_password];
+            [Plengi start:integer];
         }
     }
     
@@ -87,6 +90,8 @@
             if ([plengiResponse area] != NULL) {
                 // 상권이 인식되었을 때
             }
+            
+            
         }
     } else {
         /* 여기서부터는 오류인 경우입니다 */
