@@ -7,18 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1BD2F5CE9B5E8388336EA5C2 /* Pods_loplat_SDK_Sample_for_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B2E30067906E3BC18F9AABD /* Pods_loplat_SDK_Sample_for_Swift.framework */; };
 		BA1AD6F421102C5900B99816 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1AD6F321102C5900B99816 /* MainViewController.swift */; };
+		BA6DD7ED212B9C9000836204 /* MiniPlengi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA6DD7EC212B9C9000836204 /* MiniPlengi.framework */; };
 		BAF50E942110058900320C88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF50E932110058900320C88 /* AppDelegate.swift */; };
 		BAF50E962110058900320C88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF50E952110058900320C88 /* ViewController.swift */; };
 		BAF50E992110058900320C88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAF50E972110058900320C88 /* Main.storyboard */; };
 		BAF50E9B2110058B00320C88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAF50E9A2110058B00320C88 /* Assets.xcassets */; };
 		BAF50E9E2110058B00320C88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAF50E9C2110058B00320C88 /* LaunchScreen.storyboard */; };
+		E736F3AA53EDAAEA7D934D63 /* Pods_loplat_SDK_Sample_for_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68069CBB5E1E86F7C4910308 /* Pods_loplat_SDK_Sample_for_Swift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5B2E30067906E3BC18F9AABD /* Pods_loplat_SDK_Sample_for_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_loplat_SDK_Sample_for_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		68069CBB5E1E86F7C4910308 /* Pods_loplat_SDK_Sample_for_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_loplat_SDK_Sample_for_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA1AD6F321102C5900B99816 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		BA6DD7EC212B9C9000836204 /* MiniPlengi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MiniPlengi.framework; path = ../../../Downloads/MiniPlengi.framework; sourceTree = "<group>"; };
+		BA6DD7EF212B9CF700836204 /* module.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.map; path = "../../../loplat-ios-sdk_v2/PlaceEngine/PlaceEngine/CommonCrypto/module.map"; sourceTree = "<group>"; };
 		BAF50E902110058900320C88 /* loplat SDK Sample for Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "loplat SDK Sample for Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF50E932110058900320C88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BAF50E952110058900320C88 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -26,8 +29,8 @@
 		BAF50E9A2110058B00320C88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BAF50E9D2110058B00320C88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BAF50E9F2110058B00320C88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F7D2F3FF98B976B967766600 /* Pods-loplat SDK Sample for Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loplat SDK Sample for Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-loplat SDK Sample for Swift/Pods-loplat SDK Sample for Swift.release.xcconfig"; sourceTree = "<group>"; };
-		F7F743576CEF1E4E5B3E766C /* Pods-loplat SDK Sample for Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loplat SDK Sample for Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-loplat SDK Sample for Swift/Pods-loplat SDK Sample for Swift.debug.xcconfig"; sourceTree = "<group>"; };
+		C3F9794E4CD80B203D6C1E45 /* Pods-loplat SDK Sample for Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loplat SDK Sample for Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-loplat SDK Sample for Swift/Pods-loplat SDK Sample for Swift.release.xcconfig"; sourceTree = "<group>"; };
+		F48CB3D2271257C7AD11E71F /* Pods-loplat SDK Sample for Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loplat SDK Sample for Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-loplat SDK Sample for Swift/Pods-loplat SDK Sample for Swift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,29 +38,48 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BD2F5CE9B5E8388336EA5C2 /* Pods_loplat_SDK_Sample_for_Swift.framework in Frameworks */,
+				E736F3AA53EDAAEA7D934D63 /* Pods_loplat_SDK_Sample_for_Swift.framework in Frameworks */,
+				BA6DD7ED212B9C9000836204 /* MiniPlengi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6048DA48874464D07DC26D55 /* Pods */ = {
+		0507648CEDCF3B152DF23005 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F7F743576CEF1E4E5B3E766C /* Pods-loplat SDK Sample for Swift.debug.xcconfig */,
-				F7D2F3FF98B976B967766600 /* Pods-loplat SDK Sample for Swift.release.xcconfig */,
+				BA6DD7EC212B9C9000836204 /* MiniPlengi.framework */,
+				68069CBB5E1E86F7C4910308 /* Pods_loplat_SDK_Sample_for_Swift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7B7FEC64E701A257CB68AFB7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F48CB3D2271257C7AD11E71F /* Pods-loplat SDK Sample for Swift.debug.xcconfig */,
+				C3F9794E4CD80B203D6C1E45 /* Pods-loplat SDK Sample for Swift.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		BA6DD7EE212B9CD400836204 /* CommonCrypto */ = {
+			isa = PBXGroup;
+			children = (
+				BA6DD7EF212B9CF700836204 /* module.map */,
+			);
+			path = CommonCrypto;
 			sourceTree = "<group>";
 		};
 		BAF50E872110058900320C88 = {
 			isa = PBXGroup;
 			children = (
+				BA6DD7EE212B9CD400836204 /* CommonCrypto */,
 				BAF50E922110058900320C88 /* loplat SDK Sample for Swift */,
 				BAF50E912110058900320C88 /* Products */,
-				6048DA48874464D07DC26D55 /* Pods */,
-				BF3D09CFEB87ECD3F78BD3D7 /* Frameworks */,
+				7B7FEC64E701A257CB68AFB7 /* Pods */,
+				0507648CEDCF3B152DF23005 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,14 +105,6 @@
 			path = "loplat SDK Sample for Swift";
 			sourceTree = "<group>";
 		};
-		BF3D09CFEB87ECD3F78BD3D7 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5B2E30067906E3BC18F9AABD /* Pods_loplat_SDK_Sample_for_Swift.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -98,11 +112,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BAF50EA22110058B00320C88 /* Build configuration list for PBXNativeTarget "loplat SDK Sample for Swift" */;
 			buildPhases = (
-				64EC56E3523DB1E0CCDB42CF /* [CP] Check Pods Manifest.lock */,
+				C22C6E04FE3E3C0A1B001E6E /* [CP] Check Pods Manifest.lock */,
 				BAF50E8C2110058900320C88 /* Sources */,
 				BAF50E8D2110058900320C88 /* Frameworks */,
 				BAF50E8E2110058900320C88 /* Resources */,
-				13EF865EE190AC4C3F619100 /* [CP] Embed Pods Frameworks */,
+				523F291338F445DD3DF58C56 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -165,7 +179,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		13EF865EE190AC4C3F619100 /* [CP] Embed Pods Frameworks */ = {
+		523F291338F445DD3DF58C56 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -191,7 +205,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-loplat SDK Sample for Swift/Pods-loplat SDK Sample for Swift-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		64EC56E3523DB1E0CCDB42CF /* [CP] Check Pods Manifest.lock */ = {
+		C22C6E04FE3E3C0A1B001E6E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -360,7 +374,7 @@
 		};
 		BAF50EA32110058B00320C88 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F7F743576CEF1E4E5B3E766C /* Pods-loplat SDK Sample for Swift.debug.xcconfig */;
+			baseConfigurationReference = F48CB3D2271257C7AD11E71F /* Pods-loplat SDK Sample for Swift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -373,6 +387,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.loplat.ios.sdk.sample.app.swift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/CommonCrypto/";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -380,7 +395,7 @@
 		};
 		BAF50EA42110058B00320C88 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F7D2F3FF98B976B967766600 /* Pods-loplat SDK Sample for Swift.release.xcconfig */;
+			baseConfigurationReference = C3F9794E4CD80B203D6C1E45 /* Pods-loplat SDK Sample for Swift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -393,6 +408,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.loplat.ios.sdk.sample.app.swift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "$(PROJECT_DIR)/CommonCrypto/";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -9,5 +9,5 @@ target 'loplat SDK Sample for Swift' do
   pod 'SnapKit', '~> 4.0.0'
   pod 'Bohr'
   pod 'PopupDialog'
-  pod 'MiniPlengi', '1.2.0'
+  pod 'MiniPlengi', '1.2.1'
 end

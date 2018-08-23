@@ -22,8 +22,7 @@
         NSInteger* integer = [NSUserDefaults.standardUserDefaults integerForKey:@"integer"];
         
         if (client_id != NULL && client_password != NULL) {
-            [Plengi initWithClientID:client_id clientSecret:client_password echoCode:NULL useADID:TRUE];
-            [Plengi initWithClientID:client_id clientSecret:client_password];
+            [Plengi initWithClientID:client_id clientSecret:client_password echoCode];
             [Plengi start:integer];
         }
     }

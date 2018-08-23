@@ -87,30 +87,6 @@
             };
         }]];
         
-        [section addCell:[BOButtonTableViewCell cellWithTitle:@"SDK 초기화 (ADID 사용안함)" key:@"init_without_adid" handler:^(BOButtonTableViewCell* cell) {
-            cell.actionBlock = ^{
-                BOOL isClientFieldEmpty = TRUE;
-                
-                NSString* client_id = [NSUserDefaults.standardUserDefaults stringForKey:@"client_id"];
-                NSString* client_secret = [NSUserDefaults.standardUserDefaults stringForKey:@"client_secret"];
-                
-                if (![client_id isEqualToString:@""] && ![client_secret isEqualToString:@""]) {
-                    isClientFieldEmpty = FALSE;
-                    
-                    if ([Plengi initWithClientID:client_id clientSecret:client_secret echoCode:NULL useADID:FALSE] == Result.SUCCESS) {
-                        AppDelegate* appDelegate = (AppDelegate*)UIApplication.sharedApplication.delegate;
-                        [appDelegate registerPlaceEngineDelegate];
-                    } else {
-                        [self openDialog:@"이미 초기화 됨" forMessage:@"이미 SDK가 초기화 되었습니다."];
-                    }
-                }
-                
-                if (isClientFieldEmpty) {
-                    [self openDialog:@"Client ID/Secret 입력 안됨" forMessage:@"필수 항목이 누락되었습니다."];
-                }
-            };
-        }]];
-        
         section.footerTitle = @"로플랫으로부터 발급받은 client_id / client_secret을 입력한 후, SDK 초기화 버튼을 누르세요. \n\n주기의 단위는 '초' 이며, 최소 시간은 60초입니다. 60초 미만일 경우, 최저 주기인 60초로 자동 설정됩니다.";
     }]];
     

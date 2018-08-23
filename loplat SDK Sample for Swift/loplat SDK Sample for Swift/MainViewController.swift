@@ -8,9 +8,9 @@
 
 import Foundation
 import Bohr
-import MiniPlengi
 import CoreLocation
 import PopupDialog
+import MiniPlengi
 import UserNotifications
 
 class MainViewController: BOTableViewController {
@@ -91,34 +91,6 @@ class MainViewController: BOTableViewController {
                             if client_id != "" && client_password != "" {
                                 isClientFieldEmpty = false
                                 if Plengi.init(clientID: client_id, clientSecret: client_password) == PlengiResponse.Result.SUCCESS {
-                                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                                    appDelegate.registerPlaceEngineDelegate()
-                                } else {
-                                    let popup = PopupDialog(title: "이미 초기화 됨", message: "이미 SDK가 초기화 되었습니다.")
-                                    popup.addButton(PopupDialogButton(title: "확인") {})
-                                    self.present(popup, animated: true, completion: nil)
-                                }
-                            }
-                        }
-                        
-                        if isClientFieldEmpty {
-                            let popup = PopupDialog(title: "Client ID/Secret 입력 안됨", message: "필수 항목이 누락되었습니다.")
-                            popup.addButton(PopupDialogButton(title: "확인") {})
-                            self.present(popup, animated: true, completion: nil)
-                        }
-                    }
-                })
-                
-                section.addCell(BOButtonTableViewCell(title: "SDK 초기화 (ADID 사용안함)", key: "init_without_adid") { cell in
-                    let cellObj = cell as! BOButtonTableViewCell
-                    
-                    cellObj.actionBlock = {
-                        var isClientFieldEmpty = true
-                        if let client_id = UserDefaults.standard.string(forKey: "client_id"),
-                            let client_password = UserDefaults.standard.string(forKey: "client_secret") {
-                            if client_id != "" && client_password != "" {
-                                isClientFieldEmpty = false
-                                if Plengi.init(clientID: client_id, clientSecret: client_password, echoCode: nil, useADID: false) == PlengiResponse.Result.SUCCESS {
                                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                                     appDelegate.registerPlaceEngineDelegate()
                                 } else {
