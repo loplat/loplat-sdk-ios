@@ -38,7 +38,7 @@
 }
 
 - (void)okButtonClicked:(UIButton*)button {
-    [self dismissViewControllerAnimated:TRUE completion:NULL];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

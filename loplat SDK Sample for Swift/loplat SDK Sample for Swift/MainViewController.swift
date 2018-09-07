@@ -63,12 +63,6 @@ class MainViewController: BOTableViewController {
         
         self.addSection(BOTableViewSection.init(headerTitle: "") { section -> Void in
             if let section = section {
-                section.addCell(BONumberTableViewCell(title: "주기 설정", key: "interval") { cell -> Void in
-                    let cellObj = cell as! BONumberTableViewCell
-                    
-                    cellObj.textField.placeholder = "주기 입력 (>= 60초)"
-                })
-                
                 section.addCell(BOTextTableViewCell(title: "클라이언트 아이디", key: "client_id") { cell -> Void in
                     let cellObj = cell as! BOTextTableViewCell
                     
@@ -81,16 +75,23 @@ class MainViewController: BOTableViewController {
                     cellObj.textField.placeholder = "client_secret"
                 })
                 
+                section.addCell(BOTextTableViewCell(title: "에코 코드", key: "echo_code") { cell -> Void in
+                    let cellObj = cell as! BOTextTableViewCell
+                    
+                    cellObj.textField.placeholder = "echo_code"
+                })
+                
                 section.addCell(BOButtonTableViewCell(title: "SDK 초기화", key: "init") { cell in
                     let cellObj = cell as! BOButtonTableViewCell
                     
                     cellObj.actionBlock = {
                         var isClientFieldEmpty = true
                         if let client_id = UserDefaults.standard.string(forKey: "client_id"),
-                            let client_password = UserDefaults.standard.string(forKey: "client_secret") {
+                            let client_password = UserDefaults.standard.string(forKey: "client_secret"),
+                            let echo_code = UserDefaults.standard.string(forKey: "echo_code") {
                             if client_id != "" && client_password != "" {
                                 isClientFieldEmpty = false
-                                if Plengi.init(clientID: client_id, clientSecret: client_password) == PlengiResponse.Result.SUCCESS {
+                                if Plengi.init(clientID: client_id, clientSecret: client_password, echoCode: echo_code) == .SUCCESS {
                                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                                     appDelegate.registerPlaceEngineDelegate()
                                 } else {
@@ -116,19 +117,8 @@ class MainViewController: BOTableViewController {
         self.addSection(BOTableViewSection.init(headerTitle: "") { section -> Void in
             if let section = section {
                 section.addCell(BOButtonTableViewCell(title: "SDK 시작", key: "start") { cell in
-                    let cellObj = cell as! BOButtonTableViewCell
-                    
-                    cellObj.actionBlock = {
-                        let interval = UserDefaults.standard.integer(forKey: "interval")
-                        if interval == 0 {
-                            let popup = PopupDialog(title: "주기 입력 안됨", message: "주기가 입력되지 않았습니다.\n주기는 60초 이상이어야만 하며, 60초 미만으로 입력하면 최소 주기인 60초로 재설정됩니다.")
-                            popup.addButton(PopupDialogButton(title: "확인") {})
-                            self.present(popup, animated: true, completion: nil)
-                        } else {
-                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                            appDelegate.startSDK(interval: interval)
-                        }
-                    }
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.startSDK()
                 })
                 
                 section.addCell(BOButtonTableViewCell(title: "SDK 정지", key: "stop") { cell in

@@ -6,10 +6,10 @@
 //  Copyright © 2018 loplat. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <MiniPlengi/MiniPlengi-Swift.h>
-#import <UserNotifications/UserNotifications.h>
+@import UIKit;
+@import UserNotifications;
 @import PopupDialog;
+@import MiniPlengi;
 
 #import "MainViewController.h"
 
@@ -18,7 +18,7 @@
 @property (strong, nonatomic) UIWindow *window;
 
 - (void)registerPlaceEngineDelegate;
-- (void)startSDK:(int)interval;
+- (void)startSDK;
 - (void)stopSDK;
 - (void)refreshPlace;
 - (void)setGravity:(BOOL)isEnabled;

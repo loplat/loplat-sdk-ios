@@ -7,7 +7,7 @@
 //
 
 #import "MainViewController.h"
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface MainViewController ()
 
@@ -19,13 +19,13 @@
     [super setup];
     
     self.title = @"MiniPlengi Sample (Objective-C)";
-    [self requestLocationAlwaysPermission:FALSE];
+    [self requestLocationAlwaysPermission:NO];
     
     [self addSection:[BOTableViewSection sectionWithHeaderTitle:@"" handler:^(BOTableViewSection *section) {
         [section addCell:[BOButtonTableViewCell cellWithTitle:@"위치 권한 (항상 허용) 허용하기" key:@"location_permission" handler:^(BOButtonTableViewCell* cell) {
             cell.actionBlock = ^{
                 if (!self.isLocationPermissionAllowed) {
-                    [self requestLocationAlwaysPermission:TRUE];
+                    [self requestLocationAlwaysPermission:YES];
                 } else {
                     [self openDialog:@"위치 권한 허용됨" forMessage:@"이미 위치권한이 허용되었습니다."];
                 }
@@ -34,16 +34,19 @@
         
         [section addCell:[BOButtonTableViewCell cellWithTitle:@"알림 권한 허용하기" key:@"notification_permission" handler:^(BOButtonTableViewCell* cell) {
             cell.actionBlock = ^{
-                UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
-                [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound)
-                                      completionHandler:^(BOOL granted, NSError * _Nullable error) {
-                                          if (error != NULL) {
-                                              [self openDialog:@"알림 권한 허용 실패" forMessage:@"알림 권한한을 부여받는데에 실패하였습니다."];
-                                          } else {
-                                              [self openDialog:@"알림 권한 허용됨" forMessage:@"알림 권한이 허용되었습니다."];
-                                          }
-                                      }
-                 ];
+                if (@available(iOS 10.0, *)) {
+                    UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+                    [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound)
+                                          completionHandler:^(BOOL granted, NSError * _Nullable error) {
+                                              if (error != nil) {
+                                                  [self openDialog:@"알림 권한 허용 실패" forMessage:@"알림 권한한을 부여받는데에 실패하였습니다."];
+                                              } else {
+                                                  [self openDialog:@"알림 권한 허용됨" forMessage:@"알림 권한이 허용되었습니다."];
+                                              }
+                                          }];
+                } else {
+                    // Fallback on earlier versions
+                }
             };
         }]];
         
@@ -51,10 +54,6 @@
     }]];
     
     [self addSection:[BOTableViewSection sectionWithHeaderTitle:@"" handler:^(BOTableViewSection *section) {
-        [section addCell:[BONumberTableViewCell cellWithTitle:@"주기 설정" key:@"interval" handler:^(BONumberTableViewCell* cell) {
-            cell.textField.placeholder = @"주기 입력 (>= 60초)";
-        }]];
-        
         [section addCell:[BOTextTableViewCell cellWithTitle:@"클라이언트 아이디" key:@"client_id" handler:^(BOTextTableViewCell* cell) {
             cell.textField.placeholder = @"client_id";
         }]];
@@ -63,17 +62,24 @@
             cell.textField.placeholder = @"client_secret";
         }]];
         
+        [section addCell:[BOTextTableViewCell cellWithTitle:@"에코 코드" key:@"echo_code" handler:^(BOTextTableViewCell* cell) {
+            cell.textField.placeholder = @"echo_code";
+        }]];
+        
         [section addCell:[BOButtonTableViewCell cellWithTitle:@"SDK 초기화" key:@"init" handler:^(BOButtonTableViewCell* cell) {
             cell.actionBlock = ^{
-                BOOL isClientFieldEmpty = TRUE;
+                BOOL isClientFieldEmpty = YES;
                 
                 NSString* client_id = [NSUserDefaults.standardUserDefaults stringForKey:@"client_id"];
                 NSString* client_secret = [NSUserDefaults.standardUserDefaults stringForKey:@"client_secret"];
+                NSString* echo_code = [NSUserDefaults.standardUserDefaults stringForKey:@"echo_code"];
                 
                 if (![client_id isEqualToString:@""] && ![client_secret isEqualToString:@""]) {
-                    isClientFieldEmpty = FALSE;
+                    isClientFieldEmpty = NO;
                     
-                    if ([Plengi initWithClientID:client_id clientSecret:client_secret echoCode:NULL useADID:TRUE] == Result.SUCCESS) {
+                    if ([Plengi initWithClientID:client_id
+                                    clientSecret:client_secret
+                                        echoCode:echo_code] == ResultSUCCESS) {
                         AppDelegate* appDelegate = (AppDelegate*)UIApplication.sharedApplication.delegate;
                         [appDelegate registerPlaceEngineDelegate];
                     } else {
@@ -93,13 +99,8 @@
     [self addSection:[BOTableViewSection sectionWithHeaderTitle:@"" handler:^(BOTableViewSection *section) {
         [section addCell:[BOButtonTableViewCell cellWithTitle:@"SDK 시작" key:@"start" handler:^(BOButtonTableViewCell* cell) {
             cell.actionBlock = ^{
-                int interval = [NSUserDefaults.standardUserDefaults integerForKey:@"interval"];
-                if (interval == 0) {
-                    [self openDialog:@"주기 입력 안됨" forMessage:@"주기가 입력되지 않았습니다.\n주기는 60초 이상이어야만 하며, 60초 미만으로 입력하면 최소 주기인 60초로 재설정됩니다."];
-                } else {
-                    AppDelegate* appDelegate = (AppDelegate*)UIApplication.sharedApplication.delegate;
-                    [appDelegate startSDK:interval];
-                }
+                AppDelegate* appDelegate = (AppDelegate*)UIApplication.sharedApplication.delegate;
+                [appDelegate startSDK];
             };
         }]];
         
@@ -119,7 +120,7 @@
             };
         }]];
         
-        section.footerTitle = @"해당 기능은 테스트 용도로만 사용되어야만 하며, 릴리즈 앱에서는 사용하지 마세요.\n\n릴리즈 앱에서는 start(interval) 메소드를 통해 타이머에 의해 동작이 되어야만 합니다.";
+        section.footerTitle = @"해당 기능은 테스트 용도로만 사용되어야만 하며, 릴리즈 앱에서는 사용하지 마세요.\n\n릴리즈 앱에서는 start() 메소드를 통해 타이머에 의해 동작이 되어야만 합니다.";
     }]];
     
     [self addSection:[BOTableViewSection sectionWithHeaderTitle:@"" handler:^(BOTableViewSection *section) {
@@ -139,12 +140,12 @@
     [super viewWillAppear:animated];
     
     if (!self.isOpened) {
-        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:NULL];
+        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UIViewController* informationViewController = [storyboard instantiateViewControllerWithIdentifier:@"informationViewController"];
         
-        [self presentViewController:informationViewController animated:TRUE completion:NULL];
+        [self presentViewController:informationViewController animated:YES completion:nil];
         
-        self.isOpened = TRUE;
+        self.isOpened = YES;
     }
     
     UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
@@ -161,14 +162,14 @@
             break;
         case kCLAuthorizationStatusRestricted:
         case kCLAuthorizationStatusDenied:
-            self.isLocationPermissionAllowed = FALSE;
+            self.isLocationPermissionAllowed = NO;
             
-            [self openDialog:NULL forMessage:@"위치 권한을 허용할 수 없습니다. 환경설정에서 직접 위치권한을 허용해주세요."];
+            [self openDialog:nil forMessage:@"위치 권한을 허용할 수 없습니다. 환경설정에서 직접 위치권한을 허용해주세요."];
             
             break;
         case kCLAuthorizationStatusAuthorizedWhenInUse:
         case kCLAuthorizationStatusAuthorizedAlways:
-            self.isLocationPermissionAllowed = TRUE;
+            self.isLocationPermissionAllowed = YES;
             break;
     }
 }
@@ -189,6 +190,6 @@
                                               dismissOnTap: YES
                                                     action: nil];
     [popup addButton:ok];
-    [self presentViewController:popup animated:TRUE completion:NULL];
+    [self presentViewController:popup animated:YES completion:nil];
 }
 @end

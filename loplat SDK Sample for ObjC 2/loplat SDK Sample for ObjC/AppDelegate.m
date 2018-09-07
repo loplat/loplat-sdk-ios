@@ -17,13 +17,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
-        NSString *client_id = [NSUserDefaults.standardUserDefaults stringForKey:@"client_id"];
-        NSString *client_password = [NSUserDefaults.standardUserDefaults stringForKey:@"client_secret"];
-        NSInteger* integer = [NSUserDefaults.standardUserDefaults integerForKey:@"integer"];
+        NSString* client_id = [NSUserDefaults.standardUserDefaults stringForKey:@"client_id"];
+        NSString* client_secret = [NSUserDefaults.standardUserDefaults stringForKey:@"client_secret"];
+        NSString* echo_code = [NSUserDefaults.standardUserDefaults stringForKey:@"echo_code"];
         
-        if (client_id != NULL && client_password != NULL) {
-            [Plengi initWithClientID:client_id clientSecret:client_password echoCode];
-            [Plengi start:integer];
+        if ([Plengi initWithClientID:client_id
+                        clientSecret:client_secret
+                            echoCode:echo_code] == ResultSUCCESS)
+        {
+            if ([Plengi start] != ResultSUCCESS) {
+                // fail
+            }
         }
     }
     
@@ -38,7 +42,7 @@
         UNUserNotificationCenter.currentNotificationCenter.delegate = self;
     }
     
-    [NSUserDefaults.standardUserDefaults addObserver:self forKeyPath:@"enable_gravity" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    [NSUserDefaults.standardUserDefaults addObserver:self forKeyPath:@"enable_gravity" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     
     return YES;
 }
@@ -52,41 +56,59 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    [NSNotificationCenter.defaultCenter postNotificationName:@"processAdvertisement" object:NULL];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"processAdvertisement" object:nil];
 }
 
-- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
-    [Plengi processLoplatAdvertisement:application handleActionWithIdentifier:identifier for:notification completionHandler:completionHandler];
+-        (void)application:(UIApplication *)application
+handleActionWithIdentifier:(NSString *)identifier
+      forLocalNotification:(UILocalNotification *)notification
+         completionHandler:(void (^)())completionHandler {
+    if ([Plengi processLoplatAdvertisement:application
+                handleActionWithIdentifier:identifier
+                                       for:notification
+                         completionHandler:completionHandler] != ResultSUCCESS) {
+        // fail
+    }
 }
 
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void  (^)(UNNotificationPresentationOptions))completionHandler API_AVAILABLE(ios(10.0)) {
-    completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);  //
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center
+       willPresentNotification:(UNNotification *)notification
+         withCompletionHandler:(void  (^)(UNNotificationPresentationOptions))completionHandler API_AVAILABLE(ios(10.0)) {
+    completionHandler(UNNotificationPresentationOptionAlert |
+                      UNNotificationPresentationOptionBadge |
+                      UNNotificationPresentationOptionSound);
 }
 
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void  (^)(void))completionHandler API_AVAILABLE(ios(10.0)) {
-    [Plengi processLoplatAdvertisement:center didReceive: response withCompletionHandler:completionHandler];
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center
+didReceiveNotificationResponse:(UNNotificationResponse *)response
+         withCompletionHandler:(void  (^)(void))completionHandler API_AVAILABLE(ios(10.0)) {
+    if ([Plengi processLoplatAdvertisement:center
+                                didReceive:response
+                     withCompletionHandler:completionHandler] != ResultSUCCESS) {
+        // fail
+    }
     completionHandler();
 }
 
 /// 로플랫 SDK에서 장소 인식 등 서버로부터 응답이 온 경우, 해당 Delegate가 호출됩니다.
 - (void)responsePlaceEvent:(PlengiResponse *)plengiResponse {
-    if ([plengiResponse result] == Result.SUCCESS) {
-        if ([plengiResponse type] == ResponseType.PLACE_EVENT) {
-            if ([plengiResponse place] != NULL) {
-                if ([plengiResponse placeEvent] == PlaceEvent.ENTER) {
+    if ([plengiResponse result] == ResultSUCCESS) {
+        if ([plengiResponse type] == ResponseTypePLACE_EVENT) {
+            if ([plengiResponse place] != nil) {
+                if ([plengiResponse placeEvent] == PlaceEventENTER) {
                     // 사용자가 장소에 들어왔을 때
-                } else if ([plengiResponse placeEvent] == PlaceEvent.NEARBY) {
+                } else if ([plengiResponse placeEvent] == PlaceEventNEARBY) {
                     // NEARBY로 인식되었을 때
-                } else if ([plengiResponse placeEvent] == PlaceEvent.LEAVE) {
+                } else if ([plengiResponse placeEvent] == PlaceEventLEAVE) {
                     // 사용자가 장소를 떠났을 때
                 }
             }
             
-            if ([plengiResponse complex] != NULL) {
+            if ([plengiResponse complex] != nil) {
                 // 복합몰이 인식되었을 때
             }
             
-            if ([plengiResponse area] != NULL) {
+            if ([plengiResponse area] != nil) {
                 // 상권이 인식되었을 때
             }
             
@@ -112,7 +134,7 @@
 }
 
 - (void)registerPlaceEngineDelegate {
-    if ([Plengi setDelegate:self] == Result.SUCCESS) {
+    if ([Plengi setDelegate:self] == ResultSUCCESS) {
         
     } else {
         PopupDialog *popup = [[PopupDialog alloc] initWithTitle: @"초기화에 실패하였습니다."
@@ -130,12 +152,12 @@
                                                     dismissOnTap: YES
                                                           action: nil];
         [popup addButton:ok];
-        [self.window.rootViewController presentViewController:popup animated:TRUE completion:NULL];
+        [self.window.rootViewController presentViewController:popup animated:YES completion:nil];
     }
 }
 
-- (void)startSDK:(int)interval {
-    if ([Plengi start:interval] == Result.FAIL) {
+- (void)startSDKl {
+    if ([Plengi start] == ResultFAIL) {
         PopupDialog *popup = [[PopupDialog alloc] initWithTitle: @"SDK를 시작할 수 없음"
                                                         message: @"SDK가 이미 시작 상태입니다."
                                                           image: nil
@@ -151,12 +173,12 @@
                                                     dismissOnTap: YES
                                                           action: nil];
         [popup addButton:ok];
-        [self.window.rootViewController presentViewController:popup animated:TRUE completion:NULL];
+        [self.window.rootViewController presentViewController:popup animated:YES completion:nil];
     }
 }
 
 - (void)stopSDK {
-    if ([Plengi stop] == Result.FAIL) {
+    if ([Plengi stop] == ResultFAIL) {
         PopupDialog *popup = [[PopupDialog alloc] initWithTitle: @"SDK를 정지할 수 없음"
                                                         message: @"SDK가 이미 정지 상태입니다."
                                                           image: nil
@@ -172,12 +194,15 @@
                                                     dismissOnTap: YES
                                                           action: nil];
         [popup addButton:ok];
-        [self.window.rootViewController presentViewController:popup animated:TRUE completion:NULL];
+        [self.window.rootViewController presentViewController:popup animated:YES completion:nil];
     }
 }
 
 - (void)setGravity:(BOOL)isEnabled {
-    [Plengi enableAdNetwork:isEnabled enableNoti:TRUE];
+    if ([Plengi enableAdNetwork:isEnabled
+                     enableNoti:YES] != ResultSUCCESS) {
+        // fail
+    }
 }
 
 - (void)setupAppearence {
@@ -197,5 +222,10 @@
     BOTableViewCell.appearance.selectedColor = [[UIColor new] initWithRed:71 / 255.0 green:165.0 / 255.0 blue:254.0 / 255.0 alpha:1.0];
 }
 
+- (void)refreshPlace {
+    if ([Plengi refreshPlace] != ResultSUCCESS) {
+        // fail
+    }
+}
 
 @end

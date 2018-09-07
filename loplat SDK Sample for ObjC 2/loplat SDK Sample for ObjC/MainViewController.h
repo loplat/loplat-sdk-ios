@@ -7,8 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import <Bohr/Bohr.h>
-#import <CoreLocation/CoreLocation.h>
+@import Bohr;
+@import CoreLocation;
 
 @interface MainViewController : BOTableViewController
 

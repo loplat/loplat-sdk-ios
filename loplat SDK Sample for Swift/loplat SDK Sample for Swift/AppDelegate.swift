@@ -20,10 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PlaceDelegate, UNUserNoti
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         if ((launchOptions?.index(forKey: UIApplicationLaunchOptionsKey.location)) != nil) { // 앱이 백그라운드 모드로 재시작 되었을 때 (필수!!!!! 없으면 재시작 되지 않음)
             if let client_id = UserDefaults.standard.string(forKey: "client_id"),
-                let client_password = UserDefaults.standard.string(forKey: "client_secret") {
+                let client_password = UserDefaults.standard.string(forKey: "client_secret"),
+                let echo_code = UserDefaults.standard.string(forKey: "echo_code") {
                 if client_id != "" && client_password != "" {
-                    _ = Plengi.init(clientID: client_id, clientSecret: client_password)
-                    Plengi.start(UserDefaults.standard.integer(forKey: "integer"))
+                    if Plengi.init(clientID: client_id, clientSecret: client_password, echoCode: echo_code) == .SUCCESS {
+                        _ = Plengi.start()
+                    }
                 }
             }
         }
@@ -56,12 +58,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PlaceDelegate, UNUserNoti
     }
 
     func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, completionHandler: @escaping () -> Void) {
-        Plengi.processLoplatAdvertisement(application, handleActionWithIdentifier: identifier, for: notification, completionHandler: completionHandler)
+        _ = Plengi.processLoplatAdvertisement(application, handleActionWithIdentifier: identifier, for: notification, completionHandler: completionHandler)
     }
     
     @available(iOS 10.0,  *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping ()  ->  Void) {
-        Plengi.processLoplatAdvertisement(center, didReceive: response, withCompletionHandler: completionHandler)
+        _ = Plengi.processLoplatAdvertisement(center, didReceive: response, withCompletionHandler: completionHandler)
         completionHandler()  // loplat SDK가 사용자의 알림 트래킹 (Click, Dismiss) 를 처리하기 위한 코드
     }
     
@@ -72,15 +74,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PlaceDelegate, UNUserNoti
     
     /// 로플랫 SDK에서 장소 인식 등 서버로부터 응답이 온 경우, 해당 Delegate가 호출됩니다.
     func responsePlaceEvent(_ plengiResponse: PlengiResponse) {
-        if plengiResponse.result == PlengiResponse.Result.SUCCESS {
-            if plengiResponse.type == PlengiResponse.ResponseType.PLACE_EVENT { // BACKGROUND
+        if plengiResponse.result == .SUCCESS {
+            if plengiResponse.type == .PLACE_EVENT { // BACKGROUND
                 if plengiResponse.place != nil {
-                    if plengiResponse.placeEvent == PlengiResponse.PlaceEvent.ENTER {
+                    if plengiResponse.placeEvent == .ENTER {
                         // PlaceEvent가 NEARBY 일 경우, NEARBY 로 인식된 장소 정보가 넘어옴
                         print(plengiResponse.place!.name)
-                    } else if plengiResponse.placeEvent == PlengiResponse.PlaceEvent.NEARBY {
+                    } else if plengiResponse.placeEvent == .NEARBY {
                         // PlaceEvent가 ENTER 일 경우, 들어온 장소 정보 객체가 넘어옴
-                    } else if plengiResponse.placeEvent == PlengiResponse.PlaceEvent.LEAVE {
+                    } else if plengiResponse.placeEvent == .LEAVE {
                         // PlaceEvent가 LEAVE 일 경우, 떠난 장소 정보 객체가 넘어옴
                     }
                 }
@@ -106,7 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PlaceDelegate, UNUserNoti
     /// 로플랫 SDK에 Delegate를 등록합니다.
     /// `Plengi.setDelegate` 메소드는 반환값이 있으며, 등록 성공 시 `PlengiResponse.Result.SUCCESS`가, 실패 시 `PlengiResponse.Result.FAIL` 이 반환됩니다.
     func registerPlaceEngineDelegate() {
-        if Plengi.setDelegate(self) == PlengiResponse.Result.SUCCESS {
+        if Plengi.setDelegate(self) == .SUCCESS {
             
         } else {
             let popupDialog = PopupDialog(title: "초기화에 실패하였습니다.", message: "Plengi.setDelegate() 메소드에서 FAILED를 반환했습니다.")
@@ -116,10 +118,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PlaceDelegate, UNUserNoti
     }
     
     /// 로플랫 SDK를 시작합니다.
-    /// - Parameters:
-    ///     - interval: 주기 (최소주기 60초, 단위 : 초)
-    func startSDK(interval: Int) {
-        if Plengi.start(interval) == PlengiResponse.Result.FAIL {
+    func startSDK() {
+        if Plengi.start() == .FAIL {
             let popupDialog = PopupDialog(title: "SDK를 시작할 수 없음", message: "SDK가 이미 시작 상태입니다.")
             popupDialog.addButton(PopupDialogButton(title: "확인") {})
             self.window?.rootViewController?.present(popupDialog, animated: true, completion: nil)
@@ -128,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PlaceDelegate, UNUserNoti
     
     /// 로플랫 SDK를 정지합니다.
     func stopSDK() {
-        if Plengi.stop() == PlengiResponse.Result.FAIL {
+        if Plengi.stop() == .FAIL {
             let popupDialog = PopupDialog(title: "SDK를 정지할 수 없음", message: "SDK가 이미 정지 상태입니다.")
             popupDialog.addButton(PopupDialogButton(title: "확인") {})
             self.window?.rootViewController?.present(popupDialog, animated: true, completion: nil)

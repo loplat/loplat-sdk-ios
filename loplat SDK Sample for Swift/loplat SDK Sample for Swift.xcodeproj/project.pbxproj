@@ -21,7 +21,6 @@
 		68069CBB5E1E86F7C4910308 /* Pods_loplat_SDK_Sample_for_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_loplat_SDK_Sample_for_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA1AD6F321102C5900B99816 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		BA6DD7EC212B9C9000836204 /* MiniPlengi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MiniPlengi.framework; path = ../../../Downloads/MiniPlengi.framework; sourceTree = "<group>"; };
-		BA6DD7EF212B9CF700836204 /* module.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.map; path = "../../../loplat-ios-sdk_v2/PlaceEngine/PlaceEngine/CommonCrypto/module.map"; sourceTree = "<group>"; };
 		BAF50E902110058900320C88 /* loplat SDK Sample for Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "loplat SDK Sample for Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF50E932110058900320C88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BAF50E952110058900320C88 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -64,18 +63,9 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		BA6DD7EE212B9CD400836204 /* CommonCrypto */ = {
-			isa = PBXGroup;
-			children = (
-				BA6DD7EF212B9CF700836204 /* module.map */,
-			);
-			path = CommonCrypto;
-			sourceTree = "<group>";
-		};
 		BAF50E872110058900320C88 = {
 			isa = PBXGroup;
 			children = (
-				BA6DD7EE212B9CD400836204 /* CommonCrypto */,
 				BAF50E922110058900320C88 /* loplat SDK Sample for Swift */,
 				BAF50E912110058900320C88 /* Products */,
 				7B7FEC64E701A257CB68AFB7 /* Pods */,

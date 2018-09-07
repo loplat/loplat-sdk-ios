@@ -6,7 +6,7 @@
 //  Copyright © 2018 loplat. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface ViewController : UIViewController
 
