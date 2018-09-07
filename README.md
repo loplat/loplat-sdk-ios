@@ -56,7 +56,7 @@ end
 Podfile의  target 태그안에 아래 내용을 추가 후 저장합니다.
 
 ```Podfile
-pod 'MiniPlengi', '1.2.1'
+pod 'MiniPlengi', '1.2.4'
 ```
 <p class="tip">
 SDK가 Swift를 사용하기 때문에, `# use_frameworks`에서 '#'을 제거하여 주석을 해제합니다.
@@ -73,7 +73,7 @@ target '<Your Target Name>' do
 	pod 'AFNetworking', '~> 2.6'  // 예제
 	pod 'ORStackView', '~> 3.0'   // 예제
 	pod 'SwiftyJSON', '~> 2.3'    // 예제
-	pod 'MiniPlengi', '1.2.1'
+	pod 'MiniPlengi', '1.2.4'
 end
 ```
 
@@ -159,8 +159,8 @@ Gravity를 사용할 경우 `UserNotifications` 기능을 소스코드에 포함
 - Objective-C
 
 	```objectivec
-	#import <MiniPlengi/MiniPlengi-Swift.h>
-	#import <UserNotifications/UserNotifications.h> // Gravity를 사용할 경우
+	@import MiniPlengi;
+	@import UserNotifications; // Gravity를 사용할 경우
 	```
 
 - Swift
@@ -204,7 +204,7 @@ Gravity를 사용할 경우 `UserNotifications` 기능을 소스코드에 포함
   	// ********** 중간 생략 ********** //
   	if ([Plengi initWithClientID:@"로플랫에서 발급받은 클라이언트 아이디" 
            			clientSecret:@"로플랫에서 발급받은 클라이언트 키" 
-  						echoCode:@"고객사 별 사용자를 식별할 수 있는 코드 (개인정보 주의바람)"] == Result.SUCCESS) {
+  						echoCode:@"고객사 별 사용자를 식별할 수 있는 코드 (개인정보 주의바람)"] == ResultSUCCESS) {
   		// init 성공
   	} else {
   		// init 실패
@@ -234,7 +234,7 @@ Gravity를 사용할 경우 `UserNotifications` 기능을 소스코드에 포함
   	// ********** 중간 생략 ********** //
   	if Plengi.init(clientID: "로플랫에서 발급받은 클라이언트 아이디", clientSecret: "로플랫에서 발급받은 클라이언트 키", 
   		echoCode: "고객사 별 사용자를 식별할 수 있는 코드 (개인정보 주의바람)") 
-  		== PlengiResponse.Result.SUCCESS) {
+  		== .SUCCESS) {
   		// init 성공
   	} else {
   		// init 실패
@@ -289,7 +289,7 @@ Gravity 광고와 그 외 장소 인식 이벤트 발생시 이벤트를 수신�
 	Plengi 초기화 성공 후 `setDelegate` 를 호출합니다.
 
 	```objectivec
-	if ([Plengi setDelegate:self] == Result.SUCCESS) {
+	if ([Plengi setDelegate:self] == ResultSUCCESS) {
 		// setDelegate 등록 성공
 	} else {
 		// setDelegate 등록 실패
@@ -306,14 +306,14 @@ Gravity 광고와 그 외 장소 인식 이벤트 발생시 이벤트를 수신�
 			// 고객사에서 넣은 echoCode
 		}
 		
-		if ([plengiResponse result] == Result.SUCCESS) {
-			if ([plengiResponse type] == ResponseType.PLACE_EVENT) {
+		if ([plengiResponse result] == ResultSUCCESS) {
+			if ([plengiResponse type] == ResponseTypePLACE_EVENT) {
 				if ([plengiResponse place] != nil) {
-					if ([plengiResponse placeEvent] == PlaceEvent.ENTER) {
+					if ([plengiResponse placeEvent] == PlaceEventENTER) {
 						// 사용자가 장소에 들어왔을 때
-					} else if ([plengiResponse placeEvent] == PlaceEvent.NEARBY) {
+					} else if ([plengiResponse placeEvent] == PlaceEventNEARBY) {
 						// NEARBY로 인식되었을 때
-					} else if ([plengiResponse placeEvent] == PlaceEvent.LEAVE) {
+					} else if ([plengiResponse placeEvent] == PlaceEventLEAVE) {
 						// 사용자가 장소를 떠났을 때
 					}
 				}
@@ -353,7 +353,7 @@ Gravity 광고와 그 외 장소 인식 이벤트 발생시 이벤트를 수신�
 	Plengi 초기화 성공 후 `setDelegate` 를 호출합니다.
 
 	```swift
-	if Plengi.setDelegate(self) == PlengiResponse.Result.SUCCESS {
+	if Plengi.setDelegate(self) == .SUCCESS {
 		// setDelegate 등록 성공
 	} else {
 		// setDelegate 등록 실패
@@ -368,14 +368,14 @@ Gravity 광고와 그 외 장소 인식 이벤트 발생시 이벤트를 수신�
 			// 고객사에서 설정한 echoCode
 		}
 		
-		if plengiResponse.result == PlengiResponse.Result.SUCCESS {
-			if plengiResponse.type == PlengiResponse.ResponseType.PLACE_EVENT { // BACKGROUND
+		if plengiResponse.result == .SUCCESS {
+			if plengiResponse.type == .PLACE_EVENT { // BACKGROUND
 				if plengiResponse.place != nil {
-					if plengiResponse.placeEvent == PlengiResponse.PlaceEvent.ENTER {
+					if plengiResponse.placeEvent == .ENTER {
 						// PlaceEvent가 NEARBY 일 경우, NEARBY 로 인식된 장소 정보가 넘어옴
-					} else if plengiResponse.placeEvent == PlengiResponse.PlaceEvent.NEARBY {
+					} else if plengiResponse.placeEvent == .NEARBY {
 						// PlaceEvent가 ENTER 일 경우, 들어온 장소 정보 객체가 넘어옴
-					} else if plengiResponse.placeEvent == PlengiResponse.PlaceEvent.LEAVE {
+					} else if plengiResponse.placeEvent == .LEAVE {
 						// PlaceEvent가 LEAVE 일 경우, 떠난 장소 정보 객체가 넘어옴
 					}
 				}
