@@ -6,21 +6,14 @@
 //  Copyright © 2018 loplat. All rights reserved.
 //
 
-@import UIKit;
 @import UserNotifications;
-@import PopupDialog;
-@import MiniPlengi;
 
 #import "MainViewController.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, PlaceDelegate, UNUserNotificationCenterDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-- (void)registerPlaceEngineDelegate;
-- (void)startSDK;
-- (void)stopSDK;
-- (void)refreshPlace;
-- (void)setGravity:(BOOL)isEnabled;
+- (BOOL)initPlengi:(NSString*)echoCode;
 
 @end

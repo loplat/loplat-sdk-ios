@@ -84,181 +84,174 @@ class MainViewController: BOTableViewController {
         self.title = "MiniPlengi Sample (Swift)"
         
         // 권한 허용
-        self.addSection(BOTableViewSection.init(headerTitle: "") { section -> Void in
-            if let section = section {
-                section.addCell(BOButtonTableViewCell(title: "위치 권한 (항상 허용) 허용하기", key: "location_permission") { cell in
-                    let cellObj = cell as! BOButtonTableViewCell
-                    
-                    cellObj.actionBlock = {
-                        switch CLLocationManager.authorizationStatus() {
-                        case .notDetermined:
-                            self.locationManager.requestAlwaysAuthorization()
-                        case .authorizedWhenInUse, .restricted, .denied:
-                            self.customAlert(title: "위치 권한",
-                                             message: "위치 권한이 없습니다. \n설정에서 항상으로 변경해주세요.",
-                                             action: "이동",
-                                             cancel: "취소") {
-                                                if let url = URL(string: UIApplicationOpenSettingsURLString) {
-                                                    if #available(iOS 10.0, *) {
-                                                        UIApplication.shared.open(url)
-                                                    } else {
-                                                        UIApplication.shared.openURL(url)
-                                                    }
+        self.addSection(BOTableViewSection.init(headerTitle: "") {
+            let section = $0!
+            section.addCell(BOButtonTableViewCell(title: "위치 권한 (항상 허용) 허용하기",
+                                                  key: "location_permission") {
+                let cell = $0 as! BOButtonTableViewCell
+                cell.actionBlock = {
+                    switch CLLocationManager.authorizationStatus() {
+                    case .notDetermined:
+                        self.locationManager.requestAlwaysAuthorization()
+                    case .authorizedWhenInUse, .restricted, .denied:
+                        self.customAlert(title: "위치 권한",
+                                         message: "위치 권한이 없습니다. \n설정에서 항상으로 변경해주세요.",
+                                         action: "이동",
+                                         cancel: "취소") {
+                                            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                                                if #available(iOS 10.0, *) {
+                                                    UIApplication.shared.open(url)
+                                                } else {
+                                                    UIApplication.shared.openURL(url)
                                                 }
-                            }
-                        case .authorizedAlways:
-                            self.customAlert(title: "위치 권한 허용됨",
-                                             message: "이미 위치권한이 허용되었습니다.")
+                                            }
                         }
+                    case .authorizedAlways:
+                        self.customAlert(title: "위치 권한 허용됨",
+                                         message: "이미 위치권한이 허용되었습니다.")
                     }
-                })
-                
-                section.addCell(BOButtonTableViewCell(title: "알림 권한 허용하기", key: "notification_permission") { cell in
-                    let cellObj = cell as! BOButtonTableViewCell
-                    
-                    cellObj.actionBlock = {
-                        if #available(iOS 10, *) {
-                            UNUserNotificationCenter.current().getNotificationSettings(completionHandler: {
-                                switch $0.authorizationStatus {
-                                case .notDetermined:
-                                    DispatchQueue.main.async {
-                                        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in }
-                                        UIApplication.shared.registerForRemoteNotifications()
-                                    }
-                                case .denied:
-                                    self.customAlert(title: "알림 권한",
-                                                     message: "알림 권한이 없습니다. \n설정에서 사용으로 변경해주세요.",
-                                                     action: "이동",
-                                                     cancel: "취소") {
-                                                        if let url = URL(string: UIApplicationOpenSettingsURLString) {
-                                                            UIApplication.shared.open(url)
-                                                        }
-                                    }
-                                case .authorized:
-                                    self.customAlert(title: "알림 권한 허용됨",
-                                                     message: "이미 알림권한이 허용되었습니다.")
+                }
+            })
+            
+            section.addCell(BOButtonTableViewCell(title: "알림 권한 허용하기",
+                                                  key: "notification_permission") {
+                let cell = $0 as! BOButtonTableViewCell
+                cell.actionBlock = {
+                    if #available(iOS 10, *) {
+                        UNUserNotificationCenter.current().getNotificationSettings(completionHandler: {
+                            switch $0.authorizationStatus {
+                            case .notDetermined:
+                                DispatchQueue.main.async {
+                                    UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in }
+                                    UIApplication.shared.registerForRemoteNotifications()
                                 }
-                            })
-                        }
-                        else {
-                            if !UIApplication.shared.isRegisteredForRemoteNotifications {
-                                UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
-                                UIApplication.shared.registerForRemoteNotifications()
-                            }
-                            else {
+                            case .denied:
+                                self.customAlert(title: "알림 권한",
+                                                 message: "알림 권한이 없습니다. \n설정에서 사용으로 변경해주세요.",
+                                                 action: "이동",
+                                                 cancel: "취소") {
+                                                    if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                                                        UIApplication.shared.open(url)
+                                                    }
+                                }
+                            case .authorized:
                                 self.customAlert(title: "알림 권한 허용됨",
                                                  message: "이미 알림권한이 허용되었습니다.")
                             }
+                        })
+                    }
+                    else {
+                        if !UIApplication.shared.isRegisteredForRemoteNotifications {
+                            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
+                            UIApplication.shared.registerForRemoteNotifications()
+                        }
+                        else {
+                            self.customAlert(title: "알림 권한 허용됨",
+                                             message: "이미 알림권한이 허용되었습니다.")
                         }
                     }
-                })
-                
-                section.footerTitle = "로플랫 SDK를 사용하기 위해서는 위치 권한(항상 허용)은 필수로 필요하며, 알림 권한은 Gravity를 사용할 경우에 필요로 합니다. 권한 허용 API는 MiniPlengi에서는 제공하고 있지 않기에, 직접 구현하거나, developers.loplat.com을 참조해주세요."
-            }
-        })
-        
-        self.addSection(BOTableViewSection.init(headerTitle: "") { section -> Void in
-            if let section = section {
-                section.addCell(BOTextTableViewCell(title: "에코 코드", key: "echo_code") { cell -> Void in
-                    let cellObj = cell as! BOTextTableViewCell
-                    
-                    cellObj.textField.placeholder = "echo_code"
-                })
-                
-                section.addCell(BOButtonTableViewCell(title: "SDK 초기화", key: "init") { cell in
-                    let cellObj = cell as! BOButtonTableViewCell
-                    
-                    cellObj.actionBlock = {
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        guard let echo_code = UserDefaults.standard.string(forKey: "echo_code") else {
-                            self.customAlert(title: "필수 항목이 누락되었습니다.", message: "에코 코드를 입력해주세요.")
-                            return
-                        }
-                        guard appDelegate.initPlengi(echoCode: echo_code) else {
-                            return
-                        }
-                        
-                        self.registerPlaceEngineDelegate()
-                        Plengi.isDebug = true
-                    }
-                })
-                
-                section.footerTitle = "echo code를 입력한 후, SDK 초기화 버튼을 누르세요"
-            }
-        })
-        
-        self.addSection(BOTableViewSection.init(headerTitle: "") { section -> Void in
-            if let section = section {
-                section.addCell(BOButtonTableViewCell(title: "SDK 시작", key: "start") { cell in
-                    let cellObj = cell as! BOButtonTableViewCell
-                    cellObj.actionBlock = {
-                        self.startSDK()
-                    }
-                })
-                
-                section.addCell(BOButtonTableViewCell(title: "SDK 정지", key: "stop") { cell in
-                    let cellObj = cell as! BOButtonTableViewCell
-                    cellObj.actionBlock = {
-                        self.stopSDK(alert: true)
-                    }
-                })
-                
-                section.footerTitle = self.engineStatusMessage
-                self.engineStatusSection = section
-            }
-        })
-        
-        self.addSection(BOTableViewSection.init(headerTitle: "") { section -> Void in
-            if let section = section {
-                section.addCell(BOButtonTableViewCell(title: "장소 요청 (refreshPlace)", key: "refreshPlace") { cell in
-                    let cellObj = cell as! BOButtonTableViewCell
-                    
-                    cellObj.actionBlock = {
-                        self.refreshPlace()
-                    }
-                })
-                
-                section.footerTitle = "해당 기능은 테스트 용도로만 사용되어야만 하며, 릴리즈 앱에서는 사용하지 마세요."
-            }
-        })
-        
-        self.addSection(BOTableViewSection.init(headerTitle: "") { section -> Void in
-            if let section = section {
-                section.addCell(BOSwitchTableViewCell(title: "Gravity 사용", key: "enable_gravity") { cell in
-                    let cell = cell as! BOSwitchTableViewCell
-                    cell.toggleSwitch.addTarget(self, action: #selector(self.enableGravity(sender:)), for: .valueChanged)
-                })
-                
-                section.footerTitle = "로플랫 광고 (Gravity)를 사용할 수 있습니다."
-            }
-        })
-        
-        self.addSection(BOTableViewSection.init(headerTitle: "") { section -> Void in
-            if let section = section {
-                section.addCell(BOSwitchTableViewCell(title: "사용자 마케팅 동의", key: "marketingAgreement") { cell in
-                })
-                section.addCell(BOSwitchTableViewCell(title: "사용자 위치정보 동의", key: "locationAgreement") { cell in
-                })
-                
-                section.footerTitle = "사용자 동의 여부에 따른 시나리오를 확인합니다."
-                
-                section.cells.forEach {
-                    let cell = $0 as! BOSwitchTableViewCell
-                    // 주석을 제거하면 앱 첫 설치시 기본값이 true가 됩니다.
-//                    if nil == UserDefaults.standard.object(forKey: cell.key) {
-//                        cell.setting.value = NSNumber(booleanLiteral: true)
-//                    }
-                    cell.toggleSwitch.addTarget(self, action: Selector((cell.key + "WithSender:")), for: .valueChanged)
                 }
+            })
+            
+            section.footerTitle = "로플랫 SDK를 사용하기 위해서는 위치 권한(항상 허용)은 필수로 필요하며, 알림 권한은 Gravity를 사용할 경우에 필요로 합니다. 권한 허용 API는 MiniPlengi에서는 제공하고 있지 않기에, 직접 구현하거나, developers.loplat.com을 참조해주세요."
+        })
+        
+        self.addSection(BOTableViewSection.init(headerTitle: "") {
+            let section = $0!
+            section.addCell(BOTextTableViewCell(title: "에코 코드", key: "echo_code") {
+                let cell = $0 as! BOTextTableViewCell
+                cell.textField.placeholder = "echo_code"
+            })
+            
+            section.addCell(BOButtonTableViewCell(title: "SDK 초기화", key: "init") {
+                let cell = $0 as! BOButtonTableViewCell
+                cell.actionBlock = {
+                    guard let echo_code = UserDefaults.standard.string(forKey: "echo_code") else {
+                        self.customAlert(title: "필수 항목이 누락되었습니다.",
+                                         message: "에코 코드를 입력해주세요.")
+                        return
+                    }
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    guard appDelegate.initPlengi(echoCode: echo_code) else {
+                        return
+                    }
+                    
+                    self.registerPlaceEngineDelegate()
+                    Plengi.isDebug = true
+                }
+            })
+            
+            section.footerTitle = "echo code를 입력한 후, SDK 초기화 버튼을 누르세요"
+        })
+        
+        self.addSection(BOTableViewSection.init(headerTitle: "") {
+            let section = $0!
+            section.addCell(BOButtonTableViewCell(title: "SDK 시작", key: "start") {
+                let cell = $0 as! BOButtonTableViewCell
+                cell.actionBlock = {
+                    self.startSDK()
+                }
+            })
+            
+            section.addCell(BOButtonTableViewCell(title: "SDK 정지", key: "stop") {
+                let cell = $0 as! BOButtonTableViewCell
+                cell.actionBlock = {
+                    self.stopSDK(alert: true)
+                }
+            })
+            
+            section.footerTitle = self.engineStatusMessage
+            self.engineStatusSection = section
+        })
+        
+        self.addSection(BOTableViewSection.init(headerTitle: "") {
+            let section = $0!
+            section.addCell(BOButtonTableViewCell(title: "장소 요청 (refreshPlace)", key: "refreshPlace") {
+                let cell = $0 as! BOButtonTableViewCell
+                cell.actionBlock = {
+                    self.refreshPlace()
+                }
+            })
+            
+            section.footerTitle = "해당 기능은 테스트 용도로만 사용되어야만 하며, 릴리즈 앱에서는 사용하지 마세요."
+        })
+        
+        self.addSection(BOTableViewSection.init(headerTitle: "") {
+            let section = $0!
+            section.addCell(BOSwitchTableViewCell(title: "Gravity 사용", key: "enable_gravity") {
+                let cell = $0 as! BOSwitchTableViewCell
+                cell.toggleSwitch.addTarget(self, action: #selector(self.enableGravity(sender:)), for: .valueChanged)
+            })
+            
+            section.footerTitle = "로플랫 광고 (Gravity)를 사용할 수 있습니다."
+        })
+        
+        self.addSection(BOTableViewSection.init(headerTitle: "") {
+            let section = $0!
+            section.addCell(BOSwitchTableViewCell(title: "사용자 마케팅 동의", key: "marketingAgreement") { cell in
+            })
+            section.addCell(BOSwitchTableViewCell(title: "사용자 위치정보 동의", key: "locationAgreement") { cell in
+            })
+            
+            section.footerTitle = "사용자 동의 여부에 따른 시나리오를 확인합니다."
+            
+            section.cells.forEach {
+                let cell = $0 as! BOSwitchTableViewCell
+                // 주석을 제거하면 앱 첫 설치시 기본값이 true가 됩니다.
+//                if nil == UserDefaults.standard.object(forKey: cell.key) {
+//                    cell.setting.value = NSNumber(booleanLiteral: true)
+//                }
+                cell.toggleSwitch.addTarget(self, action: Selector((cell.key + "WithSender:")), for: .valueChanged)
             }
         })
     }
     
     /// 로플랫 SDK에 Delegate를 등록합니다.
-    /// `Plengi.setDelegate` 메소드는 반환값이 있으며, 등록 성공 시 `PlengiResponse.Result.SUCCESS`가, 실패 시 `PlengiResponse.Result.FAIL` 이 반환됩니다.
+    /// `Plengi.setDelegate` 메소드는 반환값이 있으며, 등록 성공 시 `Result.SUCCESS`가, 실패 시 `Result.FAIL` 이 반환됩니다.
     private func registerPlaceEngineDelegate() {
         guard Plengi.setDelegate(self) == .SUCCESS else {
-            self.customAlert(title: "초기화에 실패하였습니다.", message: "Plengi.setDelegate() 메소드에서 FAILED를 반환했습니다.")
+            self.customAlert(title: "초기화에 실패하였습니다.",
+                             message: "Plengi.setDelegate() 메소드에서 FAILED를 반환했습니다.")
             return
         }
     }
@@ -269,16 +262,19 @@ class MainViewController: BOTableViewController {
             self.reloadStatusSectionFooter()
         }
         guard self.locationAgreement else {
-            self.customAlert(title: "SDK를 시작할 수 없음", message: "사용자 위치정보 동의가 필요합니다.")
+            self.customAlert(title: "SDK를 시작할 수 없음",
+                             message: "사용자 위치정보 동의가 필요합니다.")
             return
         }
         
         guard Plengi.start() == .SUCCESS else {
             if CLLocationManager.authorizationStatus() == .authorizedAlways {
-                self.customAlert(title: "SDK를 시작할 수 없음", message: "초기화, iOS버전 등을 확인해보세요.")
+                self.customAlert(title: "SDK를 시작할 수 없음",
+                                 message: "초기화, iOS버전 등을 확인해보세요.")
             }
             else {
-                self.customAlert(title: "SDK를 시작할 수 없음", message: "위치 권한이 필요합니다.")
+                self.customAlert(title: "SDK를 시작할 수 없음",
+                                 message: "위치 권한이 필요합니다.")
             }
             
             return
@@ -318,27 +314,21 @@ class MainViewController: BOTableViewController {
                      action: String = "확인",
                      cancel: String? = nil,
                      handler: (() -> Void)? = nil) {
-        DispatchQueue.main.async {
-            guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
-                return
-            }
-            
-            let popupDialog = PopupDialog(title: title, message: message)
-            
-            if let cancel = cancel {
-                popupDialog.addButton(PopupDialogButton(title: cancel,
-                                                        action: nil))
-            }
-            
-            popupDialog.addButton(PopupDialogButton(title: action,
-                                                    action: {
-                                                        if let handler = handler {
-                                                            handler()
-                                                        }
-            }))
-            
-            rootViewController.present(popupDialog, animated: true, completion: nil)
+        let popupDialog = PopupDialog(title: title, message: message)
+        
+        if let cancel = cancel {
+            popupDialog.addButton(CancelButton(title: cancel,
+                                               action: nil))
         }
+        
+        popupDialog.addButton(DefaultButton(title: action,
+                                            action: {
+                                                if let handler = handler {
+                                                    handler()
+                                                }
+        }))
+        
+        self.present(popupDialog, animated: true, completion: nil)
     }
     
     @objc func enableGravity(sender: UISwitch) {
@@ -380,6 +370,10 @@ class MainViewController: BOTableViewController {
     }
     
     @objc func locationAgreement(sender: UISwitch) {
-        self.stopSDK(alert: false)
+        guard self.locationAgreement || Plengi.getEngineStatus() == .STOPPED else {
+            self.stopSDK(alert: false)
+            self.customAlert(title: "SDK를 사용할 수 없음", message: "SDK를 중단합니다.")
+            return
+        }
     }
 }

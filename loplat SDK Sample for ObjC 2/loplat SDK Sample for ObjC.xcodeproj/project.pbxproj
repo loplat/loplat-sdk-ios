@@ -85,8 +85,8 @@
 				BA8BA28221117EFE003335A7 /* LaunchScreen.storyboard */,
 				BA8BA28521117EFE003335A7 /* Info.plist */,
 				BA8BA28621117EFE003335A7 /* main.m */,
-				BA8BA28D21118330003335A7 /* MainViewController.m */,
 				BA8BA28F2111833F003335A7 /* MainViewController.h */,
+				BA8BA28D21118330003335A7 /* MainViewController.m */,
 			);
 			path = "loplat SDK Sample for ObjC";
 			sourceTree = "<group>";
