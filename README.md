@@ -245,7 +245,9 @@ Gravity를 사용할 경우 `UserNotifications` 기능을 소스코드에 포함
 
 
 
-####2) Plengi SDK 초기화 - 백그라운드에서 앱이 재시작되는 경우
+
+
+#### 2) Plengi SDK 초기화 - 백그라운드에서 앱이 재시작되는 경우
 <p class="warning">
   SDK가 재시작하기 위해 아래의 코드가 꼭 필요로 합니다.
   <br><br>
@@ -281,7 +283,9 @@ Gravity를 사용할 경우 `UserNotifications` 기능을 소스코드에 포함
 
 
 
-####3) Bluetooth 권한 요청
+
+
+#### 3) Bluetooth 권한 요청
 
 Bluetooth 사용을 요청합니다. 알림은 없습니다.
 
@@ -552,7 +556,9 @@ SDK에서 Gravity 를 사용하기 위해 함수를 호출해줍니다.
     <code>FALSE</code>일 경우, 광고 알림을 클라이언트앱에서 직접 관리할 수 있으며, SDK에서 처리하지 않습니다. 광고가 수신될 경우, <code>PlengiResponse</code> 객체 안에 <code>advertisement</code> 객체가 포함됩니다.
 	<br><br>(자세한 내용은 상단의 `PlengiResponse` 설명을 참조하세요.)
 </p>
-
+<p class="danger">
+  <code>enableAdNetwork()</code>는 <code>start()</code>사용 전에 사용하셔야합니다.<br>
+</p>
 
 #### 1)  Gravity 사용 설정 - 클라이언트 앱에서 직접 광고정보 처리
 
@@ -595,9 +601,6 @@ SDK에서 Gravity 를 사용하기 위해 함수를 호출해줍니다.
   Plengi.enableAdNetwork(false, enableNoti: false)
   ```
 
-  <p class="danger">
-    <code>enableAdNetwork()</code>는 <code>start()</code>사용 전에 사용하셔야합니다.<br>
-  </p>
 
 
 
