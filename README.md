@@ -281,6 +281,26 @@ Gravity를 사용할 경우 `UserNotifications` 기능을 소스코드에 포함
 
 
 
+####3) Bluetooth 권한 요청
+
+Bluetooth 사용을 요청합니다. 알림은 없습니다.
+
+- Objective-C
+  ```objectivec
+  - (void)applicationDidBecomeActive:(UIApplication *)application {
+      [Plengi requestBluetooth];
+  }
+  ```
+
+- Swift
+  ```swift
+  func applicationDidBecomeActive(_ application: UIApplication) {
+  	_ = Plengi.requestBluetooth()
+  }
+  ```
+
+
+
 ### 4. PlaceDelegate 등록하기
 Gravity 광고와 그 외 장소 인식 이벤트 발생시 이벤트를 수신하기 위해 `PlaceDelegate` 를 등록해줍니다.
 
@@ -566,14 +586,22 @@ SDK에서 Gravity 를 사용하기 위해 함수를 호출해줍니다.
 아래의 코드를 추가하여 Gravity 사용을 중지합니다.
 
 - Objective-C
-	```objectivec
-	[Plengi enableAdNetwork:NO enableNoti:NO];
-	```
+  ```objectivec
+  [Plengi enableAdNetwork:NO enableNoti:NO];
+  ```
 
 - Swift
-	```swift
-	Plengi.enableAdNetwork(false, enableNoti: false)
-	```
+  ```swift
+  Plengi.enableAdNetwork(false, enableNoti: false)
+  ```
+
+  <p class="danger">
+    <code>enableAdNetwork()</code>는 <code>start()</code>사용 전에 사용하셔야합니다.<br>
+  </p>
+
+
+
+
 
 
 ### 2. 알림 권한 획득하기
@@ -611,6 +639,10 @@ Plengi SDK에서 직접 광고정보 처리 시 Gravity는 알림 기능을 사�
   	UNUserNotificationCenter.current().delegate = self
   }
   ```
+
+
+
+
 
 ### 3. Gravity 광고알림 처리하기
 Plengi SDK에서 푸시알림을 직접 처리하기 위해 아래 코드를  추가합니다.
@@ -689,4 +721,4 @@ Plengi SDK에서 푸시알림을 직접 처리하기 위해 아래 코드를  �
 로플랫 SDK 샘플 앱은 Objective-C용과, Swift 용 둘 다 있습니다. 
 (샘플앱 다운로드 > https://github.com/loplat/loplat-sdk-ios)
 
-(샘플앱도 Cocoapod을 사용합니다. Cocoapod 사용법은 위에 명시되어 있습니다.)
+(샘플앱도 Cocoapod을 사용합니다. Cocoapod 사용법은 위에 명시되어 있습니다.)d
