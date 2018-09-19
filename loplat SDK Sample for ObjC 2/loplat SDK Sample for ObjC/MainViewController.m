@@ -177,6 +177,10 @@
                                 [self customAlertWithTitle:@"알림 권한 허용됨"
                                                    message:@"이미 알림권한이 허용되었습니다."];
                                 break;
+                            case UNAuthorizationStatusProvisional:
+                                [self customAlertWithTitle:@"알림 권한 허용됨"
+                                                   message:@"알림이 조용히 전달 상태입니다."];
+                                break;
                         }
                     }];
                 }
@@ -314,15 +318,13 @@
         [self customAlertWithTitle:@"SDK를 시작할 수 없음"
                            message:@"사용자 위치정보 동의가 필요합니다."];
     }
+    else if (CLLocationManager.authorizationStatus != kCLAuthorizationStatusAuthorizedAlways) {
+        [self customAlertWithTitle:@"SDK를 시작할 수 없음"
+                           message:@"위치 권한이 필요합니다."];
+    }
     else if ([Plengi start] != ResultSUCCESS) {
-        if (CLLocationManager.authorizationStatus == kCLAuthorizationStatusAuthorizedAlways) {
-            [self customAlertWithTitle:@"SDK를 시작할 수 없음"
-                               message:@"초기화, iOS버전 등을 확인해보세요."];
-        }
-        else {
-            [self customAlertWithTitle:@"SDK를 시작할 수 없음"
-                               message:@"위치 권한이 필요합니다."];
-        }
+        [self customAlertWithTitle:@"SDK를 시작할 수 없음"
+                           message:@"초기화, iOS버전 등을 확인해보세요."];
     }
     
     [self reloadStatusSectionFooter];

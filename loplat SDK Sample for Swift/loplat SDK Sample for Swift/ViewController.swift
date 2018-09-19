@@ -22,13 +22,16 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        UIApplication.shared.statusBarStyle = .default
+        self.navigationController?.navigationBar.barStyle = .default
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
     }
 
     /// 필수 UI 구성요소를 초기화합니다.

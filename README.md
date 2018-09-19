@@ -56,7 +56,7 @@ end
 Podfile의  target 태그안에 아래 내용을 추가 후 저장합니다.
 
 ```Podfile
-pod 'MiniPlengi', '1.2.4'
+pod 'MiniPlengi', '1.2.5'
 ```
 <p class="tip">
 SDK가 Swift를 사용하기 때문에, `# use_frameworks`에서 '#'을 제거하여 주석을 해제합니다.
@@ -73,7 +73,7 @@ target '<Your Target Name>' do
 	pod 'AFNetworking', '~> 2.6'  // 예제
 	pod 'ORStackView', '~> 3.0'   // 예제
 	pod 'SwiftyJSON', '~> 2.3'    // 예제
-	pod 'MiniPlengi', '1.2.4'
+	pod 'MiniPlengi', '1.2.5'
 end
 ```
 

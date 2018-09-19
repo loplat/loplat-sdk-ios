@@ -57,12 +57,14 @@ class MainViewController: BOTableViewController {
             
             self.isOpened = true
         }
-        
-        UIApplication.shared.statusBarStyle = .lightContent
+        self.navigationController?.navigationBar.barStyle = .black
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 
     private func setupAppearance() {
-        UIApplication.shared.statusBarStyle = .lightContent
         
         UINavigationBar.appearance().barTintColor = UIColor.init(red: 71 / 255.0, green: 165.0 / 255.0, blue: 254.0 / 255.0, alpha: 1.0)
         UINavigationBar.appearance().tintColor = UIColor.white
@@ -98,7 +100,7 @@ class MainViewController: BOTableViewController {
                                          message: "위치 권한이 없습니다. \n설정에서 항상으로 변경해주세요.",
                                          action: "이동",
                                          cancel: "취소") {
-                                            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                                            if let url = URL(string: UIApplication.openSettingsURLString) {
                                                 if #available(iOS 10.0, *) {
                                                     UIApplication.shared.open(url)
                                                 } else {
@@ -130,13 +132,16 @@ class MainViewController: BOTableViewController {
                                                  message: "알림 권한이 없습니다. \n설정에서 사용으로 변경해주세요.",
                                                  action: "이동",
                                                  cancel: "취소") {
-                                                    if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                                                    if let url = URL(string: UIApplication.openSettingsURLString) {
                                                         UIApplication.shared.open(url)
                                                     }
                                 }
                             case .authorized:
                                 self.customAlert(title: "알림 권한 허용됨",
                                                  message: "이미 알림권한이 허용되었습니다.")
+                            case .provisional:
+                                self.customAlert(title: "알림 권한 허용됨",
+                                                 message: "알림이 조용히 전달 상태입니다.")
                             }
                         })
                     }
@@ -175,7 +180,6 @@ class MainViewController: BOTableViewController {
                     guard appDelegate.initPlengi(echoCode: echo_code) else {
                         return
                     }
-                    
                     self.registerPlaceEngineDelegate()
                     Plengi.isDebug = true
                 }
@@ -267,16 +271,14 @@ class MainViewController: BOTableViewController {
             return
         }
         
+        if CLLocationManager.authorizationStatus() != .authorizedAlways {
+            self.customAlert(title: "SDK를 시작할 수 없음",
+                             message: "위치 권한이 필요합니다.")
+        }
+        
         guard Plengi.start() == .SUCCESS else {
-            if CLLocationManager.authorizationStatus() == .authorizedAlways {
-                self.customAlert(title: "SDK를 시작할 수 없음",
-                                 message: "초기화, iOS버전 등을 확인해보세요.")
-            }
-            else {
-                self.customAlert(title: "SDK를 시작할 수 없음",
-                                 message: "위치 권한이 필요합니다.")
-            }
-            
+            self.customAlert(title: "SDK를 시작할 수 없음",
+                             message: "초기화, iOS버전 등을 확인해보세요.")
             return
         }
     }
@@ -332,28 +334,30 @@ class MainViewController: BOTableViewController {
     }
     
     @objc func enableGravity(sender: UISwitch) {
-        defer {
-            _ = Plengi.enableAdNetwork(self.enableGravity)
-        }
-        guard sender.isOn == false || self.marketingAgreement else {
-            self.enableGravity = false
-            self.customAlert(title: "Gravity를 사용할 수 없음", message: "사용자 마케팅 동의가 필요합니다.")
-            return
-        }
-        if #available(iOS 10, *) {
-            UNUserNotificationCenter.current().getNotificationSettings(completionHandler: {
-                guard $0.authorizationStatus == .authorized else {
+        DispatchQueue.main.async {
+            defer {
+                _ = Plengi.enableAdNetwork(self.enableGravity)
+            }
+            guard sender.isOn == false || self.marketingAgreement else {
+                self.enableGravity = false
+                self.customAlert(title: "Gravity를 사용할 수 없음", message: "사용자 마케팅 동의가 필요합니다.")
+                return
+            }
+            if #available(iOS 10, *) {
+                UNUserNotificationCenter.current().getNotificationSettings(completionHandler: {
+                    guard $0.authorizationStatus == .authorized else {
+                        self.enableGravity = false
+                        self.customAlert(title: "Gravity를 사용할 수 없음", message: "알림 권한이 필요합니다.")
+                        return
+                    }
+                })
+            }
+            else {
+                guard UIApplication.shared.isRegisteredForRemoteNotifications else {
                     self.enableGravity = false
                     self.customAlert(title: "Gravity를 사용할 수 없음", message: "알림 권한이 필요합니다.")
                     return
                 }
-            })
-        }
-        else {
-            guard UIApplication.shared.isRegisteredForRemoteNotifications else {
-                self.enableGravity = false
-                self.customAlert(title: "Gravity를 사용할 수 없음", message: "알림 권한이 필요합니다.")
-                return
             }
         }
     }

@@ -13,11 +13,11 @@ import MiniPlengi
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // 앱이 백그라운드 모드로 재시작 되었을 때 MiniPlengi를 재시작합니다.
         // 초기화를 didFinishLaunchingWithOptions 에서 항상 하지 않는다면
         // 꼭 아래와 같은 작업을 하셔야합니다.
-        if ((launchOptions?.index(forKey: UIApplicationLaunchOptionsKey.location)) != nil) {
+        if ((launchOptions?.index(forKey: UIApplication.LaunchOptionsKey.location)) != nil) {
             guard let echo_code = UserDefaults.standard.string(forKey: "echo_code") else {
                 return false
             }
@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping  (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert,  .sound,  .badge])  // iOS 10 이상에서도 포그라운드에서 알림을 띄울 수 있도록 하는 코드 (가이드에는 뱃지, 소리, 경고 를 사용하지만, 개발에 따라 빼도 상관 무)
+        completionHandler([.alert, .sound, .badge])  // iOS 10 이상에서도 포그라운드에서 알림을 띄울 수 있도록 하는 코드 (가이드에는 뱃지, 소리, 경고 를 사용하지만, 개발에 따라 빼도 상관 무)
     }
     
     public func initPlengi(echoCode: String) -> Bool {
