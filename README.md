@@ -103,23 +103,25 @@ Cocoapod이 적용된 프로젝트를 열기 위해서는 **ProjectName.xcodepro
 ### 1. 앱 권한 추가하기
 #### 1) 권한 추가하기
 - Plengi SDK를 사용하기 위해서는 권한을 추가해야합니다. 필요한 권한은 아래와 같습니다.
-	```xcode_permissions
-	Background Modes 
-	- Location Updates
-	- Uses Bluetooth LE accessories
-	```
-	
-	XCode 에서 **프로젝트 > Capabilities**에 들어가 위 권한 목록에 있는 권한들을 허용해줍니다.
-	
-	![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_3.png)
-	
-	##### 권한을 사용하는 이유
-	
-	- Background Modes - Location Updates
-		- 백그라운드에서도 위치 정보를 수신하기 위해 사용합니다.
+  ```xcode_permissions
+  Background Modes 
+  - Location Updates
+  - Uses Bluetooth LE accessories
+  ```
 
-	- Background Modes - Uses Bluetooth LE accessories
-		- 백그라운드에서도 BLE를 스캔하여 위치 인식에 정확도를 향상하기 위해 사용합니다.
+  XCode 에서 **프로젝트 > Capabilities**에 들어가 위 권한 목록에 있는 권한들을 허용해줍니다.
+
+  ![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_4.png)
+
+  ![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_3.png)
+
+  ##### 권한을 사용하는 이유
+
+  - Background Modes - Location Updates
+  	- 백그라운드에서도 위치 정보를 수신하기 위해 사용합니다.
+
+  - Background Modes - Uses Bluetooth LE accessories
+  	- 백그라운드에서도 BLE를 스캔하여 위치 인식에 정확도를 향상하기 위해 사용합니다.
 
 
 #### 2) 위치 권한 사용 명시하기
