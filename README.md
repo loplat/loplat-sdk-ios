@@ -1,3 +1,5 @@
+
+
 ##### MiniPlengi SDK (for iOS)
 
 <p class="danger">
@@ -283,28 +285,6 @@ Gravity를 사용할 경우 `UserNotifications` 기능을 소스코드에 포함
 
 
 
-
-
-#### 3) Bluetooth 권한 요청
-
-Bluetooth 사용을 요청합니다. 알림은 없습니다.
-
-- Objective-C
-  ```objectivec
-  - (void)applicationDidBecomeActive:(UIApplication *)application {
-      [Plengi requestBluetooth];
-  }
-  ```
-
-- Swift
-  ```swift
-  func applicationDidBecomeActive(_ application: UIApplication) {
-  	_ = Plengi.requestBluetooth()
-  }
-  ```
-
-
-
 ### 4. PlaceDelegate 등록하기
 Gravity 광고와 그 외 장소 인식 이벤트 발생시 이벤트를 수신하기 위해 `PlaceDelegate` 를 등록해줍니다.
 
@@ -463,26 +443,27 @@ Gravity 광고와 그 외 장소 인식 이벤트 발생시 이벤트를 수신�
 
 - Place
 
-	```swift
-	@objc public let loplat_id: Int						// 장소 ID
-	@objc public let name: String						// 장소 이름
-	@objc public let tags: String?						// 장소와 관련된 태그 (Nullable)
-	@objc public let floor: Int							// 층 정보
-	@objc public let lat: Double						// 장소의 위도
-	@objc public let lng: Double						// 장소의 경도
-	@objc public let accuracy: Double					// 정확도 (accuracy > threshold 비교 필요)
-	@objc public let threshold: Double					// 한계치
-	@objc public let client_code: String?				// 고객사 코드 (Nullable)
-	@objc public let category: String					// 장소 카테고리
-	@objc public let address: String?					// 장소 (구) 주소 (Nullable)
-	@objc public let address_road: String?				// 장소 (도로명) 주소 (Nullable)
-	@objc public let post: String?						// 장소 우편번호 (Nullable)
-	```
+  ```swift
+  @objc public let loplat_id: Int						// 장소 ID
+  @objc public let name: String						// 장소 이름
+  @objc public let tags: String?						// 장소와 관련된 태그 (Nullable)
+  @objc public let floor: Int							// 층 정보
+  @objc public let lat: Double						// 장소의 위도
+  @objc public let lng: Double						// 장소의 경도
+  @objc public let accuracy: Double					// 정확도 (accuracy > threshold 비교 필요)
+  @objc public let threshold: Double					// 한계치
+  @objc public let client_code: String?				// 고객사 코드 (Nullable)
+  @objc public let category: String					// 장소 카테고리
+  @objc public let category_code: String				// 장소 카테고리 코드
+  @objc public let address: String?					// 장소 (구) 주소 (Nullable)
+  @objc public let address_road: String?				// 장소 (도로명) 주소 (Nullable)
+  @objc public let post: String?						// 장소 우편번호 (Nullable)
+  ```
 
-	<p class="tip">
-	Place 객체에서 <code>accuracy > threshold</code> 여야만 Enter 이벤트입니다.<br>
-	저 조건이 맞지 않는경우 <b>Near (옆에 있는 매장)</b> 입니다.
-	</p>
+  <p class="tip">
+  Place 객체에서 <code>accuracy > threshold</code> 여야만 Enter 이벤트입니다.<br>
+  저 조건이 맞지 않는경우 <b>Near (옆에 있는 매장)</b> 입니다.
+  </p>
 
 - Area
 
@@ -556,9 +537,7 @@ SDK에서 Gravity 를 사용하기 위해 함수를 호출해줍니다.
     <code>FALSE</code>일 경우, 광고 알림을 클라이언트앱에서 직접 관리할 수 있으며, SDK에서 처리하지 않습니다. 광고가 수신될 경우, <code>PlengiResponse</code> 객체 안에 <code>advertisement</code> 객체가 포함됩니다.
 	<br><br>(자세한 내용은 상단의 `PlengiResponse` 설명을 참조하세요.)
 </p>
-<p class="danger">
-  <code>enableAdNetwork()</code>는 <code>start()</code>사용 전에 사용하셔야합니다.<br>
-</p>
+
 
 #### 1)  Gravity 사용 설정 - 클라이언트 앱에서 직접 광고정보 처리
 
