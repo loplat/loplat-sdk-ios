@@ -92,6 +92,10 @@ Cocoapod이 적용된 프로젝트를 열기 위해서는 확장자가 **.xcodep
 	
 	![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_3.png)
 	
+	<br>
+
+	![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_4.png)
+	
 	##### 권한을 사용하는 이유
 	
 	- Background Modes - Location Updates
@@ -99,6 +103,9 @@ Cocoapod이 적용된 프로젝트를 열기 위해서는 확장자가 **.xcodep
 
 	- Background Modes - Uses Bluetooth LE accessories
 		- 백그라운드에서도 BLE를 스캔하여 위치 인식에 정확도를 향상하기 위해 사용합니다.
+
+	- Access WiFi Information
+		- iOS 12 이상부터 현재 연결되어 있는 와이파이 정보를 가져오기 위해 사용합니다.
 
 
 #### 2. 위치 권한 사용 명시하기
@@ -132,9 +139,7 @@ iOS 11 이상부터 위치권한을 사용하기 위해서는 사용자에게 �
 
 위의 코드를 XCode에서 보면 아래와 같습니다.
 
-![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_4.png)
-
-![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_3.png)
+![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_2.png)
 
 
 #### 3. 사용자에게 위치 권한 요청하기 (필수)
