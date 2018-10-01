@@ -132,7 +132,9 @@ iOS 11 이상부터 위치권한을 사용하기 위해서는 사용자에게 �
 
 위의 코드를 XCode에서 보면 아래와 같습니다.
 
-![XCode info.plist](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_2.png)
+![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_4.png)
+
+![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_3.png)
 
 
 #### 3. 사용자에게 위치 권한 요청하기 (필수)
@@ -488,6 +490,7 @@ SDK 작동을 중단합니다.
 	@objc public let threshold: Double					// 한계치
 	@objc public let client_code: String?				// 고객사 코드 (Nullable)
 	@objc public let category: String					// 장소 카테고리
+	@objc public let category_code: String				// 장소 카테고리 코드
 	@objc public let address: String?					// 장소 (구) 주소 (Nullable)
 	@objc public let address_road: String?				// 장소 (도로명) 주소 (Nullable)
 	@objc public let post: String?						// 장소 우편번호 (Nullable)
