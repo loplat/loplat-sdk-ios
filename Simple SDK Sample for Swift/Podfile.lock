@@ -1,0 +1,16 @@
+PODS:
+  - MiniPlengi (1.2.5)
+
+DEPENDENCIES:
+  - MiniPlengi (= 1.2.5)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - MiniPlengi
+
+SPEC CHECKSUMS:
+  MiniPlengi: 23a76161413dc31fd6c4deb31264593387e18056
+
+PODFILE CHECKSUM: ca7dcc6e27141aeb744c0c89ea54d3cee2e98e12
+
+COCOAPODS: 1.5.3
