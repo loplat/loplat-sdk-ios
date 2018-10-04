@@ -19,7 +19,7 @@ loplat SDK (Plengi SDK)를 사용하기 위해서는 Cocoapod 을 사용해야�
 
 #### Cocoapod 설치하기
 Cocoapod 바이너리를 설치합니다. 터미널에 아래의 명령어를 입력하세요.
-	
+​	
 ```bash
 $ sudo gem install cocoapods
 ```
@@ -82,30 +82,28 @@ Cocoapod이 적용된 프로젝트를 열기 위해서는 확장자가 **.xcodep
 ### 앱 권한 추가하기
 #### 1. 권한 추가하기
 - Plengi SDK를 사용하기 위해서는 권한을 추가해야합니다. 필요한 권한은 아래와 같습니다.
-	```xcode_permissions
-	Background Modes 
-	- Location Updates
-	- Uses Bluetooth LE accessories
-	```
-	
-	XCode 에서 **프로젝트 > Capabilities**에 들어가 위 권한 목록에 있는 권한들을 허용해줍니다.
-	
-	![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_3.png)
-	
-	<br>
+  ```xcode_permissions
+  Background Modes 
+  - Location Updates
+  - Uses Bluetooth LE accessories
+  ```
 
-	![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_4.png)
-	
-	##### 권한을 사용하는 이유
-	
-	- Background Modes - Location Updates
-		- 백그라운드에서도 위치 정보를 수신하기 위해 사용합니다.
+  XCode 에서 **프로젝트 > Capabilities**에 들어가 위 권한 목록에 있는 권한들을 허용해줍니다.
+  
+ ![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_4.png)
+  ![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_3.png)
 
-	- Background Modes - Uses Bluetooth LE accessories
-		- 백그라운드에서도 BLE를 스캔하여 위치 인식에 정확도를 향상하기 위해 사용합니다.
 
-	- Access WiFi Information
-		- iOS 12 이상부터 현재 연결되어 있는 와이파이 정보를 가져오기 위해 사용합니다.
+  ##### 권한을 사용하는 이유
+
+  - Background Modes - Location Updates
+  	- 백그라운드에서도 위치 정보를 수신하기 위해 사용합니다.
+
+  - Background Modes - Uses Bluetooth LE accessories
+  	- 백그라운드에서도 BLE를 스캔하여 위치 인식에 정확도를 향상하기 위해 사용합니다.
+
+  - Access WiFi Information
+  	- iOS 12 이상부터 현재 연결되어 있는 와이파이 정보를 가져오기 위해 사용합니다.
 
 
 #### 2. 위치 권한 사용 명시하기
@@ -307,7 +305,7 @@ Gravity를 사용할 경우 `UserNotifications` 기능을 소스코드에 포함
 	```
 
 	`AppDelegate.m` 파일에 아래의 코드를 추가합니다.
-		
+	​	
 	```objectivec
 	@implementation AppDelegate
 
