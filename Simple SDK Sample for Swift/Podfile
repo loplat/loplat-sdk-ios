@@ -6,5 +6,5 @@ target 'Simple SDK Sample for Swift' do
   use_frameworks!
 
   # Pods for loplat SDK Sample for Swift
-  pod 'MiniPlengi', '1.2.5'
+  pod 'MiniPlengi', '1.2.6'
 end
