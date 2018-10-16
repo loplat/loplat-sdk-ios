@@ -54,7 +54,7 @@ end
 Podfile 의  target 태그안에
 
 ```Podfile
-pod 'MiniPlengi', '1.2.5'
+pod 'MiniPlengi', '1.2.6'
 ```
 을 입력한 후, 저장합니다.
 
@@ -90,20 +90,15 @@ Cocoapod이 적용된 프로젝트를 열기 위해서는 확장자가 **.xcodep
 
   XCode 에서 **프로젝트 > Capabilities**에 들어가 위 권한 목록에 있는 권한들을 허용해줍니다.
   
- ![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_4.png)
-  ![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/ios_3.png)
+ ![XCode에서 권한 허용하기](https://storage.googleapis.com/loplat-storage/public/sdk-doc/iOS_5.png)
 
 
   ##### 권한을 사용하는 이유
 
   - Background Modes - Location Updates
-  	- 백그라운드에서도 위치 정보를 수신하기 위해 사용합니다.
-
-  - Background Modes - Uses Bluetooth LE accessories
-  	- 백그라운드에서도 BLE를 스캔하여 위치 인식에 정확도를 향상하기 위해 사용합니다.
-
+      - 백그라운드에서도 위치 정보를 수신하기 위해 사용합니다.
   - Access WiFi Information
-  	- iOS 12 이상부터 현재 연결되어 있는 와이파이 정보를 가져오기 위해 사용합니다.
+       - iOS 12 이상부터 현재 연결되어 있는 와이파이 정보를 가져오기 위해 사용합니다.
 
 
 #### 2. 위치 권한 사용 명시하기
@@ -143,14 +138,15 @@ iOS 11 이상부터 위치권한을 사용하기 위해서는 사용자에게 �
 #### 3. 사용자에게 위치 권한 요청하기 (필수)
 <p class="warning">
 SDK에는 내부적으로 **사용자에게 위치 권한을 요청하는 코드는 포함되어있지 않습니다.**<br>
-**위치 권한 허용 요청 / 위치 권한 확인 로직 등**은 고객사의 시나리오에 맞게 알아서 구현하여야 합니다.
+**위치 권한 허용 요청 / 위치 권한 확인 로직 등**은 고객사의 시나리오에 맞게 알아서 구현하여야 합니다.<br>
+시나리오 구성에 도움이 필요하시면 예제 코드 중 **Simple SDK Sample for Swift**를 참조하세요.
 </p>
+
 
 <p class="tip">
 위치 권한에 상관없이 SDK의 `start()` 메소드는 호출되어야만 합니다.<br>
 SDK 초기화 과정이 완료된 후 <b>3. SDK 시작과 종료</b> 항목을 꼭 참고해서 구현해주세요.
 </p>
-
 <br>
 <br>
 
@@ -180,12 +176,13 @@ Gravity를 사용할 경우 `UserNotifications` 기능을 소스코드에 포함
 
 ### SDK 적용법
 #### 1. Plengi 초기화하기
-`Plengi` 를 사용하기 위해서는 `init` 메소드를 호출해야합니다.
+`Plengi` 를 사용하기 위해서는 `init` 메소드를 항상 호출해야합니다.
 
 <p class="danger">
-  <code>Plengi.init()</code> 메소드는 무조건 <code>AppDelegate</code> 에서만 호출되어야만 합니다.<br>
-  그렇지 않을 경우, 예상치 못한 문제가 발생할 수 있으며, <code>Extension</code>, <code>ViewController</code> 클래스 등에서는 호출하면 안됩니다. 
+  <code>Plengi.init()</code> 메소드는 <code>AppDelegate</code> 에서 호출되어야 합니다.<br>
+  그렇지 않을 경우, 작동 성능을 보장하지 않습니다. <code>Extension</code>, <code>ViewController</code> 클래스 등에서는 호출하면 안됩니다. 
 </p>
+
 
 ##### 1. Plengi 초기화 - 포그라운드, 일반적인 상황에서의 초기화 (필수)
 
@@ -240,8 +237,9 @@ Gravity를 사용할 경우 `UserNotifications` 기능을 소스코드에 포함
   func application(_ application: UIApplication, 
   	didFinishLaunchingWithOptions launchOptions: [IOApplicationLaunchOptionsKey: Any]?) -> Bool {
   	// ********** 중간 생략 ********** //
-  	if Plengi.init(clientID: "로플랫에서 발급받은 클라이언트 아이디", clientSecret: "로플랫에서 발급받은 클라이언트 키", 
-  		echoCode: "고객사 별 사용자를 식별할 수 있는 코드 (개인정보 주의바람)") 
+  	if Plengi.init(clientID: "로플랫에서 발급받은 클라이언트 아이디", 
+                     clientSecret: "로플랫에서 발급받은 클라이언트 키", 
+                     echoCode: "고객사 별 사용자를 식별할 수 있는 코드 (개인정보 주의바람)") 
   		== PlengiResponse.Result.SUCCESS) {
   		// init 성공
   	} else {
@@ -280,9 +278,9 @@ Gravity를 사용할 경우 `UserNotifications` 기능을 소스코드에 포함
   	if ((launchOptions?.index(forKey: UIApplicationLaunchOptionsKey.location)) != nil) { 
   	// 앱이 백그라운드 모드로 재시작 되었을 때 (필수!!!!! 없으면 재시작 되지 않음)
   		_ = Plengi.init(clientID: "로플랫에서 발급받은 클라이언트 아이디", 
-  			clientSecret: "로플랫에서 발급받은 클라이언트 키", 
-  			echoCode: "고객사 별 사용자를 식별할 수 있는 코드 (개인정보 주의바람)")
-  		Plengi.start()   
+                          clientSecret: "로플랫에서 발급받은 클라이언트 키", 
+                          echoCode: "고객사 별 사용자를 식별할 수 있는 코드 (개인정보 주의바람)")
+  		_ = Plengi.start()   
       }
   }
   ```
@@ -294,129 +292,131 @@ Gravity를 사용할 경우 `UserNotifications` 기능을 소스코드에 포함
 
 - Objective-C
 
-	Plengi 초기화 성공 후 `setDelegate` 를 호출합니다.
+  Plengi 초기화 성공 후 `setDelegate` 를 호출합니다.
 
-	```objectivec
-	if ([Plengi setDelegate:self] == ResultSUCCESS) {
-		// setDelegate 등록 성공
-	} else {
-		// setDelegate 등록 실패
-	}
-	```
+  ```objectivec
+  if ([Plengi setDelegate:self] == ResultSUCCESS) {
+  	// setDelegate 등록 성공
+  } else {
+  	// setDelegate 등록 실패
+  }
+  ```
 
-	`AppDelegate.m` 파일에 아래의 코드를 추가합니다.
-	​	
-	```objectivec
-	@implementation AppDelegate
-
-	- (void)responsePlaceEvent:(PlengiResponse *)plengiResponse {
-		if ([plengiResponse echoCode] != nil) {
-			// 고객사에서 넣은 echoCode
-		}
-
-		if ([plengiResponse result] == ResultSUCCESS) {
-			if ([plengiResponse type] == ResponseTypePLACE_EVENT) {
-				if ([plengiResponse place] != nil) {
-					if ([plengiResponse placeEvent] == PlaceEventENTER) {
-						// 사용자가 장소에 들어왔을 때
-					} else if ([plengiResponse placeEvent] == PlaceEventNEARBY) {
-						// NEARBY로 인식되었을 때
-					} else if ([plengiResponse placeEvent] == PlaceEventLEAVE) {
-						// 사용자가 장소를 떠났을 때
-					}
-				}
-
-				if ([plengiResponse complex] != nil) {
-					// 복합몰이 인식되었을 때
-				}
-
-				if ([plengiResponse area] != nil) {
-					// 상권이 인식되었을 때
-				}
-
-				if ([plengiResponse advertisement] != nil) {
-					// Gravity 광고 정보가 있을 때
-					// 기본으로 Plengi SDK에서 광고이벤트를 직접 알림으로 처리합니다.
-					// 하지만 설정값에 따라 광고이벤트를 직접 처리할 경우 해당 객체를 사용합니다.
-				}
-
-				if ([plengiResponse geofence] != nil) {
-					// Geofence 정보가 있을 때
-				}
-			}
-		} else {
-			/* 여기서부터는 오류인 경우입니다 */
-			// [plengiResponse errorReason] 에 위치 인식 실패 / 오류 이유가 포함됨
-
-			// FAIL : 위치 인식 실패
-			// NETWORK_FAIL : 네트워크 오류
-			// ERROR_CLOUD_ACCESS : 클라이언트 ID/PW가 틀렸거나 인증되지 않은 사용자가 요청했을 때
-		}
-	}
-	```
+  `AppDelegate.m` 파일에 아래의 코드를 추가합니다.
+  ​	
+  ```objectivec
+  @implementation AppDelegate
+  
+  - (void)responsePlaceEvent:(PlengiResponse *)plengiResponse {
+  	if ([plengiResponse echoCode] != nil) {
+  		// 고객사에서 넣은 echoCode
+  	}
+  
+  	if ([plengiResponse result] == ResultSUCCESS) {
+  		if ([plengiResponse type] == ResponseTypePLACE_EVENT) {
+              // refreshPlace() 로 테스트 시, type값은 ResponseTypePLACE 입니다.
+  			if ([plengiResponse place] != nil) {
+  				if ([plengiResponse placeEvent] == PlaceEventENTER) {
+  					// 사용자가 장소에 들어왔을 때
+  				} else if ([plengiResponse placeEvent] == PlaceEventNEARBY) {
+  					// NEARBY로 인식되었을 때
+  				} else if ([plengiResponse placeEvent] == PlaceEventLEAVE) {
+  					// 사용자가 장소를 떠났을 때
+  				}
+  			}
+  
+  			if ([plengiResponse complex] != nil) {
+  				// 복합몰이 인식되었을 때
+  			}
+  
+  			if ([plengiResponse area] != nil) {
+  				// 상권이 인식되었을 때
+  			}
+  
+  			if ([plengiResponse advertisement] != nil) {
+  				// Gravity 광고 정보가 있을 때
+  				// 기본으로 Plengi SDK에서 광고이벤트를 직접 알림으로 처리합니다.
+  				// 하지만 설정값에 따라 광고이벤트를 직접 처리할 경우 해당 객체를 사용합니다.
+  			}
+  
+  			if ([plengiResponse geofence] != nil) {
+  				// Geofence 정보가 있을 때
+  			}
+  		}
+  	} else {
+  		/* 여기서부터는 오류인 경우입니다 */
+  		// [plengiResponse errorReason] 에 위치 인식 실패 / 오류 이유가 포함됨
+  
+  		// FAIL : 위치 인식 실패
+  		// NETWORK_FAIL : 네트워크 오류
+  		// ERROR_CLOUD_ACCESS : 클라이언트 ID/PW가 틀렸거나 인증되지 않은 사용자가 요청했을 때
+  	}
+  }
+  ```
 
 
 - Swift
 
-	Plengi 초기화 성공 후 `setDelegate` 를 호출합니다.
+  Plengi 초기화 성공 후 `setDelegate` 를 호출합니다.
 
-	```swift
-	if Plengi.setDelegate(self) == .SUCCESS {
+  ```swift
+  if Plengi.setDelegate(self) == .SUCCESS {
       	// setDelegate 등록 성공
-	} else {
-		// setDelegate 등록 실패
-	}
-	```
+  } else {
+  	// setDelegate 등록 실패
+  }
+  ```
 
-	`AppDelegate.swift` 파일에 아래의 코드를 추가합니다.
-	
-	```swift
-	func responsePlaceEvent(_ plengiResponse: PlengiResponse) {
-		if plengiResponse.echoCode != nil {
-			// 고객사에서 설정한 echoCode
-		}
+  `AppDelegate.swift` 파일에 아래의 코드를 추가합니다.
 
-		if plengiResponse.result == .SUCCESS {
-			if plengiResponse.type == .PLACE_EVENT { // BACKGROUND
-				if plengiResponse.place != nil {
-					if plengiResponse.placeEvent == .ENTER {
-						// PlaceEvent가 NEARBY 일 경우, NEARBY 로 인식된 장소 정보가 넘어옴
-					} else if plengiResponse.placeEvent == .NEARBY {
-						// PlaceEvent가 ENTER 일 경우, 들어온 장소 정보 객체가 넘어옴
-					} else if plengiResponse.placeEvent == .LEAVE {
-						// PlaceEvent가 LEAVE 일 경우, 떠난 장소 정보 객체가 넘어옴
-					}
-				}
+  ```swift
+  func responsePlaceEvent(_ plengiResponse: PlengiResponse) {
+  	if plengiResponse.echoCode != nil {
+  		// 고객사에서 설정한 echoCode
+  	}
+  
+  	if plengiResponse.result == .SUCCESS {
+  		if plengiResponse.type == .PLACE_EVENT {
+              // refreshPlace() 로 테스트 시, type값은 .PLACE 입니다.
+  			if plengiResponse.place != nil {
+  				if plengiResponse.placeEvent == .ENTER {
+  					// PlaceEvent가 NEARBY 일 경우, NEARBY 로 인식된 장소 정보가 넘어옴
+  				} else if plengiResponse.placeEvent == .NEARBY {
+  					// PlaceEvent가 ENTER 일 경우, 들어온 장소 정보 객체가 넘어옴
+  				} else if plengiResponse.placeEvent == .LEAVE {
+  					// PlaceEvent가 LEAVE 일 경우, 떠난 장소 정보 객체가 넘어옴
+  				}
+  			}
+  
+  			if plengiResponse.complex != nil {
+  				// 복합몰이 인식되었을 때
+  			}
+  
+  			if plengiResponse.area != nil {
+  				// 상권이 인식되었을 때
+  			}
+  
+  			if plengiResponse.advertisement != nil {
+  				// Gravity 광고 정보가 있을 때
+  				// 기본으로 Plengi SDK에서 광고이벤트를 직접 알림으로 처리합니다.
+  				// 하지만 설정값에 따라 광고이벤트를 직접 처리할 경우 해당 객체를 사용합니다.
+  			}
+  
+  			if plengiResponse.geofence != nil {
+  				// Geofence 정보가 있을 때
+  			}
+  		}
+  	} else {
+  		/* 여기서부터는 오류인 경우입니다 */
+  		// plengiResponse.errorReason 에 위치 인식 실패 / 오류 이유가 포함됨
+  
+  		// FAIL : 위치 인식 실패
+  		// NETWORK_FAIL : 네트워크 오류
+  		// ERROR_CLOUD_ACCESS : 클라이언트 ID/PW가 틀렸거나 인증되지 않은 사용자가 요청했을 때
+  	}
+  }
+  ```
 
-				if plengiResponse.complex != nil {
-					// 복합몰이 인식되었을 때
-				}
-
-				if plengiResponse.area != nil {
-					// 상권이 인식되었을 때
-				}
-
-				if plengiResponse.advertisement != nil {
-					// Gravity 광고 정보가 있을 때
-					// 기본으로 Plengi SDK에서 광고이벤트를 직접 알림으로 처리합니다.
-					// 하지만 설정값에 따라 광고이벤트를 직접 처리할 경우 해당 객체를 사용합니다.
-				}
-
-				if plengiResponse.geofence != nil {
-					// Geofence 정보가 있을 때
-				}
-			}
-		} else {
-			/* 여기서부터는 오류인 경우입니다 */
-			// [plengiResponse errorReason] 에 위치 인식 실패 / 오류 이유가 포함됨
-
-			// FAIL : 위치 인식 실패
-			// NETWORK_FAIL : 네트워크 오류
-			// ERROR_CLOUD_ACCESS : 클라이언트 ID/PW가 틀렸거나 인증되지 않은 사용자가 요청했을 때
-		}
-	}
-	```
-	
 
 
 
@@ -479,6 +479,44 @@ SDK 작동을 중단합니다.
 `PlaceDelegate` 에서 장소정보를 가지고 있는 객체입니다.<br>
 *`@objc` 키워드는 Objective-C에서도 동일하다는 의미입니다.*
 *`let` 키워드는 변하지 않는 값이라는 것을 의미합니다.*
+
+- echoCode
+
+  ```swift
+  @objc public var echoCode: String?					// 사용자 식별 echoCode
+  ```
+
+- errorReason
+
+  ```swift
+  @objc public var errorReason: String				// result가 FAIL시 사유
+  ```
+
+- result
+
+  ```swift
+  @objc public var result: Result						// 결과 보고
+  // Result.SUCCESS // 요청위치 정보획득 성공
+  // Result.Fail // 실패
+  ```
+
+- type
+
+  ```swift
+  @objc public var type: ResponseType					// 요청타입
+  // ResponseType.PLACE // 테스트로 refreshPlace() 요청시
+  // ResponseType.PLACE_EVENT // 설정된 주기에 따라 요청시
+  ```
+
+- echoCode
+
+  ```swift
+  @objc public var placeEvent: PlaceEvent				// 인식된 Place event 타입
+  // PlaceEvent.NOT_AVAILABLE // Place 정보가 없음, Area, Complex, Geofence와 관련이 없음
+  // PlaceEvent.ENTER // Place에 들어감
+  // PlaceEvent.LEAVE // Place에서 떠남
+  // PlaceEvent.NEARBY // Place근처에 있음
+  ```
 
 - Place
 
@@ -571,9 +609,9 @@ SDK에서 Gravity 를 사용하기 위해 함수를 호출해줍니다.
 <p class="warning">
   <code>enableNoti</code>는 광고정보의 처리대상을 결정합니다. <br>
     <code>TRUE</code>일 경우, SDK에서 광고정보를 직접 iOS알림으로 유저에게 알립니다, (기본값) <br>
-    <code>FALSE</code>일 경우, 광고 알림을 클라이언트앱에서 직접 관리할 수 있으며, SDK에서 처리하지 않습니다. 광고가 수신될 경우, <code>PlengiResponse</code> 객체 안에 <code>advertisement</code> 객체가 전달됩니다.
-	<br><br>(자세한 내용은 상단의 `PlengiResponse` 객체 설명을 참조하세요.)
+    <code>FALSE</code>일 경우, 광고 알림을 클라이언트앱에서 직접 관리할 수 있으며, SDK에서 처리하지 않습니다.
 </p>
+
 
 ##### 1.  Gravity 사용 설정 - 클라이언트 앱에서 직접 광고정보 처리
 
@@ -632,17 +670,19 @@ SDK에서 Gravity 를 사용하기 위해 함수를 호출해줍니다.
   ```
 
 - Swift
-	```swift
-	if #available(iOS 10, *) {
-		UNUserNotificationCenter.current()
-			.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in }
-		UIApplication.shared.registerForRemoteNotifications()
-    } else {
-		UIApplication.shared.registerUserNotificationSettings(
-			UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
-	    UIApplication.shared.registerForRemoteNotifications()
-	}
-	```
+  ```swift
+  if #available(iOS 10, *) {
+  	UNUserNotificationCenter.current()
+  		.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in}
+  	UIApplication.shared.registerForRemoteNotifications()
+  } 
+  else {
+  	UIApplication.shared.registerUserNotificationSettings(
+  		UIUserNotificationSettings(types: [.badge, .sound, .alert], 
+                                     categories: nil))
+      UIApplication.shared.registerForRemoteNotifications()
+  }
+  ```
 
 #### 3. NotificationCenter에 Gravity 등록하기
 SDK에서 Gravity 광고 수신을 사용하기 위해서 시스템에 이벤트를 등록해줘야 합니다.
@@ -655,7 +695,7 @@ SDK에서 Gravity 광고 수신을 사용하기 위해서 시스템에 이벤트
   }
   
   - (void)application:(UIApplication *)application
-  	handleActionWithIdentifier:(NSString *)identifier 
+  handleActionWithIdentifier:(NSString *)identifier 
   	  forLocalNotification:(UILocalNotification *)notification 
   	     completionHandler:(void (^)())completionHandler {
   	[Plengi processLoplatAdvertisement:application 
@@ -690,47 +730,50 @@ SDK에서 Gravity 광고 수신을 사용하기 위해서 시스템에 이벤트
   ```
 
 - Swift
-	```swift
-	if #available(iOS  10.0, *) {
-		UNUserNotificationCenter.current().delegate = self
-	}
-
-	func application(_ application: UIApplication, 
-		handleActionWithIdentifier identifier: String?, 
-		for notification: UILocalNotification, 
-		completionHandler: @escaping () -> Void) {
-		
-		Plengi.processLoplatAdvertisement(application, handleActionWithIdentifier: identifier, 
-			for: notification, completionHandler: completionHandler)
-	}
-
-	@available(iOS 10.0,  *) 
-	func userNotificationCenter(_ center: UNUserNotificationCenter, 
-		didReceive response: UNNotificationResponse, 
-		withCompletionHandler completionHandler: @escaping ()  ->  Void) { 
-		
-		Plengi.processLoplatAdvertisement(center,
-			 didReceive: response, 
-			 withCompletionHandler: completionHandler) 
-		completionHandler()  
-		
-		// loplat SDK가 사용자의 알림 트래킹 (Click, Dismiss) 를 처리하기 위한 코드  
-	} 
-
-	@available(iOS 10.0, *)
-	func userNotificationCenter(_ center: UNUserNotificationCenter, 
-		willPresent notification: UNNotification, 
-		withCompletionHandler completionHandler: @escaping  (UNNotificationPresentationOptions) -> Void) { 
-		
-		completionHandler([.alert,  .sound,  .badge])  
-		// iOS 10 이상에서도 포그라운드에서 알림을 띄울 수 있도록 하는 코드 
-		// (가이드에는 뱃지, 소리, 경고 를 사용하지만, 개발에 따라 빼도 상관 무)  			
-	}
-	```
+  ```swift
+  if #available(iOS  10.0, *) {
+  	UNUserNotificationCenter.current().delegate = self
+  }
+  
+  func application(_ application: UIApplication, 
+                   handleActionWithIdentifier identifier: String?,
+                   for notification: UILocalNotification, 
+                   completionHandler: @escaping () -> Void)
+  	Plengi.processLoplatAdvertisement(application, 
+                                        handleActionWithIdentifier: identifier, 
+                                        for: notification, 
+                                        completionHandler: completionHandler)
+  }
+  
+  @available(iOS 10.0,  *) 
+  func userNotificationCenter(_ center: UNUserNotificationCenter, 
+                              didReceive response: UNNotificationResponse, 
+                              withCompletionHandler completionHandler: @escaping ()  ->  Void) { 
+  	Plengi.processLoplatAdvertisement(center,
+                                        didReceive: response, 
+                                        withCompletionHandler: completionHandler) 
+  	completionHandler()  
+  	
+  	// loplat SDK가 사용자의 알림 트래킹 (Click, Dismiss) 를 처리하기 위한 코드  
+  } 
+  
+  @available(iOS 10.0, *)
+  func userNotificationCenter(_ center: UNUserNotificationCenter, 
+                              willPresent notification: UNNotification, 
+                              withCompletionHandler completionHandler: @escaping  (UNNotificationPresentationOptions) -> Void) { 
+  	
+  	completionHandler([.alert,  .sound,  .badge])  
+  	// iOS 10 이상에서도 포그라운드에서 알림을 띄울 수 있도록 하는 코드 
+  	// (가이드에는 뱃지, 소리, 경고 를 사용하지만, 개발에 따라 빼도 상관 무)  			
+  }
+  ```
 
 
 ## 샘플앱
 로플랫 SDK 샘플 앱은 Objective-C용과, Swift 용 둘 다 있습니다. 
-(샘플앱 다운로드 > https://github.com/loplat/loplat-sdk-ios)
+
+기능 기반 샘플 앱은[loplat SDK Sample for ObjC 2](https://github.com/loplat/loplat-sdk-ios/tree/master/loplat%20SDK%20Sample%20for%20ObjC%202), [Simple SDK Sample for Swift](https://github.com/loplat/loplat-sdk-ios/tree/master/Simple%20SDK%20Sample%20for%20Swift)가 있으며
+
+유저동의 기반 시나리오 샘플앱은 [Simple SDK Sample for Swift](https://github.com/loplat/loplat-sdk-ios/tree/master/Simple%20SDK%20Sample%20for%20Swift)를 참조하세요.
 
 (샘플앱도 Cocoapod을 사용합니다. Cocoapod 사용법은 위에 명시되어 있습니다.)
