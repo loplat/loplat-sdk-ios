@@ -54,7 +54,7 @@ end
 Podfile 의  target 태그안에
 
 ```Podfile
-pod 'MiniPlengi', '1.2.6'
+pod 'MiniPlengi', '1.2.7'
 ```
 을 입력한 후, 저장합니다.
 
