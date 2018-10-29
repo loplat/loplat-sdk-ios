@@ -42,7 +42,7 @@ extension AppDelegate: PlaceDelegate {
             // NETWORK_FAIL : 네트워크 오류
             // ERROR_CLOUD_ACCESS : 클라이언트 ID/PW가 틀렸거나 인증되지 않은 사용자가 요청했을 때
             title += "Error"
-            message = "\nReason : " + plengiResponse.errorReason
+            message = "\nReason : " + (plengiResponse.errorReason ?? "Unknown")
             return
         }
         
