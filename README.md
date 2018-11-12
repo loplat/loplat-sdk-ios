@@ -1,7 +1,5 @@
 <p align="center">
   <img width="100" height="100" src="https://storage.googleapis.com/loplat-storage/public/sdk-doc/loplat-ios-sdk-sample-app-icon.png"></p>
-  
-# loplat iOS SDK Sample
 
 <h1 align="center">
   loplat iOS SDK Sample
