@@ -8,7 +8,7 @@
 <h4 align="center">loplat iOS Sample Application (for Swift / Objective-C)<br>로플랫 SDK의 샘플앱입니다. 자세한 내용은 <a href="https://developers.loplat.com">로플랫 개발자 사이트</a> 를 참조해주세요.</h4>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/MiniPlengi-v%201.2.7-blue.svg?style=flat-square">
+  <img src="https://img.shields.io/badge/MiniPlengi-v%201.3.0-blue.svg?style=flat-square">
   <img src="https://img.shields.io/badge/platform-iOS-lightgrey.svg?style=flat-square">
 </p>
 
