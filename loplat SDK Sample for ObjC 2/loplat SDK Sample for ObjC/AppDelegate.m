@@ -74,10 +74,6 @@ didReceiveNotificationResponse:(UNNotificationResponse *)response
     completionHandler();
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    [Plengi requestBluetooth]; // Bluetooth 사용을 요청합니다. 알림은 없습니다.
-}
-
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }

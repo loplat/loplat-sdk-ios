@@ -347,7 +347,7 @@
 }
 
 - (void)refreshPlace {
-    if ([Plengi refreshPlace] != ResultSUCCESS) {
+    if ([Plengi manual_refreshPlace_foreground] != ResultSUCCESS) {
         [self customAlertWithTitle:@"장소 요청을 할 수 없음"
                            message:@"초기화, iOS버전 등을 확인해보세요."];
     }
@@ -450,36 +450,61 @@
 
 /// 로플랫 SDK에서 장소 인식 등 서버로부터 응답이 온 경우, 해당 Delegate가 호출됩니다.
 - (void)responsePlaceEvent:(PlengiResponse *)plengiResponse {
+    NSString* title = @"Plengi Response : ";
+    NSString* message = @"";
+    
+    if (plengiResponse.echoCode != nil) {
+        message = [message stringByAppendingFormat:@"Echo code : %@", plengiResponse.echoCode];
+    }
+
     if ([plengiResponse result] == ResultSUCCESS) {
-        if ([plengiResponse type] == ResponseTypePLACE_EVENT) {
-            if ([plengiResponse place] != nil) {
-                if ([plengiResponse placeEvent] == PlaceEventENTER) {
-                    // 사용자가 장소에 들어왔을 때
-                } else if ([plengiResponse placeEvent] == PlaceEventNEARBY) {
-                    // NEARBY로 인식되었을 때
-                } else if ([plengiResponse placeEvent] == PlaceEventLEAVE) {
-                    // 사용자가 장소를 떠났을 때
-                }
+        Place*     place = plengiResponse.place;
+        Area*       area = plengiResponse.area;
+        Complex* complex = plengiResponse.complex;
+        
+        if (place != nil) {
+            title = [title stringByAppendingString:place.name];
+            message = [message stringByAppendingString:@"\nplaceEvent : "];
+            if ([plengiResponse placeEvent] == PlaceEventENTER) {
+                // 사용자가 장소에 들어왔을 때
+                message = [message stringByAppendingString:@"ENTER"];
+            } else if ([plengiResponse placeEvent] == PlaceEventNEARBY) {
+                // NEARBY로 인식되었을 때
+                message = [message stringByAppendingString:@"NEARBY"];
+            } else if ([plengiResponse placeEvent] == PlaceEventLEAVE) {
+                // 사용자가 장소를 떠났을 때
+                message = [message stringByAppendingString:@"LEAVE"];
             }
-            
-            if ([plengiResponse complex] != nil) {
-                // 복합몰이 인식되었을 때
-            }
-            
-            if ([plengiResponse area] != nil) {
-                // 상권이 인식되었을 때
-            }
-            
-            
+            message = [message stringByAppendingFormat:@"\nID : %td \nAddress_road : %@", place.loplat_id, place.address_road];
         }
-    } else {
+        else if (area != nil) {
+            // 상권이 인식되었을 때
+            title = [title stringByAppendingString:area.name];
+            message = [message stringByAppendingFormat:@"\nID : %td \nlat : %f \nlng : %f", area.id, area.lat, area.lng];
+        }
+        else if (complex != nil) {
+            // 복합몰이 인식되었을 때
+            title = [title stringByAppendingString:complex.name];
+            message = [message stringByAppendingFormat:@"\nID : %td \nBranch name: %@", complex.id, complex.branch_name];
+        }
+    }
+    else {
         /* 여기서부터는 오류인 경우입니다 */
         // [plengiResponse errorReason] 에 위치 인식 실패 / 오류 이유가 포함됨
         
         // FAIL : 위치 인식 실패
         // NETWORK_FAIL : 네트워크 오류
         // ERROR_CLOUD_ACCESS : 클라이언트 ID/PW가 틀렸거나 인증되지 않은 사용자가 요청했을 때
+        title = [title stringByAppendingString:@"Error"];
+        NSString* errorReason = plengiResponse.errorReason;
+        if (errorReason == nil) {
+            errorReason = @"NONE";
+        }
+        message = [message stringByAppendingFormat:@"\nReason : %@", errorReason];
     }
+    
+    [self customAlertWithTitle:title
+                       message:message];
 }
 
 @end

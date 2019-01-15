@@ -1,14 +1,14 @@
 PODS:
   - Bohr (3.0.0)
-  - DynamicBlurView (2.0.2)
-  - MiniPlengi (1.2.5)
-  - PopupDialog (0.8.1):
-    - DynamicBlurView (~> 2.0)
+  - DynamicBlurView (3.0.1)
+  - MiniPlengi (1.3.0)
+  - PopupDialog (0.9.2):
+    - DynamicBlurView (~> 3.0.1)
   - SnapKit (4.0.1)
 
 DEPENDENCIES:
   - Bohr
-  - MiniPlengi (= 1.2.5)
+  - MiniPlengi (= 1.3.0)
   - PopupDialog
   - SnapKit (~> 4.0.0)
 
@@ -22,11 +22,11 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Bohr: 17b150766e54e1fb8ff417d85b830c7caafa8b4a
-  DynamicBlurView: aa6db4defc6e537eb86fc5e58dd3991666178399
-  MiniPlengi: 23a76161413dc31fd6c4deb31264593387e18056
-  PopupDialog: 3d4e8e0795c3a614f407d730986c9b9af9781123
+  DynamicBlurView: b1df5415f9bd31897549e5d7077e5ec120a4d636
+  MiniPlengi: 3492f8a58adf8529fe553a54a6909352c4809667
+  PopupDialog: f4bb461bf70ff422be0b56656566424ee9273080
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
 
-PODFILE CHECKSUM: e30d519b3d94b71c33ad495cd68ed12e2f74b2f2
+PODFILE CHECKSUM: 3c1d8e7abdd7fde45d9260f10efd0fba956c3800
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.2

@@ -211,7 +211,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Simple SDK Sample for Swift/Pods-Simple SDK Sample for Swift-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Simple SDK Sample for Swift/Pods-Simple SDK Sample for Swift-frameworks.sh",
 				"${PODS_ROOT}/MiniPlengi/MiniPlengi.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -220,7 +220,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Simple SDK Sample for Swift/Pods-Simple SDK Sample for Swift-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Simple SDK Sample for Swift/Pods-Simple SDK Sample for Swift-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

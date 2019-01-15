@@ -29,13 +29,13 @@ extension MainViewController: PlaceDelegate {
             // NETWORK_FAIL : 네트워크 오류
             // ERROR_CLOUD_ACCESS : 클라이언트 ID/PW가 틀렸거나 인증되지 않은 사용자가 요청했을 때
             title += "Error"
-            message = "\nReason : " + plengiResponse.errorReason
+            message += "\nReason : " + (plengiResponse.errorReason ?? "NONE")
             return
         }
         
         if let place = plengiResponse.place {
             title += place.name
-            message = "\nplaceEvent : "
+            message += "\nplaceEvent : "
             if plengiResponse.placeEvent == .ENTER {
                 // PlaceEvent가 NEARBY 일 경우, NEARBY 로 인식된 장소 정보가 넘어옴\
                 message += "ENTER"
@@ -51,12 +51,12 @@ extension MainViewController: PlaceDelegate {
             // 복합몰이 인식되었을 때
         else if let complex = plengiResponse.complex {
             title += complex.name
-            message = "\nID : \(complex.id) \nBranch name: " + complex.branch_name
+            message += "\nID : \(complex.id) \nBranch name: " + complex.branch_name
         }
             // 상권이 인식되었을 때
         else if let area = plengiResponse.area {
             title += area.name
-            message = "\nID : \(area.id) \nlat : \(area.lat) \nlng : \(area.lng)"
+            message += "\nID : \(area.id) \nlat : \(area.lat) \nlng : \(area.lng)"
         }
     }
 }

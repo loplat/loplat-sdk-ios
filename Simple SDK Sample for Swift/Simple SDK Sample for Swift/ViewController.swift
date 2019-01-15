@@ -68,7 +68,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func touchGetPlaceInfo(_ sender: UIButton) {
-        _ = Plengi.refreshPlace()
+        _ = Plengi.manual_refreshPlace_foreground()
     }
     
     @IBAction func switchMarketing(_ sender: UISwitch) {

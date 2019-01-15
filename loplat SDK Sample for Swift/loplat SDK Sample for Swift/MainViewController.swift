@@ -305,7 +305,7 @@ class MainViewController: BOTableViewController {
     /// 장소 인식 요청을 수동으로 호출합니다.
     /// 경고 : 실제 릴리즈 앱에서는 해당 기능을 사용하지 마세요. 테스트 용도로만 사용해주세요.
     private func refreshPlace() {
-        guard Plengi.refreshPlace() == .SUCCESS else {
+        guard Plengi.manual_refreshPlace_foreground() == .SUCCESS else {
             self.customAlert(title: "장소 요청을 할 수 없음", message: "초기화, iOS버전 등을 확인해보세요.")
             return
         }

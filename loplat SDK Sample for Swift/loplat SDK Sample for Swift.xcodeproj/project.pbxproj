@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37055E9F21ED8584005674EA /* loplat SDK Sample for Swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "loplat SDK Sample for Swift.entitlements"; sourceTree = "<group>"; };
 		3767905D2148B94800EBEEAE /* MainViewController+PlaceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+PlaceDelegate.swift"; sourceTree = "<group>"; };
 		68069CBB5E1E86F7C4910308 /* Pods_loplat_SDK_Sample_for_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_loplat_SDK_Sample_for_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA1AD6F321102C5900B99816 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +87,7 @@
 		BAF50E922110058900320C88 /* loplat SDK Sample for Swift */ = {
 			isa = PBXGroup;
 			children = (
+				37055E9F21ED8584005674EA /* loplat SDK Sample for Swift.entitlements */,
 				BAF50E932110058900320C88 /* AppDelegate.swift */,
 				BAF50E952110058900320C88 /* ViewController.swift */,
 				BAF50E972110058900320C88 /* Main.storyboard */,
@@ -134,6 +136,9 @@
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 1000;
 						SystemCapabilities = {
+							com.apple.AccessWiFi = {
+								enabled = 1;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
@@ -142,7 +147,7 @@
 				};
 			};
 			buildConfigurationList = BAF50E8B2110058900320C88 /* Build configuration list for PBXProject "loplat SDK Sample for Swift" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -179,7 +184,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-loplat SDK Sample for Swift/Pods-loplat SDK Sample for Swift-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-loplat SDK Sample for Swift/Pods-loplat SDK Sample for Swift-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bohr/Bohr.framework",
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
 				"${PODS_ROOT}/MiniPlengi/MiniPlengi.framework",
@@ -196,7 +201,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-loplat SDK Sample for Swift/Pods-loplat SDK Sample for Swift-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-loplat SDK Sample for Swift/Pods-loplat SDK Sample for Swift-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C22C6E04FE3E3C0A1B001E6E /* [CP] Check Pods Manifest.lock */ = {
@@ -372,6 +377,7 @@
 			baseConfigurationReference = F48CB3D2271257C7AD11E71F /* Pods-loplat SDK Sample for Swift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "loplat SDK Sample for Swift/loplat SDK Sample for Swift.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M8QW9959L5;
 				INFOPLIST_FILE = "loplat SDK Sample for Swift/Info.plist";
@@ -393,6 +399,7 @@
 			baseConfigurationReference = C3F9794E4CD80B203D6C1E45 /* Pods-loplat SDK Sample for Swift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "loplat SDK Sample for Swift/loplat SDK Sample for Swift.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M8QW9959L5;
 				INFOPLIST_FILE = "loplat SDK Sample for Swift/Info.plist";
