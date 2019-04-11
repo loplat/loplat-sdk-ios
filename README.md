@@ -8,7 +8,7 @@
 <h4 align="center">loplat iOS Sample Application (for Swift / Objective-C)<br>로플랫 SDK의 샘플앱입니다. 자세한 내용은 <a href="https://developers.loplat.com">로플랫 개발자 사이트</a> 를 참조해주세요.</h4>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/MiniPlengi-v%201.3.0-blue.svg?style=flat-square">
+  <img src="https://img.shields.io/badge/MiniPlengi-v%201.3.1-blue.svg?style=flat-square">
   <img src="https://img.shields.io/badge/platform-iOS-lightgrey.svg?style=flat-square">
 </p>
 
@@ -17,7 +17,7 @@
 ### 빌드하기
 #### 1. Cocoapod 적용하기
 
-loplat SDK (Plengi SDK)를 사용하기 위해서는 Cocoapod 을 사용해야합니다. 
+loplat SDK (Plengi SDK)를 사용하기 위해서는 Cocoapod 을 사용해야합니다.
 
 #### 2. Cocoapod 설치하기
 Cocoapod 바이너리를 설치합니다. 터미널에 아래의 명령어를 입력하세요.
