@@ -17,9 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application : UIApplication, didFinishLaunchingWithOptions launchOptions : [UIApplication.LaunchOptionsKey : Any]?) -> Bool {
-        if Plengi.init(clientID: "loplatdemo",
+        if Plengi.initialize(clientID: "loplatdemo",
                        clientSecret: "loplatdemokey",
-                       echoCode: <#"원하시는 echo code를 입력하세요"#> ) == .SUCCESS {
+                       echoCode: nil) == .SUCCESS {
             _ = Plengi.setDelegate(self)
             Plengi.isDebug = true
         }

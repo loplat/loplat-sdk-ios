@@ -458,9 +458,11 @@
     }
 
     if ([plengiResponse result] == ResultSUCCESS) {
-        Place*     place = plengiResponse.place;
-        Area*       area = plengiResponse.area;
-        Complex* complex = plengiResponse.complex;
+        Place*       place = plengiResponse.place;
+        Area*         area = plengiResponse.area;
+        Complex*   complex = plengiResponse.complex;
+        District* district = plengiResponse.district;
+        Location* location = plengiResponse.location;
         
         if (place != nil) {
             title = [title stringByAppendingString:place.name];
@@ -477,15 +479,27 @@
             }
             message = [message stringByAppendingFormat:@"\nID : %td \nAddress_road : %@", place.loplat_id, place.address_road];
         }
-        else if (area != nil) {
+        if (area != nil) {
             // 상권이 인식되었을 때
             title = [title stringByAppendingString:area.name];
             message = [message stringByAppendingFormat:@"\nID : %td \nlat : %f \nlng : %f", area.id, area.lat, area.lng];
         }
-        else if (complex != nil) {
+        if (complex != nil) {
             // 복합몰이 인식되었을 때
             title = [title stringByAppendingString:complex.name];
             message = [message stringByAppendingFormat:@"\nID : %td \nBranch name: %@", complex.id, complex.branch_name];
+        }
+        if (district != nil) {
+            // 상권 정보가 있을 때
+            title = [title stringByAppendingString:district.lv0_code];
+            message = [message stringByAppendingFormat:@"\n%@ %@ %@\n", district.lv1_name, district.lv2_name, district.lv3_name];
+        }
+        if (location != nil) {
+            // 디바이스 위경도
+            double deviceLat = location.lat;
+            double deviceLng = location.lng;
+            
+            // 로깅하기
         }
     }
     else {
@@ -499,6 +513,18 @@
         NSString* errorReason = plengiResponse.errorReason;
         if (errorReason == nil) {
             errorReason = @"NONE";
+        }
+        else {
+            // 오류 원인이 '위치 인식 실패' 인 경우에만
+            if (errorReason == @"Location Acquisition Fail") {
+                // 디바이스 위경도 존재
+                Location* location = plengiResponse.location;
+                
+                double deviceLat = location.lat;
+                double deviceLng = location.lng;
+                
+                // 로깅
+            }
         }
         message = [message stringByAppendingFormat:@"\nReason : %@", errorReason];
     }
