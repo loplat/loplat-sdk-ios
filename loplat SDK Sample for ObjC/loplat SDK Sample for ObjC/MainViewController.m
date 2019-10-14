@@ -461,6 +461,7 @@
         Place*       place = plengiResponse.place;
         Area*         area = plengiResponse.area;
         Complex*   complex = plengiResponse.complex;
+        Geofence* geofence = plengiResponse.geofence;
         District* district = plengiResponse.district;
         Location* location = plengiResponse.location;
         
@@ -489,6 +490,12 @@
             title = [title stringByAppendingString:complex.name];
             message = [message stringByAppendingFormat:@"\nID : %td \nBranch name: %@", complex.id, complex.branch_name];
         }
+        if (geofence != nil) {
+            // 지오펜스가 인식되었을 때
+            NSArray<Fence*> *fences = geofence.fences;  // 지오펜스의 펜스
+            double geofenceLat = geofence.lat;          // 지오펜스 lat
+            double geofenceLng = geofence.lng;          // 지오펜스 lng
+        }
         if (district != nil) {
             // 상권 정보가 있을 때
             title = [title stringByAppendingString:district.lv0_code];
@@ -498,8 +505,6 @@
             // 디바이스 위경도
             double deviceLat = location.lat;
             double deviceLng = location.lng;
-            
-            // 로깅하기
         }
     }
     else {
