@@ -48,6 +48,13 @@ extension MainViewController: PlaceDelegate {
                 title += area.name
                 message = "\nID : \(area.id) \nlat : \(area.lat) \nlng : \(area.lng)"
             }
+            // 지오펜스가 인식되었을 때
+            if let geofence = plengiResponse.geofence {
+                title += "지오펜스"
+                let fences = geofence.fences
+                let geofenceLat = geofence.lat
+                let geofenceLng = geofence.lng
+            }
             // 행정구역이 인식되었을 때
             if let district = plengiResponse.district {
                 title += "\(district.lv1_name) \(district.lv2_name) \(district.lv3_name)"
