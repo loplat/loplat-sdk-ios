@@ -8,90 +8,90 @@
 
 import UIKit
 import CoreLocation
-
 import MiniPlengi
+import UserNotifications
 
 class ViewController: UIViewController {
-    static let locationManager = CLLocationManager()
+    
+    @IBAction func loginAndPlengiStart(_ sender: UIButton) {
+        let start = Plengi.start()
+        print(start.rawValue)
+    }
+    
+    
+    private let locationManager = CLLocationManager()
+    private let notificationCenter = NotificationCenter.default
 
-    @IBOutlet weak var versionLabel: UILabel!
-    @IBOutlet weak var  engineLabel: UILabel!
-    
-    @IBOutlet weak var marketingSwitch: UISwitch!
-    @IBOutlet weak var  locationSwitch: UISwitch!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ViewController.locationManager.delegate = self
+        self.locationManager.delegate = self
+        self.notificationCenter.addObserver(self, selector: #selector(recievePlengiResponse), name: .pr, object: nil)
         
-        Agreement.marketing.observeValue(on: true, sender: self)
-        Agreement.location.observeValue(on: true, sender: self)
+        // 버전별 권한 요청
+        // iOS 13.4 이상의 경우 WhenInUse 권한을 먼저 요청
+        if #available(iOS 13.4, *) {
+            locationManager.requestWhenInUseAuthorization()
+        } else { // iOS 13.4 미만은 Always 권한 요청
+            locationManager.requestAlwaysAuthorization()
+        }
+       
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        Agreement.marketing.setIsOn()
-        Agreement.location.setIsOn()
-        
-        if let info = Bundle(for: Plengi.self).infoDictionary {
-            self.versionLabel.text = "SDK version : " + (info["CFBundleShortVersionString"] as? String ?? "")
+    private func alertRequest() {
+        if #available(iOS 10, *) {
+            UNUserNotificationCenter.current()
+                .requestAuthorization(options:[.badge, .alert, .sound]) { (granted,error) in}
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+        else {
+            UIApplication.shared.registerUserNotificationSettings(
+                UIUserNotificationSettings(types: [.badge, .sound, .alert],
+                                           categories: nil))
+            UIApplication.shared.registerForRemoteNotifications()
         }
     }
+ 
+}
+
+// MARK:- 위치 권한에 따른 시나리오
+extension ViewController: CLLocationManagerDelegate {
     
-    deinit {
-        Agreement.marketing.observeValue(on: false, sender: self)
-        Agreement.location.observeValue(on: false, sender: self)
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?,
-                               of object: Any?,
-                               change: [NSKeyValueChangeKey : Any]?,
-                               context: UnsafeMutableRawPointer?) {
-        guard let keyPath = keyPath else {
-            return
-        }
-        guard let agreemnet = Agreement(rawValue: keyPath) else {
-            return
-        }
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
-        DispatchQueue.main.async {
-            switch agreemnet {
-            case .marketing:
-                self.marketingSwitch.setOn(agreemnet.isOn , animated: true)
-            case .location:
-                self.locationSwitch.setOn(agreemnet.isOn , animated: true)
-                self.engineLabel.text = "Engine is " + (Plengi.getEngineStatus() == .STARTED ? "started" : "stopped")
+        // iOS 13.4 이상의 경우 status가 WhenInUse 일 때, Always권한 재요청
+        if #available(iOS 13.4, *) {
+            if status == .authorizedWhenInUse {
+                
+                // 앱 사용 중 권한을 받았을때, start()를 해준다.
+                self.locationManager.requestAlwaysAuthorization()
+            } else if status == .authorizedAlways {
+                // 알림 권한 요청
+                self.alertRequest()
+            }
+        } else {
+            if status == .authorizedAlways || status == .authorizedWhenInUse {
+                // 알림 권한 요청
+                
+                // 앱 사용 중 또는 항상 권한을 받았을때, start()를 해준다.
+                self.alertRequest()
             }
         }
     }
-
-    @IBAction func touchGetPlaceInfo(_ sender: UIButton) {
-        _ = Plengi.manual_refreshPlace_foreground()
-    }
     
-    @IBAction func switchMarketing(_ sender: UISwitch) {
-        Agreement.marketing.setIsOn(sender.isOn)
-    }
     
-    @IBAction func switchLocation(_ sender: UISwitch) {
-        Agreement.location.setIsOn(sender.isOn)
-    }
 }
 
-extension ViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if UserDefaults.standard.bool(forKey: "notDetermined") {
-            UserDefaults.standard.set(false, forKey: "notDetermined")
-            Agreement.location.setIsOn(true)
-        }
-        else {
-            switch status {
-            case .notDetermined, .restricted, .denied, .authorizedWhenInUse:
-                Agreement.location.setIsOn(false)
-            case .authorizedAlways:
-                print("do nothing")
+
+extension ViewController {
+   
+    
+    @objc private func recievePlengiResponse() {
+        if let plengiResponseData = UserDefaults.standard.data(forKey: "plengiResponse") {
+            if let pr = NSKeyedUnarchiver.unarchiveObject(with: plengiResponseData) as? PlengiResponse {
+                if let place = pr.place {
+                    print(place.name)
+                }
             }
         }
     }
