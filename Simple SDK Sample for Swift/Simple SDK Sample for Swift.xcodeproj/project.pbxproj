@@ -370,6 +370,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Simple SDK Sample for Swift/Simple SDK Sample for Swift.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D567D4UBJ5;
 				INFOPLIST_FILE = "Simple SDK Sample for Swift/Info.plist";
@@ -391,6 +392,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Simple SDK Sample for Swift/Simple SDK Sample for Swift.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D567D4UBJ5;
 				INFOPLIST_FILE = "Simple SDK Sample for Swift/Info.plist";
