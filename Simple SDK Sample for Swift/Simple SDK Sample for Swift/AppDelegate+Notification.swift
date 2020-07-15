@@ -8,6 +8,9 @@
 import UserNotifications
 import MiniPlengi
 
+/*
+ 아래의 메소드를 적용해주시면 loplat X와 연계된 캠페인 메시지를 받으실수 있습니다.
+ */
 @available(iOS 10.0, *)
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,

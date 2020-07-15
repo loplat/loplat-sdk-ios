@@ -20,9 +20,16 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>현재 위치를 알아오기 위해 해당 권한을 사용합니다. (주의: 이 값에 &apos;항상&apos; 허용 권한에 대한 자세한 설명을 추가해주세요. 그렇지 않으면 심사에 반려될 수 있습니다.)</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>현재 위치를 알아오기 위해 해당 권한을 사용합니다. 현재 위치를 알아오기 위해 해당 권한을 사용합니다. (주의: 이 값에 &apos;항상&apos; 허용 권한에 대한 자세한 설명을 추가해주세요. 그렇지 않으면 심사에 반려될 수 있습니다.)</string>
+	<key>NSLocationUsageDescription</key>
+	<string>현재 위치를 알아오기 위해 해당 권한을 사용합니다.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>현재 위치를 알아오기 위해 해당 권한을 사용합니다.</string>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>bluetooth-central</string>
 		<string>location</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
@@ -44,13 +51,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>현재 위치를 알아오기 위해 해당 권한을 사용합니다.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>현재 위치를 알아오기 위해 해당 권한을 사용합니다.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>현재 위치를 알아오기 위해 해당 권한을 사용합니다.</string>
-	<key>NSLocationUsageDescription</key>
-	<string>현재 위치를 알아오기 위해 해당 권한을 사용합니다.</string>
 </dict>
 </plist>
