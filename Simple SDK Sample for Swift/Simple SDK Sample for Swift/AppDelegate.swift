@@ -18,15 +18,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application : UIApplication, didFinishLaunchingWithOptions launchOptions : [UIApplication.LaunchOptionsKey : Any]?) -> Bool {
         
-        // AppDelegate에는 반드시 아래의 두 메소드를 추가해주세요.
-        // Plengi.initialize(...)
-        // Plengi.start()
-        // 이곳에서, Plengi.start()를 추가해주는 이유는
-        // 백그라운드에서 App이 launching 됐을때 로플랫 SDK의 엔진이 start돼야 하기 때문입니다.
+        /*
+         AppDelegate에는 반드시 아래의 두 메소드를 추가해주세요.
+         Plengi.initialize(clientID:, clientSecret:)
+         Plengi.start()
+         이곳에서, Plengi.start()를 추가해주는 이유는
+         백그라운드에서 App이 launching 됐을때 로플랫 SDK의 엔진이 start돼야 하기 때문입니다.
+         */
+        
         if Plengi.initialize(clientID: "loplatdemo",
                        clientSecret: "loplatdemokey",
                        echoCode: nil) == .SUCCESS {
             // 델리게이트를 설정해주셔야 위치 정보를 앱에서 사용할 수 있습니다.
+            // 설정하지 않아도 SDK는 작동합니다.
             _ = Plengi.setDelegate(self)
         }
         

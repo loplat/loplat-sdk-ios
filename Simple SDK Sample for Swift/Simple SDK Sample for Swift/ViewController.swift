@@ -13,11 +13,15 @@ import UserNotifications
 
 class ViewController: UIViewController {
     
+    
+    /*
+     AppDelegate에서 start()가 호출되더라도, 다시 한 번 명시적으로 start()를 호출해야합니다.
+     return 값의 rawValue가 0일때 SDK가 시작된 것입니다.
+     */
     @IBAction func loginAndPlengiStart(_ sender: UIButton) {
         let start = Plengi.start()
         print(start.rawValue)
     }
-    
     
     private let locationManager = CLLocationManager()
     private let notificationCenter = NotificationCenter.default
@@ -25,8 +29,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.locationManager.delegate = self
         self.notificationCenter.addObserver(self, selector: #selector(recievePlengiResponse), name: .pr, object: nil)
+        
+        
+        
+        // MARK:- 위치 권한 요청
+        self.locationManager.delegate = self
         
         // 버전별 권한 요청
         // iOS 13.4 이상의 경우 WhenInUse 권한을 먼저 요청
@@ -38,6 +46,7 @@ class ViewController: UIViewController {
        
     }
     
+    // MARK:- 알람 권한 요청
     private func alertRequest() {
         if #available(iOS 10, *) {
             UNUserNotificationCenter.current()
@@ -54,7 +63,7 @@ class ViewController: UIViewController {
  
 }
 
-// MARK:- 위치 권한에 따른 시나리오
+// MARK:- 버전별 위치 권한
 extension ViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -73,7 +82,7 @@ extension ViewController: CLLocationManagerDelegate {
             if status == .authorizedAlways || status == .authorizedWhenInUse {
                 // 알림 권한 요청
                 
-                // 앱 사용 중 또는 항상 권한을 받았을때, start()를 해준다.
+                // 앱 사용 중 또는 항상 권한을 받았을때, 알림요청을 해준다.
                 self.alertRequest()
             }
         }
@@ -83,14 +92,25 @@ extension ViewController: CLLocationManagerDelegate {
 }
 
 
+// MARK:- 앱 델리게이트에서 받은 plengiResponse
+// SDK가 시작되고 약 2분 뒤, 첫 이벤트를 받습니다.
+// Plengi.start()의 return 값의 rawValue가 0인 것을 확인하시고
+// 약 2 분뒤 콘솔창에 결과 값을 확인하세요.
 extension ViewController {
    
-    
     @objc private func recievePlengiResponse() {
         if let plengiResponseData = UserDefaults.standard.data(forKey: "plengiResponse") {
             if let pr = NSKeyedUnarchiver.unarchiveObject(with: plengiResponseData) as? PlengiResponse {
                 if let place = pr.place {
                     print(place.name)
+                }
+                
+                if let area = pr.area {
+                    print(area.name)
+                }
+                
+                if let district = pr.district {
+                    print(district.lv1_name, district.lv2_name, district.lv3_name)
                 }
             }
         }
