@@ -9,7 +9,6 @@
 <h4 align="center">Objective - C와 Swift로 작성된 loplat SDK Sample 폴더는 테스트 용도이며 실제 앱에 적용시킬 수 있는 필수 코드만 모아 놓은 Simple SDK Sample 폴더를 참고하여(Swift로만 작성) 해당 앱에 적용해주시기 바랍니다.</h4>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/MiniPlengi-v%201.3.7-blue.svg?style=flat-square">
   <img src="https://img.shields.io/badge/platform-iOS-lightgrey.svg?style=flat-square">
 </p>
 
