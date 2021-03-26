@@ -34,10 +34,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             _ = Plengi.setDelegate(self)
         }
         
-        // 초기 Plengi.start()는 init 시 로플랫 서버에 유저의 정보가 등록되는 과정에서 1~2초 간의 딜레이가 있어
-        // start()가 되지 않을수도 있습니다.
-        // 따라서. AppDelegate를 제외한 ViewController에 Plengi.start()를 한번 더 호출해주세요.
-        _ = Plengi.start()
+        // MainViewController 에서 Start된 이력이 있는 경우
+        // AppDelegate에서 앱이 런칭될때(유저가 앱을 터치하여 켜거나 백그라운드에서 앱이 켜진 경우)
+        // Plengi를 Start 해줍니다.
+        // MainViewController 에서 Start된 이력이 없다면 백그라운드에서 동작하지 않습니다.
+        if Plengi.getEngineStatus() == .STARTED {
+            _ = Plengi.start()
+        }
+        
         
         return true
     }

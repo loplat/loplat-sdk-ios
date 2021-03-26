@@ -15,8 +15,8 @@ class ViewController: UIViewController {
     
     
     /*
-     AppDelegate에서 start()가 호출되더라도, 다시 한 번 명시적으로 start()를 호출해야합니다.
-     return 값의 rawValue가 0일때 SDK가 시작된 것입니다.
+     MainViewController에서 유저에게 시스템 권한과 앱에서 관리하는 위치 권한을 받은 사용자에 대하여 Start를 호출해 주십시오.
+     ***!!! 주의 : Plengi.start()를 명시적으로 호출하지 않으면 백그라운드에서 작동하지 않습니다.
      */
     @IBAction func loginAndPlengiStart(_ sender: UIButton) {
         let start = Plengi.start()
