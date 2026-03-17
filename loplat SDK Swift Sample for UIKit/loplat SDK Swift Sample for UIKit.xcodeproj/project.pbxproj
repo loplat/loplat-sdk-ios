@@ -1,0 +1,399 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		917E7EF02F693722001C6040 /* MiniPlengi in Frameworks */ = {isa = PBXBuildFile; productRef = 917E7EEF2F693722001C6040 /* MiniPlengi */; };
+		917E7EF32F693732001C6040 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 917E7EF22F693732001C6040 /* SnapKit */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		917E7ED62F69366B001C6040 /* loplat SDK Swift Sample for UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "loplat SDK Swift Sample for UIKit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		917E7EE82F69366C001C6040 /* Exceptions for "loplat SDK Swift Sample for UIKit" folder in "loplat SDK Swift Sample for UIKit" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 917E7ED52F69366B001C6040 /* loplat SDK Swift Sample for UIKit */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		917E7ED82F69366B001C6040 /* loplat SDK Swift Sample for UIKit */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				917E7EE82F69366C001C6040 /* Exceptions for "loplat SDK Swift Sample for UIKit" folder in "loplat SDK Swift Sample for UIKit" target */,
+			);
+			path = "loplat SDK Swift Sample for UIKit";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		917E7ED32F69366B001C6040 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				917E7EF02F693722001C6040 /* MiniPlengi in Frameworks */,
+				917E7EF32F693732001C6040 /* SnapKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		917E7ECD2F69366B001C6040 = {
+			isa = PBXGroup;
+			children = (
+				917E7ED82F69366B001C6040 /* loplat SDK Swift Sample for UIKit */,
+				917E7ED72F69366B001C6040 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		917E7ED72F69366B001C6040 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				917E7ED62F69366B001C6040 /* loplat SDK Swift Sample for UIKit.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		917E7ED52F69366B001C6040 /* loplat SDK Swift Sample for UIKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 917E7EE92F69366C001C6040 /* Build configuration list for PBXNativeTarget "loplat SDK Swift Sample for UIKit" */;
+			buildPhases = (
+				917E7ED22F69366B001C6040 /* Sources */,
+				917E7ED32F69366B001C6040 /* Frameworks */,
+				917E7ED42F69366B001C6040 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				917E7ED82F69366B001C6040 /* loplat SDK Swift Sample for UIKit */,
+			);
+			name = "loplat SDK Swift Sample for UIKit";
+			packageProductDependencies = (
+				917E7EEF2F693722001C6040 /* MiniPlengi */,
+				917E7EF22F693732001C6040 /* SnapKit */,
+			);
+			productName = "loplat SDK Swift Sample for UIKit";
+			productReference = 917E7ED62F69366B001C6040 /* loplat SDK Swift Sample for UIKit.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		917E7ECE2F69366B001C6040 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					917E7ED52F69366B001C6040 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+				};
+			};
+			buildConfigurationList = 917E7ED12F69366B001C6040 /* Build configuration list for PBXProject "loplat SDK Swift Sample for UIKit" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 917E7ECD2F69366B001C6040;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				917E7EEE2F693722001C6040 /* XCRemoteSwiftPackageReference "loplat-ios-spm" */,
+				917E7EF12F693732001C6040 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 917E7ED72F69366B001C6040 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				917E7ED52F69366B001C6040 /* loplat SDK Swift Sample for UIKit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		917E7ED42F69366B001C6040 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		917E7ED22F69366B001C6040 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		917E7EEA2F69366C001C6040 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "loplat SDK Swift Sample for UIKit/loplat SDK Swift Sample for UIKit.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D567D4UBJ5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "loplat SDK Swift Sample for UIKit/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "로플랫 SDK 샘플앱";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "예 : 앱이 제공하는 '모든 혜택'을 누리시려면 '항상' 허용을 선택해 주세요.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "예 : 앱이 제공하는 '모든 혜택'을 누리시려면 '항상' 허용을 선택해 주세요.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "예 : 앱이 제공하는 혜택을 누리시려면 위치 정보를 '앱을 사용하는 동안'으로 선택하고 이후, '항상' 허용을 선택해주세요.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "예 : 허용을 하시면 알맞은 정보를 받아보실수 있습니다.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.loplat.sample.uikit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		917E7EEB2F69366C001C6040 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "loplat SDK Swift Sample for UIKit/loplat SDK Swift Sample for UIKit.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D567D4UBJ5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "loplat SDK Swift Sample for UIKit/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "로플랫 SDK 샘플앱";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "예 : 앱이 제공하는 '모든 혜택'을 누리시려면 '항상' 허용을 선택해 주세요.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "예 : 앱이 제공하는 '모든 혜택'을 누리시려면 '항상' 허용을 선택해 주세요.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "예 : 앱이 제공하는 혜택을 누리시려면 위치 정보를 '앱을 사용하는 동안'으로 선택하고 이후, '항상' 허용을 선택해주세요.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "예 : 허용을 하시면 알맞은 정보를 받아보실수 있습니다.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.loplat.sample.uikit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		917E7EEC2F69366C001C6040 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = D567D4UBJ5;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		917E7EED2F69366C001C6040 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = D567D4UBJ5;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		917E7ED12F69366B001C6040 /* Build configuration list for PBXProject "loplat SDK Swift Sample for UIKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				917E7EEC2F69366C001C6040 /* Debug */,
+				917E7EED2F69366C001C6040 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		917E7EE92F69366C001C6040 /* Build configuration list for PBXNativeTarget "loplat SDK Swift Sample for UIKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				917E7EEA2F69366C001C6040 /* Debug */,
+				917E7EEB2F69366C001C6040 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		917E7EEE2F693722001C6040 /* XCRemoteSwiftPackageReference "loplat-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/loplat/loplat-ios-spm";
+			requirement = {
+				kind = exactVersion;
+				version = 1.5.16;
+			};
+		};
+		917E7EF12F693732001C6040 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		917E7EEF2F693722001C6040 /* MiniPlengi */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 917E7EEE2F693722001C6040 /* XCRemoteSwiftPackageReference "loplat-ios-spm" */;
+			productName = MiniPlengi;
+		};
+		917E7EF22F693732001C6040 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 917E7EF12F693732001C6040 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 917E7ECE2F69366B001C6040 /* Project object */;
+}

@@ -1,0 +1,24 @@
+{
+  "originHash" : "3f2fbc2d2ae47fb96236c3764c92189fd3c793b4bc986bac316c7c3762772b65",
+  "pins" : [
+    {
+      "identity" : "loplat-ios-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/loplat/loplat-ios-spm",
+      "state" : {
+        "revision" : "4f138d8777796870230dd2b1dd76951ad3655d3c",
+        "version" : "1.5.16"
+      }
+    },
+    {
+      "identity" : "snapkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SnapKit/SnapKit",
+      "state" : {
+        "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
+        "version" : "5.7.1"
+      }
+    }
+  ],
+  "version" : 3
+}
