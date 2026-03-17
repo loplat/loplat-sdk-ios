@@ -1,0 +1,15 @@
+{
+  "originHash" : "8168bcfdb8ccbf06c8ef7f75d4b1aa0d9a585bada0d71041ece7abea00613252",
+  "pins" : [
+    {
+      "identity" : "loplat-ios-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/loplat/loplat-ios-spm",
+      "state" : {
+        "revision" : "4f138d8777796870230dd2b1dd76951ad3655d3c",
+        "version" : "1.5.16"
+      }
+    }
+  ],
+  "version" : 3
+}
